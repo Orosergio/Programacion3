@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *Planilla para calcular saldo liquido de 10 trabajadores usando valores random
- * @author Sergio Orozco Valle joto 
+ * @author Sergio Orozco Valle
  * 0901-17-6739
  */
 public class MatricesArrays extends javax.swing.JFrame {
