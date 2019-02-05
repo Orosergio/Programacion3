@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 /**
- *
+ *Planilla para calcular saldo liquido de 10 trabajadores usando valores random
  * @author Sergio Orozco 
  * 0901-17-6739
  */
