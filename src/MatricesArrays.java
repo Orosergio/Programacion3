@@ -147,7 +147,7 @@ public void random(){
     
     public void ISRcalcular(){
         for(int i=0;i<10;i++){
-             //CALCULO SIN ISR
+             //CALCULO SIN ISR....
             matriz[i][10]=String.valueOf(formato.format(Integer.parseInt(matriz[i][2])+Integer.parseInt(matriz[i][3])+Integer.parseInt(matriz[i][4])-Integer.parseInt(matriz[i][5])-Float.parseFloat(matriz[i][6])));
             //ASIGNACION DE CODIGO
             matriz[i][0]=String.valueOf(i+1);
