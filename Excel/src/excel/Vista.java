@@ -5,17 +5,24 @@
  */
 package excel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sergio Orozco
  */
 public class Vista extends javax.swing.JFrame {
-
+    public static int intFila, intColumna;
+    public static Lista miLista=new Lista();
     /**
      * Creates new form Vista
      */
     public Vista() {
         initComponents();
+        /*miLista.insertarPrincipio(new Celda("10", 3, 3));
+        JOptionPane.showMessageDialog(this, miLista.Listar());
+        miLista.modifyPorFilaColumna(3,3,"hi");
+        JOptionPane.showMessageDialog(this, miLista.Listar());*/
     }
 
     /**
@@ -28,11 +35,11 @@ public class Vista extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblexcel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblexcel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -70,7 +77,17 @@ public class Vista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblexcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblexcelMouseClicked(evt);
+            }
+        });
+        tblexcel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblexcelKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblexcel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +108,33 @@ public class Vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblexcelMouseClicked
+        // TODO add your handling code here:
+        //método para obtener fila y columna al dar click a la celda
+        intColumna=tblexcel.getSelectedColumn();
+        intFila=tblexcel.getSelectedRow();
+        
+    }//GEN-LAST:event_tblexcelMouseClicked
+
+    private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
+        // TODO add your handling code here:
+        
+        try{
+            JOptionPane.showMessageDialog(this, "hi");
+            //método para obtener fila y columna al moverse con las flechas del teclado
+            //arriba o abajo
+            if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
+                intFila=tblexcel.getSelectedRow();
+            }
+            //izquiera o derecha
+            if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
+                intColumna=tblexcel.getSelectedColumn();
+            }
+        }catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_tblexcelKeyReleased
 
     /**
      * @param args the command line arguments
@@ -129,6 +173,6 @@ public class Vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblexcel;
     // End of variables declaration//GEN-END:variables
 }
