@@ -10,7 +10,7 @@ package excel;
  * @author Bryan
  */
 public class Celda {
-   private String dato;
+        private String dato;
 	private int fila;
 	private int columna;
 	public Celda(String dato, int fila, int columna) {
