@@ -10,8 +10,11 @@ import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
 public class Vista extends javax.swing.JFrame {
     public static int intFila, intColumna;
     public static Lista miLista=new Lista();
+    DefaultTableModel tm;
+    String sCopiado;
     /**
      * Creates new form Vista
      */
@@ -39,6 +44,7 @@ public class Vista extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.getMessage();
         }
+       setJTexFieldChanged(txtBarra);
         /*miLista.insertarPrincipio(new Celda("10", 3, 3));
         JOptionPane.showMessageDialog(this, miLista.Listar());
         miLista.modifyPorFilaColumna(3,3,"hi");
@@ -57,6 +63,7 @@ public class Vista extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblexcel = new javax.swing.JTable();
+        txtBarra = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -69,6 +76,10 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
@@ -76,6 +87,8 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -167,6 +180,13 @@ public class Vista extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1228, 360));
 
+        txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBarraKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 1090, -1));
+
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
 
@@ -213,6 +233,34 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu2.add(jMenu5);
 
+        jMenu7.setText("Alineado");
+
+        jMenuItem5.setText("Izquierda");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem5);
+
+        jMenuItem21.setText("Centro");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem21);
+
+        jMenuItem22.setText("Derecha");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem22);
+
+        jMenu2.add(jMenu7);
+
         jMenu6.setText("Tamaño de Letra");
 
         jMenuItem1.setText("7");
@@ -242,6 +290,22 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setText("S");
         jMenu2.add(jMenuItem8);
+
+        jMenuItem24.setText("Pegar");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem24);
+
+        jMenuItem23.setText("Copiar");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem23);
 
         jMenuBar1.add(jMenu2);
 
@@ -294,21 +358,26 @@ public class Vista extends javax.swing.JFrame {
     private void tblexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblexcelMouseClicked
         // TODO add your handling code here:
         //método para obtener fila y columna al dar click a la celda
-        intColumna=tblexcel.getSelectedColumn();
-        intFila=tblexcel.getSelectedRow();
-        DefaultTableModel tm= (DefaultTableModel) tblexcel.getModel();
-        String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
+       intColumna=tblexcel.getSelectedColumn();
+       intFila=tblexcel.getSelectedRow();
+       tm=(DefaultTableModel) tblexcel.getModel();
+       String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
+       
+       //limpia barra principal
+       this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+    
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
         //se vuelve a centrar en la misma celda
+      
         tblexcel.requestFocus();
         // edita la celda
         tblexcel.editCellAt(intFila,intColumna);
        //Obtiene el dato de la celda 
-        DefaultTableModel tm= (DefaultTableModel) tblexcel.getModel();
+         tm=(DefaultTableModel) tblexcel.getModel();
         String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-        
+          System.out.println(datos);
         try{           
           
             //método para obtener fila y columna al moverse con las flechas del teclado
@@ -335,12 +404,13 @@ public class Vista extends javax.swing.JFrame {
         }
      
     }//GEN-LAST:event_tblexcelKeyReleased
-public void AlinearDerecha(){
+
+    public void AlinearDerecha(){
    //alinea la celda a la derecha
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
       tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
-    
+
 }
 public void AlinearIzquierda(){
    //alinea la celda a la izquierda
@@ -375,17 +445,105 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void tblexcelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyTyped
- 
-     
+
     }//GEN-LAST:event_tblexcelKeyTyped
 
     private void tblexcelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyPressed
          //Si le da enter cambia el focus a la celda de abajo
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                  intFila=(tblexcel.getSelectedRow())+1;
+                 tblexcel.requestFocus();
+                 System.out.println(intFila+" -"+intColumna+"-");
             }
     }//GEN-LAST:event_tblexcelKeyPressed
 
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+      //alinea la celda a la izquierda
+     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+      modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+      //alinea la celda a la izquierda
+     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+      modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+     //alinea la celda a la izquierda
+     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+      modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void txtBarraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarraKeyReleased
+       try{
+             setJTexFieldChanged(txtBarra);
+       }catch(Exception e){
+           
+       }      
+    }//GEN-LAST:event_txtBarraKeyReleased
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        sCopiado=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));       
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        tblexcel.setValueAt(sCopiado, intFila, intColumna);
+        tblexcel.requestFocus();        
+        tblexcel.editCellAt(intFila,intColumna);
+        String datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
+private void setJTexFieldChanged(JTextField txt)
+    {
+        DocumentListener documentListener = new DocumentListener() {
+ 
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+
+        };
+        txt.getDocument().addDocumentListener(documentListener);
+ 
+    }
+ 
+    private void printIt(DocumentEvent documentEvent) {
+        DocumentEvent.EventType type = documentEvent.getType();
+ 
+        if (type.equals(DocumentEvent.EventType.CHANGE))
+        {
+ 
+        }
+        else if (type.equals(DocumentEvent.EventType.INSERT))
+        {
+            txtEjemploJTextFieldChanged();
+        }
+        else if (type.equals(DocumentEvent.EventType.REMOVE))
+        {
+            txtEjemploJTextFieldChanged();
+        }
+    }
+       private void txtEjemploJTextFieldChanged()
+    {        
+        //Copiar el contenido del jtextfield al jlabel        
+     
+        tblexcel.setValueAt(this.txtBarra.getText(), intFila, intColumna);         
+        String datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
+        System.out.println(datos);
+    }
     /**
      * @param args the command line arguments
      */
@@ -429,6 +587,7 @@ public void AlinearIzquierda(){
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -443,13 +602,19 @@ public void AlinearIzquierda(){
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblexcel;
+    private javax.swing.JTextField txtBarra;
     // End of variables declaration//GEN-END:variables
 }
