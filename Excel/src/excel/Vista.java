@@ -5,8 +5,17 @@
  */
 package excel;
 
+import java.awt.event.KeyEvent;
+import java.util.Set;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -132,17 +141,25 @@ public class Vista extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblexcel.setColumnSelectionAllowed(true);
         tblexcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblexcelMouseClicked(evt);
             }
         });
         tblexcel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblexcelKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblexcelKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblexcelKeyTyped(evt);
+            }
         });
         jScrollPane1.setViewportView(tblexcel);
+        tblexcel.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tblexcel.getColumnModel().getColumnCount() > 0) {
             tblexcel.getColumnModel().getColumn(11).setResizable(false);
             tblexcel.getColumnModel().getColumn(14).setResizable(false);
@@ -279,14 +296,21 @@ public class Vista extends javax.swing.JFrame {
         //método para obtener fila y columna al dar click a la celda
         intColumna=tblexcel.getSelectedColumn();
         intFila=tblexcel.getSelectedRow();
-        
+        DefaultTableModel tm= (DefaultTableModel) tblexcel.getModel();
+        String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
-        // TODO add your handling code here:
+        //se vuelve a centrar en la misma celda
+        tblexcel.requestFocus();
+        // edita la celda
+        tblexcel.editCellAt(intFila,intColumna);
+       //Obtiene el dato de la celda 
+        DefaultTableModel tm= (DefaultTableModel) tblexcel.getModel();
+        String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
         
-        try{
-            JOptionPane.showMessageDialog(this, "hi");
+        try{           
+          
             //método para obtener fila y columna al moverse con las flechas del teclado
             //arriba o abajo
             if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
@@ -296,11 +320,35 @@ public class Vista extends javax.swing.JFrame {
             if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
                 intColumna=tblexcel.getSelectedColumn();
             }
+
+            //obtiene la letra que ingreso
+               String dato=(String) evt.getKeyText(evt.getKeyCode());                 
+          //verifica si el dato es numero o letra
+               int ascii= dato.charAt(0);     
+                   if ((ascii >= 48) && (ascii <= 57)|| (ascii==84)) {                
+                       AlinearDerecha();
+                   }else{                    
+                       AlinearIzquierda();
+                   }                   
         }catch(Exception ex){
             
         }
+     
     }//GEN-LAST:event_tblexcelKeyReleased
-
+public void AlinearDerecha(){
+   //alinea la celda a la derecha
+     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+      modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+    
+}
+public void AlinearIzquierda(){
+   //alinea la celda a la izquierda
+     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+      modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+    
+}
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Cambien algo");
@@ -325,6 +373,18 @@ public class Vista extends javax.swing.JFrame {
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void tblexcelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyTyped
+ 
+     
+    }//GEN-LAST:event_tblexcelKeyTyped
+
+    private void tblexcelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyPressed
+         //Si le da enter cambia el focus a la celda de abajo
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                 intFila=(tblexcel.getSelectedRow())+1;
+            }
+    }//GEN-LAST:event_tblexcelKeyPressed
 
     /**
      * @param args the command line arguments
