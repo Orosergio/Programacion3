@@ -30,7 +30,7 @@ public class Vista extends javax.swing.JFrame {
     DefaultTableModel tm;
     String sCopiado;
      String vctAbc[]=new String[27];
-      int x,y;        //variables para obtener las cooredenadas de seleccion en la tabla
+      int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
      * Creates new form Vista
      */
@@ -204,6 +204,11 @@ public class Vista extends javax.swing.JFrame {
         getContentPane().add(txtBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 1090, -1));
 
         cmbfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbfilActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
 
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -523,6 +528,12 @@ public void AlinearIzquierda(){
         tblexcel.editCellAt(intFila,intColumna);
         String datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
     }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
+    x=cmbcol.getSelectedIndex();
+    y=cmbfil.getSelectedIndex(); 
+    tblexcel.editCellAt(y,x);
+    }//GEN-LAST:event_cmbfilActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
