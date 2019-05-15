@@ -29,11 +29,16 @@ public class Vista extends javax.swing.JFrame {
     public static Lista miLista=new Lista();
     DefaultTableModel tm;
     String sCopiado;
+     String vctAbc[]=new String[27];
+      int x,y;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
      * Creates new form Vista
      */
     public Vista() {
         initComponents();
+        this.cmbcol.removeAllItems();
+        this.cmbfil.removeAllItems();
+        cmbllenado();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()  ){
                 if("Windows".equals(info.getName())){
@@ -50,7 +55,16 @@ public class Vista extends javax.swing.JFrame {
         miLista.modifyPorFilaColumna(3,3,"hi");
         JOptionPane.showMessageDialog(this, miLista.Listar());*/
     }
-
+   public void cmbllenado(){
+      for(int i=0; i<=20;i++){
+      cmbfil.addItem(String.valueOf(i));
+      }
+      vctAbc[0]="A";vctAbc[1]="B";vctAbc[2]="C";vctAbc[3]="D";vctAbc[4]="E";vctAbc[5]="F";vctAbc[6]="G";vctAbc[7]="H";vctAbc[8]="I";vctAbc[9]="J";vctAbc[10]="K";vctAbc[11]="L";vctAbc[12]="M";
+      vctAbc[13]="N";vctAbc[14]="Ñ";vctAbc[15]="O";vctAbc[16]="P";vctAbc[17]="Q";vctAbc[18]="R";vctAbc[19]="S";vctAbc[20]="T";vctAbc[21]="U";vctAbc[22]="V";vctAbc[23]="W";vctAbc[24]="X";vctAbc[25]="Y";vctAbc[26]="Z";
+            for(int i=0; i<=26;i++){
+        cmbcol.addItem(String.valueOf(vctAbc[i]));
+      }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +78,8 @@ public class Vista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblexcel = new javax.swing.JTable();
         txtBarra = new javax.swing.JTextField();
+        cmbfil = new javax.swing.JComboBox<>();
+        cmbcol = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -186,6 +202,12 @@ public class Vista extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 1090, -1));
+
+        cmbfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
+
+        cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -383,11 +405,15 @@ public class Vista extends javax.swing.JFrame {
             //método para obtener fila y columna al moverse con las flechas del teclado
             //arriba o abajo
             if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
-                intFila=tblexcel.getSelectedRow();
+                intFila=tblexcel.getSelectedRow();                
+                     x=tblexcel.getSelectedColumn();
+                    y=tblexcel.getSelectedRow();
             }
             //izquiera o derecha
             if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
-                intColumna=tblexcel.getSelectedColumn();
+                intColumna=tblexcel.getSelectedColumn();               
+                     x=tblexcel.getSelectedColumn();
+                    y=tblexcel.getSelectedRow();
             }
 
             //obtiene la letra que ingreso
@@ -402,7 +428,8 @@ public class Vista extends javax.swing.JFrame {
         }catch(Exception ex){
             
         }
-     
+     cmbcol.setSelectedIndex(x);
+     cmbfil.setSelectedIndex(y);
     }//GEN-LAST:event_tblexcelKeyReleased
 
     public void AlinearDerecha(){
@@ -580,6 +607,8 @@ private void setJTexFieldChanged(JTextField txt)
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbcol;
+    private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
