@@ -233,6 +233,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.png"))); // NOI18N
         jMenu2.setText("Inicio");
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
         jMenu5.setText("Letra");
 
         jMenuItem16.setText("Calibri");
@@ -257,8 +258,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu2.add(jMenu5);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/align2.png"))); // NOI18N
         jMenu7.setText("Alineado");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left.png"))); // NOI18N
         jMenuItem5.setText("Izquierda");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,6 +270,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem5);
 
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/center.png"))); // NOI18N
         jMenuItem21.setText("Centro");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,6 +279,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem21);
 
+        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/right.png"))); // NOI18N
         jMenuItem22.setText("Derecha");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +290,7 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu2.add(jMenu7);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
         jMenu6.setText("Tamaño de Letra");
 
         jMenuItem1.setText("7");
@@ -304,17 +310,21 @@ public class Vista extends javax.swing.JFrame {
         jMenu2.add(jMenu6);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
         jMenuItem6.setText("K");
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
         jMenuItem7.setText("N");
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
         jMenuItem8.setText("S");
         jMenu2.add(jMenuItem8);
 
+        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
         jMenuItem24.setText("Pegar");
         jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,6 +333,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem24);
 
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
         jMenuItem23.setText("Copiar");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +347,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/numero.png"))); // NOI18N
         jMenu4.setText("Número");
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fraccion.png"))); // NOI18N
         jMenuItem10.setText("Fracción 1/2");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,6 +356,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/moneda.png"))); // NOI18N
         jMenuItem11.setText("Moneda  Q.");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,9 +365,11 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem11);
 
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/general.png"))); // NOI18N
         jMenuItem12.setText("General");
         jMenu4.add(jMenuItem12);
 
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/porcentaje.png"))); // NOI18N
         jMenuItem13.setText("Porcentaje %");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +384,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu3.setText("Ayuda");
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
         jMenuItem9.setText("Manual de Usuario");
         jMenu3.add(jMenuItem9);
 
@@ -434,6 +450,25 @@ public class Vista extends javax.swing.JFrame {
      cmbfil.setSelectedIndex(y);
     }//GEN-LAST:event_tblexcelKeyReleased
 
+    
+public void moneda(){
+        //Agrega a cada valor simbolo de moneda
+       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       intColumna=tblexcel.getSelectedColumn();
+       intFila=tblexcel.getSelectedRow();
+       
+       if(!infodatos.matches("[0-9]*")){
+       
+           JOptionPane.showMessageDialog(null,"Solo numero");
+       
+       }else{
+           tblexcel.setValueAt("Q. "+infodatos, intFila, intColumna);
+       }
+       
+       
+          
+    }
+    
     public void AlinearDerecha(){
    //alinea la celda a la derecha
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
@@ -461,7 +496,8 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:.
+        moneda();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
