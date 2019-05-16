@@ -60,9 +60,12 @@ public class Vista extends javax.swing.JFrame {
       cmbfil.addItem(String.valueOf(i));
       }
       vctAbc[0]="A";vctAbc[1]="B";vctAbc[2]="C";vctAbc[3]="D";vctAbc[4]="E";vctAbc[5]="F";vctAbc[6]="G";vctAbc[7]="H";vctAbc[8]="I";vctAbc[9]="J";vctAbc[10]="K";vctAbc[11]="L";vctAbc[12]="M";
-      vctAbc[13]="N";vctAbc[14]="Ñ";vctAbc[15]="O";vctAbc[16]="P";vctAbc[17]="Q";vctAbc[18]="R";vctAbc[19]="S";vctAbc[20]="T";vctAbc[21]="U";vctAbc[22]="V";vctAbc[23]="W";vctAbc[24]="X";vctAbc[25]="Y";vctAbc[26]="Z";
-            for(int i=0; i<=26;i++){
+      vctAbc[13]="N";vctAbc[14]="O";vctAbc[15]="P";vctAbc[16]="Q";vctAbc[17]="R";vctAbc[18]="S";vctAbc[19]="T";vctAbc[20]="U";vctAbc[21]="V";vctAbc[22]="W";vctAbc[23]="X";vctAbc[24]="Y";vctAbc[25]="Z";      
+       for(int i=0; i<=25;i++){
         cmbcol.addItem(String.valueOf(vctAbc[i]));
+      }
+        for(int i=0; i<=15;i++){
+        cmbcol.addItem(String.valueOf("A"+vctAbc[i]));
       }
     }
     /**
@@ -161,15 +164,7 @@ public class Vista extends javax.swing.JFrame {
             new String [] {
                 "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblexcel.setColumnSelectionAllowed(true);
         tblexcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -189,10 +184,6 @@ public class Vista extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblexcel);
         tblexcel.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (tblexcel.getColumnModel().getColumnCount() > 0) {
-            tblexcel.getColumnModel().getColumn(11).setResizable(false);
-            tblexcel.getColumnModel().getColumn(14).setResizable(false);
-        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1228, 360));
 
@@ -209,10 +200,10 @@ public class Vista extends javax.swing.JFrame {
                 cmbfilActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
+        getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
 
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
