@@ -165,6 +165,7 @@ public class Vista extends javax.swing.JFrame {
                 "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK"
             }
         ));
+        tblexcel.setAutoscrolls(false);
         tblexcel.setColumnSelectionAllowed(true);
         tblexcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -216,6 +217,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder1.png"))); // NOI18N
         jMenuItem3.setText("Abrir");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout.png"))); // NOI18N
@@ -443,8 +449,7 @@ public void AlinearIzquierda(){
     
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Cambien algo");
+     tblexcel.setValueAt("asdad", 1, 1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
@@ -525,6 +530,10 @@ public void AlinearIzquierda(){
     y=cmbfil.getSelectedIndex(); 
     tblexcel.editCellAt(y,x);
     }//GEN-LAST:event_cmbfilActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       JOptionPane.showMessageDialog(null,"sepa");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
