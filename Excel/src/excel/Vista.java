@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package excel;
-
+import java.sql.*;
 import java.awt.event.KeyEvent;
 import java.util.Set;
 import javax.swing.AbstractAction;
@@ -29,16 +29,25 @@ public class Vista extends javax.swing.JFrame {
     public static Lista miLista=new Lista();
     DefaultTableModel tm;
     String sCopiado;
-     String vctAbc[]=new String[27];
+     String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
+     int itOp=0;
       int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
      * Creates new form Vista
      */
     public Vista() {
         initComponents();
+        //oculta algunos obtjetos
+        this.cmbcodigo.setVisible(false);
+        this.lblsel.setVisible(false);
+        this.cmblistado.setVisible(false);
+        btnabrireli.setVisible(false); 
+        //limpia algunos combobox
         this.cmbcol.removeAllItems();
         this.cmbfil.removeAllItems();
-        cmbllenado();
+        //llamado de metodos para llenado de combobox
+        llenadocmbArchivos();
+        cmbllenado();               
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()  ){
                 if("Windows".equals(info.getName())){
@@ -54,6 +63,24 @@ public class Vista extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, miLista.Listar());
         miLista.modifyPorFilaColumna(3,3,"hi");
         JOptionPane.showMessageDialog(this, miLista.Listar());*/
+    }
+    public void llenadocmbArchivos(){
+     this.cmblistado.removeAllItems();
+      this.cmbcodigo.removeAllItems();
+        try{
+            //conexion de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM tblarchivo");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){
+                this.cmbcodigo.addItem(rs.getString("codarch"));
+                this.cmblistado.addItem(rs.getString("nombre"));
+                r=rs.next();            
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
+        }
     }
    public void cmbllenado(){
       for(int i=0; i<=20;i++){
@@ -83,6 +110,10 @@ public class Vista extends javax.swing.JFrame {
         txtBarra = new javax.swing.JTextField();
         cmbfil = new javax.swing.JComboBox<>();
         cmbcol = new javax.swing.JComboBox<>();
+        cmblistado = new javax.swing.JComboBox<>();
+        cmbcodigo = new javax.swing.JComboBox<>();
+        btnabrireli = new javax.swing.JButton();
+        lblsel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -187,7 +218,7 @@ public class Vista extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblexcel);
         tblexcel.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1228, 360));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1228, 360));
 
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -206,6 +237,28 @@ public class Vista extends javax.swing.JFrame {
 
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, -1));
+
+        cmblistado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmblistado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmblistadoItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(cmblistado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 170, -1));
+
+        cmbcodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cmbcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 50, 170, -1));
+
+        btnabrireli.setText("Eliminar");
+        btnabrireli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnabrireliActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnabrireli, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, -1, -1));
+
+        lblsel.setText("Seleccione");
+        getContentPane().add(lblsel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -227,6 +280,11 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
         jMenuItem25.setText("Eliminar");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem25);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout.png"))); // NOI18N
@@ -573,8 +631,52 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_cmbfilActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       JOptionPane.showMessageDialog(null,"sepa");
+      //muestra un combobox y un boton para que pueda seleccionar el archivo que desea abrir 
+        JOptionPane.showMessageDialog(null,"Seleccione el archivo que desee abrir");
+       itOp=1;
+       btnabrireli.setText("Abrir");
+       btnabrireli.setVisible(true);
+       this.lblsel.setVisible(true);
+       cmblistado.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void cmblistadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmblistadoItemStateChanged
+        try{ cmbcodigo.setSelectedIndex(cmblistado.getSelectedIndex());}// se cambia el indice del combo
+        catch(Exception e){
+        }
+    }//GEN-LAST:event_cmblistadoItemStateChanged
+
+    private void btnabrireliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrireliActionPerformed
+        //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOp,
+        //entonces entrara en el if y luego de realizar la accion vuelve a cerrar el combobox y el boton
+        if(itOp==1){
+        
+        }
+        if(itOp==2){
+         try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+        }  
+        cmblistado.setVisible(false);
+        btnabrireli.setVisible(false);
+        this.lblsel.setVisible(false);
+    }//GEN-LAST:event_btnabrireliActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+    //muestra un combobox y un boton para que pueda seleccionar el archivo que desea eliminar
+        JOptionPane.showMessageDialog(null,"Seleccione el archivo que desee eliminar");
+       itOp=2;
+       btnabrireli.setText("Eliminar");
+       btnabrireli.setVisible(true);
+       cmblistado.setVisible(true);
+       this.lblsel.setVisible(true);
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
@@ -659,8 +761,11 @@ private void setJTexFieldChanged(JTextField txt)
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnabrireli;
+    private javax.swing.JComboBox<String> cmbcodigo;
     private javax.swing.JComboBox<String> cmbcol;
     private javax.swing.JComboBox<String> cmbfil;
+    private javax.swing.JComboBox<String> cmblistado;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -696,6 +801,7 @@ private void setJTexFieldChanged(JTextField txt)
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblsel;
     private javax.swing.JTable tblexcel;
     private javax.swing.JTextField txtBarra;
     // End of variables declaration//GEN-END:variables
