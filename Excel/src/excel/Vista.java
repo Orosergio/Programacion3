@@ -696,15 +696,30 @@ public void AlinearIzquierda(){
         
         }
         if(itOp==2){
+     int itres, iterror=0;
+     itres=  JOptionPane.showConfirmDialog(this,"¿Esta seguro de eliminar los datos?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+     if(itres==JOptionPane.YES_OPTION){
+               try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            pst.executeUpdate(); 
+            iterror=1;
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+     }
          try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
-            pst.executeUpdate();
-
-            JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
+            pst.executeUpdate();  
+            iterror=1+iterror;
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
+         if(iterror==2){                  
+         JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
+         }
+         llenadocmbArchivos();
+     }     
         }  
         cmblistado.setVisible(false);
         btnabrireli.setVisible(false);
