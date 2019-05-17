@@ -114,6 +114,9 @@ public class Vista extends javax.swing.JFrame {
         cmbcodigo = new javax.swing.JComboBox<>();
         btnabrireli = new javax.swing.JButton();
         lblsel = new javax.swing.JLabel();
+        numer = new javax.swing.JTextField();
+        denom = new javax.swing.JTextField();
+        calcular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -259,6 +262,16 @@ public class Vista extends javax.swing.JFrame {
 
         lblsel.setText("Seleccione");
         getContentPane().add(lblsel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
+        getContentPane().add(numer, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 70, 50, -1));
+        getContentPane().add(denom, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 50, -1));
+
+        calcular.setText("Calcular");
+        calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcularActionPerformed(evt);
+            }
+        });
+        getContentPane().add(calcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -526,11 +539,40 @@ public void moneda(){
        
        }else{
            tblexcel.setValueAt("Q. "+infodatos, intFila, intColumna);
-       }
-       
-       
-          
+       }      
     }
+
+
+
+public void fractoria(){
+        //Agrega a cada valor simbolo de moneda
+       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       intColumna=tblexcel.getSelectedColumn();
+       intFila=tblexcel.getSelectedRow();
+       
+       double decimal=Double.parseDouble(infodatos);
+        
+       ControllerGeneral control=new ControllerGeneral(decimal);
+       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
+       tblexcel.setValueAt(control.toFraccion(decimal), intFila, intColumna);
+       
+        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+              
+       int i=0;
+        while(infodatos2.charAt(i)!='/'){
+            i++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(i==infodatos2.length()){
+                break;
+            }
+        }
+       
+        /*fraccion frac = new fraccion(Integer.parseInt(numer.getText()),Integer.parseInt(denom.getText()));
+        JOptionPane.showMessageDialog(null, frac.toString());*/
+      /////////////////////////////////////////////
+    }
+    
+
     
     public void AlinearDerecha(){
    //alinea la celda a la derecha
@@ -556,6 +598,7 @@ public void AlinearIzquierda(){
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
+        fractoria();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -677,6 +720,13 @@ public void AlinearIzquierda(){
        cmblistado.setVisible(true);
        this.lblsel.setVisible(true);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
+        // TODO add your handling code here:
+        fraccion frac = new fraccion(Integer.parseInt(numer.getText()),Integer.parseInt(denom.getText()));
+        JOptionPane.showMessageDialog(null, frac.toString());
+        
+    }//GEN-LAST:event_calcularActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
@@ -762,10 +812,12 @@ private void setJTexFieldChanged(JTextField txt)
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnabrireli;
+    private javax.swing.JButton calcular;
     private javax.swing.JComboBox<String> cmbcodigo;
     private javax.swing.JComboBox<String> cmbcol;
     private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JComboBox<String> cmblistado;
+    private javax.swing.JTextField denom;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -802,6 +854,7 @@ private void setJTexFieldChanged(JTextField txt)
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblsel;
+    private javax.swing.JTextField numer;
     private javax.swing.JTable tblexcel;
     private javax.swing.JTextField txtBarra;
     // End of variables declaration//GEN-END:variables
