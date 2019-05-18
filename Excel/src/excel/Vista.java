@@ -426,6 +426,7 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem8.setText("S");
         jMenu2.add(jMenuItem8);
 
+        jMenuItem24.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
         jMenuItem24.setText("Pegar");
         jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
@@ -435,6 +436,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem24);
 
+        jMenuItem23.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
         jMenuItem23.setText("Copiar");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
@@ -505,7 +507,7 @@ public class Vista extends javax.swing.JFrame {
        tm=(DefaultTableModel) tblexcel.getModel();
        datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
         System.out.println(datos);
-        miLista.insertarDato(new Celda(datos,intFila,intColumna));
+        
        Lista();
        //limpia barra principal
        this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
@@ -860,6 +862,9 @@ private void setJTexFieldChanged(JTextField txt)
         System.out.println(datos);
     }
        public void Lista(){
+           if (miLista.obtenerPos(intFila, intColumna)==-1) {
+                miLista.insertarDato(new Celda(datos,intFila,intColumna));
+            }
            if (datos.length()>=1) {
                miLista.modifyPorFilaColumna(intFila, intColumna, datos);
            }else{
