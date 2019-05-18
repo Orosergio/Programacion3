@@ -260,6 +260,11 @@ public class Vista extends javax.swing.JFrame {
         getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
 
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbcol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbcolActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, -1));
 
         cmblistado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -549,7 +554,7 @@ public class Vista extends javax.swing.JFrame {
      datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
     Lista();
     System.out.println(datos);
-    System.out.println(miLista.Listar());
+    System.out.println(miLista.Listar());    
      cmbcol.setSelectedIndex(intColumna);
      cmbfil.setSelectedIndex(intFila);
     }//GEN-LAST:event_tblexcelKeyReleased
@@ -696,10 +701,11 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
-          tblexcel.requestFocus();     
-    intColumna=cmbcol.getSelectedIndex();
+     intColumna=cmbcol.getSelectedIndex();
     intFila=cmbfil.getSelectedIndex(); 
     tblexcel.editCellAt(intFila,intColumna);
+     tblexcel.changeSelection(intFila,intColumna,false, false);
+     tblexcel.requestFocus();  
     }//GEN-LAST:event_cmbfilActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -811,6 +817,10 @@ public void AlinearIzquierda(){
         }
         intCod++;
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void cmbcolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbcolActionPerformed
+ 
+    }//GEN-LAST:event_cmbcolActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
