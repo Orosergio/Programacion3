@@ -23,15 +23,8 @@ public class Lista {
 			this.celda=celda;
 		}
 	}
-        //metodo para ingresar el nodo al principio
-	public void insertarPrincipio(Celda celda) {
-		Nodo nodo=new Nodo(celda);
-		nodo.siguiente=cabeza;
-		cabeza=nodo;
-		longitud++;	
-	}
-        //metodo para ingresar el nodo al final
-	public void insertarFinal(Celda celda) {
+        //metodo para ingresar el nodo en posicion vacia
+	public void insertarDato(Celda celda) {
 		Nodo nodo=new Nodo(celda);
 		if (cabeza==null) {
 			cabeza=nodo;
@@ -40,44 +33,30 @@ public class Lista {
 			while (puntero.siguiente!=null) {
 				puntero=puntero.siguiente;
 			}
-			puntero.siguiente=nodo;
-		}
-		longitud++;
-	}
-        //metodo para ingresar el nodo en una posicion especificada
-	public void insertarDespues(int n, Celda celda) {
-		Nodo nodo=new Nodo(celda);
-		if (cabeza==null) {
-			cabeza=nodo;
-		} else {
-			Nodo puntero=cabeza;
-			int contador=0;
-			while (contador<n && puntero.siguiente!=null) {
-				puntero=puntero.siguiente;
-				contador++;
-			}
 			nodo.siguiente=puntero.siguiente;
 			puntero.siguiente=nodo;
 		}
 		longitud++;
 	}
-        //metodo para obtener la direccion de la posicion ingresada
-	public Celda obtener(int n) {
-		if (cabeza==null) {
-			return null;
-		} else {
-			Nodo puntero=cabeza;
-			int contador=0;
-			while (contador<n && puntero.siguiente!=null) {
-				puntero=puntero.siguiente;
-				contador++;
-			}
-			if (contador!=n) {
-				return null;
-			} else {
-				return puntero.celda;
-			}
-		}
+        //metodo para obtener la posición de lo buscado
+	public int obtenerPos(int fila, int columna) {
+            int intPos=-1;
+            Nodo aux = cabeza;
+            boolean encontrado = false;
+            // Recorre la lista hasta encontrar el elemento o al final 
+            while(aux != null && encontrado != true){
+                intPos++;
+                if (fila == aux.celda.getFila() && columna == aux.celda.getColumna()){
+                    encontrado = true;
+                }
+                else{
+                    aux = aux.siguiente;
+                }
+                if (aux==null) {
+                    intPos=-1;
+                }
+            }
+            return intPos;
 	}
         //metodo para modificar dato de la celda buscándolo por la fila y la columna
         public void modifyPorFilaColumna(int fila, int columna, String dat){
@@ -100,30 +79,6 @@ public class Lista {
 	}
         public boolean estaVacia() {
             return cabeza==null;
-        }
-        //metodo para eliminar el primer nodo
-        public void eliminaPrincipio() {
-            if (cabeza!=null){
-                Nodo primer = cabeza;
-                cabeza=cabeza.siguiente;
-                longitud--;
-            }
-        }
-        //metodo para eliminar el ultimo nodo
-        public void eliminarUltimo() {
-            if (cabeza!= null) {
-                if (cabeza.siguiente==null) {
-                    cabeza=null;  
-                    longitud--;
-                } else {
-                    Nodo puntero=cabeza;
-                    while (puntero.siguiente.siguiente!=null) {                    
-                        puntero=puntero.siguiente;
-                    }
-                    puntero.siguiente=null;
-                    longitud--;
-                }
-            }
         }
         //metodo para eliminar una celda elegida
         public void eliminarCelda(int n) {
@@ -148,6 +103,23 @@ public class Lista {
                 }
             }
         }
+        //metodo para ver la lista guardada
+        public String obtenerNodo(int pos)
+	{
+		String Dato="";
+		Nodo aux=cabeza;
+                int intContador=0;
+                //ciclo para obtener los datos que contiene la lista
+		while (aux!=null)
+		{
+                    if (intContador==pos) {
+                        Dato=aux.celda.getDato()+";"+aux.celda.getFila()+";"+aux.celda.getColumna() + ";";
+                    }
+                    intContador++;
+                    aux=aux.siguiente;
+		}
+		return(Dato);
+	}
         //metodo para ver la lista guardada
         public String Listar()
 	{

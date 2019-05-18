@@ -25,8 +25,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Sergio Orozco
  */
 public class Vista extends javax.swing.JFrame {
+     public static int intCod=0;
     public static int intFila, intColumna;
     public static Lista miLista=new Lista();
+    public static String datos;
     DefaultTableModel tm;
     String sCopiado;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
@@ -36,6 +38,25 @@ public class Vista extends javax.swing.JFrame {
      * Creates new form Vista
      */
     public Vista() {
+        try{
+            //Conección con la base de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("select * from tblarchivo");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            //mientras encuentre datos en la tabla y campo especificado
+            while(r){
+                //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
+                if (intCod< Integer.parseInt(rs.getString("codarch"))) {
+                    intCod=Integer.parseInt(rs.getString("codarch"));
+                }
+                r=rs.next();
+            }
+            intCod++;
+            System.out.println(intCod);
+        }catch (Exception e){
+            System.out.println("No conecta");
+        }
         initComponents();
         //oculta algunos obtjetos
         this.cmbcodigo.setVisible(false);
@@ -289,6 +310,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/save.png"))); // NOI18N
         jMenuItem2.setText("Guardar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
@@ -477,8 +503,10 @@ public class Vista extends javax.swing.JFrame {
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
        tm=(DefaultTableModel) tblexcel.getModel();
-       String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
-       
+       datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
+        System.out.println(datos);
+        miLista.insertarDato(new Celda(datos,intFila,intColumna));
+       Lista();
        //limpia barra principal
        this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
     
@@ -486,30 +514,27 @@ public class Vista extends javax.swing.JFrame {
 
     private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
         //se vuelve a centrar en la misma celda
-      
         tblexcel.requestFocus();
         // edita la celda
         tblexcel.editCellAt(intFila,intColumna);
        //Obtiene el dato de la celda 
          tm=(DefaultTableModel) tblexcel.getModel();
-        String datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-          System.out.println(datos);
         try{           
-          
             //método para obtener fila y columna al moverse con las flechas del teclado
             //arriba o abajo
             if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
-                intFila=tblexcel.getSelectedRow();                
+                intFila=tblexcel.getSelectedRow();
+                miLista.insertarDato(new Celda(datos,intFila,intColumna));                
                      x=tblexcel.getSelectedColumn();
                     y=tblexcel.getSelectedRow();
             }
             //izquiera o derecha
             if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
-                intColumna=tblexcel.getSelectedColumn();               
+                intColumna=tblexcel.getSelectedColumn(); 
+                miLista.insertarDato(new Celda(datos,intFila,intColumna));
                      x=tblexcel.getSelectedColumn();
                     y=tblexcel.getSelectedRow();
             }
-
             //obtiene la letra que ingreso
                String dato=(String) evt.getKeyText(evt.getKeyCode());                 
           //verifica si el dato es numero o letra
@@ -522,6 +547,10 @@ public class Vista extends javax.swing.JFrame {
         }catch(Exception ex){
             
         }
+     datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+    Lista();
+    System.out.println(datos);
+    System.out.println(miLista.Listar());
      cmbcol.setSelectedIndex(x);
      cmbfil.setSelectedIndex(y);
     }//GEN-LAST:event_tblexcelKeyReleased
@@ -664,7 +693,7 @@ public void AlinearIzquierda(){
         tblexcel.setValueAt(sCopiado, intFila, intColumna);
         tblexcel.requestFocus();        
         tblexcel.editCellAt(intFila,intColumna);
-        String datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
@@ -742,6 +771,46 @@ public void AlinearIzquierda(){
         JOptionPane.showMessageDialog(null, frac.toString());
         
     }//GEN-LAST:event_calcularActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE);
+        try{
+            //Conección con la base de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("insert into tblarchivo values(?,?)");
+            pst.setString(1, String.valueOf(intCod));
+            pst.setString(2, strNombreAr.trim());
+            pst.executeUpdate();
+            //se agregan los datos ingresados a la base de datos 
+            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e){
+            System.out.println("le dio un error");
+        }
+        for (int i = 0; i < miLista.contar(); i++) {
+            String strCont=miLista.obtenerNodo(i);
+            String[] strPartes=strCont.split(";");
+            int fila=Integer.parseInt(strPartes[1]);
+            int col=Integer.parseInt(strPartes[2]);
+            String cont=strPartes[0];
+            System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido) values(?,?,?,?)");
+                pst.setString(1, String.valueOf(fila));
+                pst.setString(2, String.valueOf(col));
+                pst.setString(3, String.valueOf(intCod));
+                pst.setString(4, String.valueOf(cont));
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("le dio un error "+e);
+            }
+            //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
+        }
+        intCod++;
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 private void setJTexFieldChanged(JTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
@@ -790,6 +859,13 @@ private void setJTexFieldChanged(JTextField txt)
         String datos=String.valueOf(this.tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
         System.out.println(datos);
     }
+       public void Lista(){
+           if (datos.length()>=1) {
+               miLista.modifyPorFilaColumna(intFila, intColumna, datos);
+           }else{
+               miLista.eliminarCelda(miLista.obtenerPos(intFila, intColumna));
+           }
+       }
     /**
      * @param args the command line arguments
      */
