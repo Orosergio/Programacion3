@@ -526,14 +526,14 @@ public class Vista extends javax.swing.JFrame {
             //arriba o abajo
             if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
                 intFila=tblexcel.getSelectedRow();
-                miLista.insertarDato(new Celda(datos,intFila,intColumna));                
+                Lista();
                      x=tblexcel.getSelectedColumn();
                     y=tblexcel.getSelectedRow();
             }
             //izquiera o derecha
             if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
                 intColumna=tblexcel.getSelectedColumn(); 
-                miLista.insertarDato(new Celda(datos,intFila,intColumna));
+                Lista();
                      x=tblexcel.getSelectedColumn();
                     y=tblexcel.getSelectedRow();
             }
