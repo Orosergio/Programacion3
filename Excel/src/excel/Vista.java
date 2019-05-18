@@ -511,7 +511,8 @@ public class Vista extends javax.swing.JFrame {
        Lista();
        //limpia barra principal
        this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-    
+     cmbcol.setSelectedIndex(intColumna);
+     cmbfil.setSelectedIndex(intFila);
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
@@ -527,15 +528,11 @@ public class Vista extends javax.swing.JFrame {
             if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
                 intFila=tblexcel.getSelectedRow();
                 Lista();
-                     x=tblexcel.getSelectedColumn();
-                    y=tblexcel.getSelectedRow();
             }
             //izquiera o derecha
             if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
                 intColumna=tblexcel.getSelectedColumn(); 
                 Lista();
-                     x=tblexcel.getSelectedColumn();
-                    y=tblexcel.getSelectedRow();
             }
             //obtiene la letra que ingreso
                String dato=(String) evt.getKeyText(evt.getKeyCode());                 
@@ -553,8 +550,8 @@ public class Vista extends javax.swing.JFrame {
     Lista();
     System.out.println(datos);
     System.out.println(miLista.Listar());
-     cmbcol.setSelectedIndex(x);
-     cmbfil.setSelectedIndex(y);
+     cmbcol.setSelectedIndex(intColumna);
+     cmbfil.setSelectedIndex(intFila);
     }//GEN-LAST:event_tblexcelKeyReleased
 
     
@@ -699,9 +696,10 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
-    x=cmbcol.getSelectedIndex();
-    y=cmbfil.getSelectedIndex(); 
-    tblexcel.editCellAt(y,x);
+          tblexcel.requestFocus();     
+    intColumna=cmbcol.getSelectedIndex();
+    intFila=cmbfil.getSelectedIndex(); 
+    tblexcel.editCellAt(intFila,intColumna);
     }//GEN-LAST:event_cmbfilActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
