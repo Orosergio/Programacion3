@@ -954,7 +954,7 @@ public void AlinearIzquierda(){
         //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOp,
         //entonces entrara en el if y luego de realizar la accion vuelve a cerrar el combobox y el boton
         if(itOp==1){
-            /*
+            
         try{//obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
@@ -970,9 +970,9 @@ public void AlinearIzquierda(){
             System.out.println(miLista.Listar());  
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal ");
-        }*/
         }
-        if(itOp==2){/*
+        }
+        if(itOp==2){
      int itres, iterror=0;
      itres=  JOptionPane.showConfirmDialog(this,"¿Esta seguro de eliminar los datos?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
      if(itres==JOptionPane.YES_OPTION){
@@ -996,7 +996,7 @@ public void AlinearIzquierda(){
          JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
          }
          llenadocmbArchivos();
-     }     */
+     }     
         }  
         cmblistado.setVisible(false);
         btnabrireli.setVisible(false);
@@ -1057,6 +1057,7 @@ public void AlinearIzquierda(){
             }
             //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
         }
+        llenadocmbArchivos();
         intCod++;
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
