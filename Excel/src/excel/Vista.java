@@ -31,6 +31,7 @@ public class Vista extends javax.swing.JFrame {
     public static String datos;
     DefaultTableModel tm;
     String sCopiado;
+    String simbolo;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
      int itOp=0;
       int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
@@ -140,6 +141,7 @@ public class Vista extends javax.swing.JFrame {
         calcular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -301,6 +303,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
+
+        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
+        jMenuItem26.setText("Nuevo");
+        jMenu1.add(jMenuItem26);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder1.png"))); // NOI18N
@@ -559,52 +565,199 @@ public class Vista extends javax.swing.JFrame {
      cmbfil.setSelectedIndex(intFila);
     }//GEN-LAST:event_tblexcelKeyReleased
 
+ 
+public void Porcentaje(){
     
+       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       intColumna=tblexcel.getSelectedColumn();
+       intFila=tblexcel.getSelectedRow();
+    
+            if(infodatos.charAt(0)=='Q'){
+         generalm();
+         infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+         float Intporcen=Float.parseFloat(infodatos);
+         float intvalormostrar=Intporcen*100;
+          tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+       
+       }else if(infodatos.matches("\\d+\\/\\d+")){
+           generalm();
+            infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+         float Intporcen=Float.parseFloat(infodatos);
+         float intvalormostrar=Intporcen*100;
+         tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+       }else{
+            infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+         float Intporcen=Float.parseFloat(infodatos);
+         float intvalormostrar=Intporcen*100;
+         tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+         
+       }
+    
+
+
+    
+    
+    
+}
 public void moneda(){
         //Agrega a cada valor simbolo de moneda
        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
        
-       if(!infodatos.matches("[0-9]*")){
+       String regex="\\d+\\.\\d+";
+       /*Pattern pattern = Pattern.compile(regex);
+       Matcher matcher=pattern.matcher(infodatos);
+       System.out.println(matcher.find());*/
+                
+       if(infodatos.matches("\\d+")){
+           tblexcel.setValueAt("Q"+infodatos+".00", intFila, intColumna);
+       }
        
-           JOptionPane.showMessageDialog(null,"Solo numero");
+       if(infodatos.matches(regex)){
+           
+           infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+           simbolo="Q"+infodatos;
+           tblexcel.setValueAt(simbolo, intFila, intColumna);
+       }    
        
-       }else{
-           tblexcel.setValueAt("Q. "+infodatos, intFila, intColumna);
-       }      
+       //CONVIRTIENDO FRACCION A MONEDA------------------------------------------------------------------------
+          if(infodatos.matches("\\d+\\/\\d+")){
+           
+          int o=0;
+        while(infodatos.charAt(o)!='/'){
+            o++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(o==infodatos.length()){
+                break;
+            }
+        } 
+        
+        float numer=Integer.parseInt(infodatos.substring(0, o));
+        float denom=Integer.parseInt(infodatos.substring(o+1, infodatos.length()));
+        
+        float total=0;
+        total=numer/denom;
+                
+        String nuevodato=Float.toString(total);
+        
+                
+        
+           System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
+        tblexcel.setValueAt(total, intFila, intColumna);
+        
+       }
+          
     }
 
 
 
 public void fractoria(){
         //Agrega a cada valor simbolo de moneda
-       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
+           
        
-       double decimal=Double.parseDouble(infodatos);
+                 
+       if(infodatos.charAt(0)=='Q'){
+          
+           int p=0;
+        while(infodatos.charAt(p)!='Q'){
+            p++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(p==infodatos.length()){
+                break;
+            }
+        } 
+        
+        //envio de parametro
+        double decimal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
         
        ControllerGeneral control=new ControllerGeneral(decimal);
        JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
        tblexcel.setValueAt(control.toFraccion(decimal), intFila, intColumna);
        
-        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-              
-       int i=0;
+        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+           
+           
+           
+       }else{
+           
+            double decimal=Double.parseDouble(infodatos);
+        
+       ControllerGeneral control=new ControllerGeneral(decimal);
+       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
+       tblexcel.setValueAt(control.toFraccion(decimal), intFila, intColumna);
+       
+        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+           
+       }   
+       
+       /*int i=0;
         while(infodatos2.charAt(i)!='/'){
             i++;
             //Validacion por si no tuviera punto decimal y no se quede en bucle
             if(i==infodatos2.length()){
                 break;
             }
-        }
+        }*/
        
         /*fraccion frac = new fraccion(Integer.parseInt(numer.getText()),Integer.parseInt(denom.getText()));
         JOptionPane.showMessageDialog(null, frac.toString());*/
       /////////////////////////////////////////////
     }
     
+public void generalm(){
+//Guardando un valor de la celda en variable string
+     String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       intColumna=tblexcel.getSelectedColumn();
+       intFila=tblexcel.getSelectedRow();
+       
+          //Recorrido del String
+       if(infodatos.charAt(0)=='Q'){
+           
+                 int p=0;
+        while(infodatos.charAt(p)!='Q'){
+            p++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(p==infodatos.length()){
+                break;
+            }
+        } 
+        
+        //envio de parametro
+        
+        double normal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
+        
+       tblexcel.setValueAt(normal, intFila, intColumna);
+       
+       }else{
+          int o=0;
+        while(infodatos.charAt(o)!='/'){
+            o++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(o==infodatos.length()){
+                break;
+            }
+        } 
+        
+        float numer=Integer.parseInt(infodatos.substring(0, o));
+        float denom=Integer.parseInt(infodatos.substring(o+1, infodatos.length()));
+        
+        float total=0;
+        total=numer/denom;
+        float total2=5/2;
+           System.out.println("num: "+numer+" denom: "+denom+" total: "+total+" total2: "+total2);
+        tblexcel.setValueAt(total, intFila, intColumna);
+        
+       }
+       
+          
+        
+       
+}
+
 
     
     public void AlinearDerecha(){
@@ -949,6 +1102,7 @@ private void setJTexFieldChanged(JTextField txt)
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
