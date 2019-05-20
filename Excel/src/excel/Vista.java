@@ -35,8 +35,7 @@ public class Vista extends javax.swing.JFrame {
     String sCopiado,sTipoLetra;
     String simbolo;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
-     int itOp=0;
-     
+     int itOp=0, itNegr=0;//variable pivote de ayuda
      int iTamañoLetra=12;
       int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
@@ -89,6 +88,15 @@ public class Vista extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, miLista.Listar());
         miLista.modifyPorFilaColumna(3,3,"hi");
         JOptionPane.showMessageDialog(this, miLista.Listar());*/
+    }
+    public void negrita(){
+        if(itNegr==0){
+            tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.BOLD, iTamañoLetra));
+            itNegr=1;
+        }else{
+            itNegr=0;
+        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+        }
     }
     public void llenadocmbArchivos(){
      this.cmblistado.removeAllItems();
@@ -187,10 +195,29 @@ public class Vista extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 514, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 690, -1, -1));
 
         tblexcel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -248,7 +275,7 @@ public class Vista extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblexcel);
         tblexcel.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1228, 360));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 1228, 550));
 
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -477,6 +504,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
         jMenuItem7.setText("N");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -557,69 +589,6 @@ public class Vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblexcelMouseClicked
-        // TODO add your handling code here:
-        //método para obtener fila y columna al dar click a la celda
-       intColumna=tblexcel.getSelectedColumn();
-       intFila=tblexcel.getSelectedRow();
-       tm=(DefaultTableModel) tblexcel.getModel();
-       datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn())); 
-        System.out.println(datos);
-        
-       Lista();
-       //limpia barra principal
-       this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-     cmbcol.setSelectedIndex(intColumna);
-     cmbfil.setSelectedIndex(intFila);
-    }//GEN-LAST:event_tblexcelMouseClicked
-
-    private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
-      //se vuelve a centrar en la misma celda          
-              try{           
-            //método para obtener fila y columna al moverse con las flechas del teclado
-            //arriba o abajo
-            if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
-                intFila=tblexcel.getSelectedRow();
-                Lista();
-            }
-            //izquiera o derecha
-            if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
-                intColumna=tblexcel.getSelectedColumn(); 
-                Lista();
-            }
-           /* pa mientras//obtiene la letra que ingreso
-               String dato=(String) evt.getKeyText(evt.getKeyCode());                 
-          //verifica si el dato es numero o letra
-               int ascii= dato.charAt(0);     
-                   if ((ascii >= 48) && (ascii <= 57)|| (ascii==84)) {                
-                       AlinearDerecha();
-                   }else{                    
-                       AlinearIzquierda();
-                   }      */
-                  if (tblexcel.isEditing()) {
-                         tblexcel.requestFocus();
-                        // edita la celda         
-                         tblexcel.editCellAt(intFila,intColumna);       
-                  }else{
-                        tblexcel.requestFocus();
-                  }   
- 
-       //Obtiene el dato de la celda 
-         tm=(DefaultTableModel) tblexcel.getModel();
-        }catch(Exception ex){
-            
-        }
-    VerificarVacio(); 
-    this.txtBarra.setText(datos);
-    Lista();
-    System.out.println(datos);
-    System.out.println(miLista.Listar());    
-    cmbcol.setSelectedIndex(intColumna);
-    cmbfil.setSelectedIndex(intFila);
-    tblexcel.requestFocus();
-            //     
-    }//GEN-LAST:event_tblexcelKeyReleased
-
  
 public void Porcentaje(){
     
@@ -646,12 +615,7 @@ public void Porcentaje(){
          float intvalormostrar=Intporcen*100;
          tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
          
-       }
-    
-
-
-    
-    
+       } 
     
 }
 public void moneda(){
@@ -858,19 +822,6 @@ public void AlinearIzquierda(){
        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
-    private void tblexcelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyTyped
-
-    }//GEN-LAST:event_tblexcelKeyTyped
-
-    private void tblexcelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyPressed
-         //Si le da enter cambia el focus a la celda de abajo
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                 intFila=(tblexcel.getSelectedRow())+1;
-                 tblexcel.requestFocus();
-                 System.out.println(intFila+" -"+intColumna+"-");
-            }
-    }//GEN-LAST:event_tblexcelKeyPressed
-
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
       //alinea la celda a la izquierda
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
@@ -935,8 +886,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_cmbfilActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      //muestra un combobox y un boton para que pueda seleccionar el archivo que desea abrir 
-        JOptionPane.showMessageDialog(null,"Seleccione el archivo que desee abrir");
+      //muestra un combobox y un boton para que pueda seleccionar el archivo que desea abrir        
        itOp=1;
        btnabrireli.setText("Abrir");
        btnabrireli.setVisible(true);
@@ -961,15 +911,20 @@ public void AlinearIzquierda(){
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){       
-                JOptionPane.showMessageDialog(null, rs.getString("contenido"));
                tblexcel.setValueAt(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum")));
                miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));
+               itNegr=Integer.parseInt(rs.getString("negrita"));
                 r=rs.next();
-                x++;
+                x++;               
             }
+            if(itNegr==1){
+            itNegr=0;
+            negrita();
+            }            
+        
             System.out.println(miLista.Listar());  
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un Error fatal ");
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
         }
         }
         if(itOp==2){
@@ -1004,8 +959,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_btnabrireliActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-    //muestra un combobox y un boton para que pueda seleccionar el archivo que desea eliminar
-        JOptionPane.showMessageDialog(null,"Seleccione el archivo que desee eliminar");
+    //muestra un combobox y un boton para que pueda seleccionar el archivo que desea eliminar       
        itOp=2;
        btnabrireli.setText("Eliminar");
        btnabrireli.setVisible(true);
@@ -1044,11 +998,12 @@ public void AlinearIzquierda(){
             try{
                 //Conección con la base de datos
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido) values(?,?,?,?)");
+                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido,negrita) values(?,?,?,?,?)");
                 pst.setString(1, String.valueOf(fila));
                 pst.setString(2, String.valueOf(col));
                 pst.setString(3, String.valueOf(intCod));
                 pst.setString(4, String.valueOf(cont));
+                pst.setString(5, String.valueOf(itNegr));
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
                 JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1111,6 +1066,87 @@ public void AlinearIzquierda(){
        iTamañoLetra=20;
        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
     }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void tblexcelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyTyped
+
+    }//GEN-LAST:event_tblexcelKeyTyped
+
+    private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
+        //se vuelve a centrar en la misma celda
+        try{
+            //método para obtener fila y columna al moverse con las flechas del teclado
+            //arriba o abajo
+            if (evt.getKeyCode() == 38 || evt.getKeyCode()== 40) {
+                intFila=tblexcel.getSelectedRow();
+                Lista();
+            }
+            //izquiera o derecha
+            if (evt.getKeyCode() == 37 || evt.getKeyCode()== 39) {
+                intColumna=tblexcel.getSelectedColumn();
+                Lista();
+            }
+            /* pa mientras//obtiene la letra que ingreso
+            String dato=(String) evt.getKeyText(evt.getKeyCode());
+            //verifica si el dato es numero o letra
+            int ascii= dato.charAt(0);
+            if ((ascii >= 48) && (ascii <= 57)|| (ascii==84)) {
+                AlinearDerecha();
+            }else{
+                AlinearIzquierda();
+            }      */
+            if (tblexcel.isEditing()) {
+                tblexcel.requestFocus();
+                // edita la celda
+                tblexcel.editCellAt(intFila,intColumna);
+            }else{
+                tblexcel.requestFocus();
+            }
+
+            //Obtiene el dato de la celda
+            tm=(DefaultTableModel) tblexcel.getModel();
+        }catch(Exception ex){
+
+        }
+        VerificarVacio();
+        this.txtBarra.setText(datos);
+        Lista();
+        System.out.println(datos);
+        System.out.println(miLista.Listar());
+        cmbcol.setSelectedIndex(intColumna);
+        cmbfil.setSelectedIndex(intFila);
+        tblexcel.requestFocus();
+        //
+    }//GEN-LAST:event_tblexcelKeyReleased
+
+    private void tblexcelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyPressed
+        //Si le da enter cambia el focus a la celda de abajo
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            intFila=(tblexcel.getSelectedRow())+1;
+            tblexcel.requestFocus();
+            System.out.println(intFila+" -"+intColumna+"-");
+        }
+    }//GEN-LAST:event_tblexcelKeyPressed
+
+    private void tblexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblexcelMouseClicked
+        // TODO add your handling code here:
+        //método para obtener fila y columna al dar click a la celda
+        intColumna=tblexcel.getSelectedColumn();
+        intFila=tblexcel.getSelectedRow();
+        tm=(DefaultTableModel) tblexcel.getModel();
+        datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+        System.out.println(datos);
+
+        Lista();
+        //limpia barra principal
+        this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+        cmbcol.setSelectedIndex(intColumna);
+        cmbfil.setSelectedIndex(intFila);
+    }//GEN-LAST:event_tblexcelMouseClicked
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        negrita();
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
        public void Lista(){
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
                 miLista.insertarDato(new Celda(datos,intFila,intColumna));
