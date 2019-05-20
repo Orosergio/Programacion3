@@ -35,7 +35,7 @@ public class Vista extends javax.swing.JFrame {
     String sCopiado,sTipoLetra;
     String simbolo;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
-     int itOp=0, itNegr=0;//variable pivote de ayuda
+     int itOp=0, itNegr=0, itCursiva=0;//variable pivote de ayuda
      int iTamañoLetra=12;
       int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
@@ -95,6 +95,15 @@ public class Vista extends javax.swing.JFrame {
             itNegr=1;
         }else{
             itNegr=0;
+        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+        }
+    }
+        public void cursiva(){
+        if(itCursiva==0){
+            tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.ITALIC, iTamañoLetra));
+            itCursiva=1;
+        }else{
+            itCursiva=0;
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
@@ -499,6 +508,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
         jMenuItem6.setText("K");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
@@ -903,8 +917,7 @@ public void AlinearIzquierda(){
     private void btnabrireliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrireliActionPerformed
         //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOp,
         //entonces entrara en el if y luego de realizar la accion vuelve a cerrar el combobox y el boton
-        if(itOp==1){
-            
+        if(itOp==1){            
         try{//obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
@@ -914,6 +927,7 @@ public void AlinearIzquierda(){
                tblexcel.setValueAt(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum")));
                miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));
                itNegr=Integer.parseInt(rs.getString("negrita"));
+               itCursiva=Integer.parseInt(rs.getString("cursiva"));
                 r=rs.next();
                 x++;               
             }
@@ -921,6 +935,10 @@ public void AlinearIzquierda(){
             itNegr=0;
             negrita();
             }            
+             if(itCursiva==1){
+            itCursiva=0;
+            cursiva();
+            } 
         
             System.out.println(miLista.Listar());  
         }catch (Exception e){
@@ -998,12 +1016,13 @@ public void AlinearIzquierda(){
             try{
                 //Conección con la base de datos
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido,negrita) values(?,?,?,?,?)");
+                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido,negrita,cursiva) values(?,?,?,?,?,?)");
                 pst.setString(1, String.valueOf(fila));
                 pst.setString(2, String.valueOf(col));
                 pst.setString(3, String.valueOf(intCod));
                 pst.setString(4, String.valueOf(cont));
                 pst.setString(5, String.valueOf(itNegr));
+                pst.setString(6, String.valueOf(itCursiva));
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
                 JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1144,9 +1163,16 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        negrita();
-        
+        itCursiva=1;
+        cursiva();
+        negrita(); 
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+            itNegr=1;
+            negrita();
+        cursiva();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
        public void Lista(){
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
                 miLista.insertarDato(new Celda(datos,intFila,intColumna));
