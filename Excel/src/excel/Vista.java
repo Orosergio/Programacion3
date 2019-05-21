@@ -42,7 +42,7 @@ public class Vista extends javax.swing.JFrame {
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
      int itOp=0, itNegr=0, itCursiva=0,itSubrayado=0;//variable pivote de ayuda
      int iTamañoLetra=12;
-      int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
+      int x=0,y=0;  //variables para obtener las cooredenadas de seleccion en la tabla
     /**
      * Creates new form Vista
      */
@@ -77,7 +77,7 @@ public class Vista extends javax.swing.JFrame {
         //limpia algunos combobox
         this.cmbcol.removeAllItems();
         this.cmbfil.removeAllItems();
-        //llamado de metodos para llenado de combobox
+        //llamado de metodos para llenado de combobox, de los 2 grupos
         llenadocmbArchivos();
         cmbllenado();      
         try {
@@ -97,39 +97,40 @@ public class Vista extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, miLista.Listar());*/
     }
     public void negrita(){
-        if(itNegr==0){
+        if(itNegr==0){//si la variable pivote es scero, colocara negrita
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.BOLD, iTamañoLetra));
-            itNegr=1;
-        }else{
-            itNegr=0;
+            itNegr=1;//cambio de dato en variable pivote
+        }else{//si la variable no es cero quitara lo negrita
+            itNegr=0;//cambio de dato en variable pivote
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
         public void cursiva(){
-        if(itCursiva==0){
+        if(itCursiva==0){//si la variable pivote es cero, colocara cursiva
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.ITALIC, iTamañoLetra));
-            itCursiva=1;
-        }else{
-            itCursiva=0;
+            itCursiva=1;//cambio de dato en variable pivote
+        }else{//si la variable pivote es diferente de cero, quitara cursiva
+            itCursiva=0;//cambio de dato en variable pivote
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
         public void subrayado(){
-           if(itSubrayado==0){           
+           if(itSubrayado==0){    //si la variable pivote es cero, colocara el subrayado   
     Font font = tblexcel.getFont();
     Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
     attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
     tblexcel.setFont(font.deriveFont(attributes));
-    itSubrayado=1;
-        }else{
+    itSubrayado=1;//cambio de dato en variable pivote
+        }else{//si la variable pivote es diferente de cero, quitara el subrayado
             Font font = tblexcel.getFont();
     Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
     attributes.put(TextAttribute.UNDERLINE, -1);
     tblexcel.setFont(font.deriveFont(attributes));
-    itSubrayado=0;
+    itSubrayado=0;//cambio de dato en variable pivote
             }
         }
     public void llenadocmbArchivos(){
+        //limpia lo que tienen los combobox
      this.cmblistado.removeAllItems();
       this.cmbcodigo.removeAllItems();
         try{
@@ -139,6 +140,7 @@ public class Vista extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){
+                //ingresa los datos de la consulta en los combobox
                 this.cmbcodigo.addItem(rs.getString("codarch"));
                 this.cmblistado.addItem(rs.getString("nombre"));
                 r=rs.next();            
@@ -148,19 +150,20 @@ public class Vista extends javax.swing.JFrame {
         }
     }
    public void cmbllenado(){
-      for(int i=1; i<=20;i++){
+      for(int i=1; i<=20;i++){// se llena los combobox de fila
       cmbfil.addItem(String.valueOf(i));
       }
       for(int i=1; i<tblexcel.getRowCount();i++){
-      tblexcel.setValueAt(i, i, 0);
+      tblexcel.setValueAt(i, i, 0);//coloca el numero de fila
       }
+      //vector con las letras de las columnas
       vctAbc[1]="A";vctAbc[2]="B";vctAbc[3]="C";vctAbc[4]="D";vctAbc[5]="E";vctAbc[6]="F";vctAbc[7]="G";vctAbc[8]="H";vctAbc[9]="I";vctAbc[10]="J";vctAbc[11]="K";vctAbc[12]="L";vctAbc[13]="M";
       vctAbc[14]="N";vctAbc[15]="O";vctAbc[16]="P";vctAbc[17]="Q";vctAbc[18]="R";vctAbc[19]="S";vctAbc[20]="T";vctAbc[21]="U";vctAbc[22]="V";vctAbc[23]="W";vctAbc[24]="X";vctAbc[25]="Y";vctAbc[26]="Z";      
-      cmbcol.addItem(String.valueOf("Seleccione"));
-       for(int i=1; i<=26;i++){           
+      cmbcol.addItem(String.valueOf(""));// como la primera columna contiene las filas no mostrara nada
+       for(int i=1; i<=26;i++){      //primera lista de columnas     
         cmbcol.addItem(String.valueOf(vctAbc[i]));
       }
-        for(int i=1; i<=15;i++){
+        for(int i=1; i<=15;i++){//segunda lista con las columnas 
         cmbcol.addItem(String.valueOf("A"+vctAbc[i]));
       }
     }
@@ -656,8 +659,7 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
  
-public void Porcentaje(){
-    
+public void Porcentaje(){    
        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
@@ -947,10 +949,11 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
-      intColumna=cmbcol.getSelectedIndex();
-    intFila=cmbfil.getSelectedIndex();
-    
+      //se obtinen los indeces de los combobox, el cual nos permite saber la fila y columna
+        intColumna=cmbcol.getSelectedIndex();
+    intFila=cmbfil.getSelectedIndex();    
         if (tblexcel.isEditing()) {
+            //se cambiara a la ubicacion deseada para poder modificar texto alli
             tblexcel.editCellAt(intFila,intColumna);
             tblexcel.changeSelection(intFila,intColumna,false, false);       
             tblexcel.requestFocus();     
@@ -970,7 +973,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void cmblistadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmblistadoItemStateChanged
-        try{ cmbcodigo.setSelectedIndex(cmblistado.getSelectedIndex());}// se cambia el indice del combo
+        try{ cmbcodigo.setSelectedIndex(cmblistado.getSelectedIndex());}// se cambia el indice del combo junto con el otro
         catch(Exception e){
         }
     }//GEN-LAST:event_cmblistadoItemStateChanged
@@ -984,9 +987,9 @@ public void AlinearIzquierda(){
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){       
+            while(r){//obtencion de base de datos
                tblexcel.setValueAt(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum")));
-               miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));
+               miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));//agrega a lista
                 r=rs.next();
                 x++;               
             }                   
@@ -999,37 +1002,36 @@ public void AlinearIzquierda(){
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){                    
+            while(r){          //obtencion de propiedades de la tabla          
                itNegr=Integer.parseInt(rs.getString("negrita"));
                itCursiva=Integer.parseInt(rs.getString("cursiva"));
                itSubrayado=Integer.parseInt(rs.getString("subrayada"));
                 r=rs.next();
                 x++;               
             }
+            //se colocan las caracteristicas de cada cosa
             if(itNegr==1){
             itNegr=0;
-            negrita();
+            negrita();//lamado del metodo
             }            
              if(itCursiva==1){
             itCursiva=0;
-            cursiva();
+            cursiva();//lamado del metodo
             } 
             if(itSubrayado==1){
             itSubrayado=0;
-            subrayado();
-            } 
-        
-            System.out.println(miLista.Listar());  
+            subrayado();//lamado del metodo
+            }                     
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
         }
-        ConsultaAlinear();
+        ConsultaAlinear();//metodo vara aliniear los datos, segun lo guardado en la bd
         }
         if(itOp==2){
-     int itres, iterror=0;
+     int itres, iterror=0;//variables para obtencion de error
      itres=  JOptionPane.showConfirmDialog(this,"¿Esta seguro de eliminar los datos?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-     if(itres==JOptionPane.YES_OPTION){
-        try{
+     if(itres==JOptionPane.YES_OPTION){//si esta seguro de eliminar
+        try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             pst.executeUpdate(); 
@@ -1037,7 +1039,7 @@ public void AlinearIzquierda(){
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         } 
-               try{
+               try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             pst.executeUpdate(); 
@@ -1045,7 +1047,7 @@ public void AlinearIzquierda(){
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
      }
-         try{
+         try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             pst.executeUpdate();  
@@ -1055,11 +1057,11 @@ public void AlinearIzquierda(){
         }
    
          if(iterror==2){                  
-         JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
+         JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");// si no hubieron errores se muestra que se elimino todo
          }
-         llenadocmbArchivos();
+         llenadocmbArchivos();//actualiza los combobox de los archivos
      }     
-        }  
+        }  //se ocultan algunos objetos que ya no se usaran
         cmblistado.setVisible(false);
         btnabrireli.setVisible(false);
         this.lblsel.setVisible(false);
@@ -1241,6 +1243,7 @@ public void AlinearIzquierda(){
         Lista();
         System.out.println(datos);
         System.out.println(miLista.Listar());
+        // muestra la ubicacion actual en los combobox
         cmbcol.setSelectedIndex(intColumna);
         cmbfil.setSelectedIndex(intFila);
         tblexcel.requestFocus();
@@ -1273,19 +1276,25 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        itCursiva=1;
-        cursiva();
-        negrita(); 
+            cursiva();
+            negrita(); 
+            subrayado();
+            JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-            itNegr=1;
+          
             negrita();
-        cursiva();
+            cursiva();
+            subrayado();
+             JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-                subrayado();
+            subrayado();
+            negrita();
+            cursiva();
+             JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
