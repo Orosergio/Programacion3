@@ -25,6 +25,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  *
@@ -659,7 +662,8 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
  
-public void Porcentaje(){    
+public void Porcentaje(){
+    
        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
@@ -683,8 +687,7 @@ public void Porcentaje(){
          float intvalormostrar=Intporcen*100;
          tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
          
-       } 
-    
+       }
 }
 public void moneda(){
         //Agrega a cada valor simbolo de moneda
@@ -736,7 +739,6 @@ public void moneda(){
        }
           
     }
-
 
 
 public void fractoria(){
@@ -829,8 +831,8 @@ public void generalm(){
             }
         } 
         
-        float numer=Integer.parseInt(infodatos.substring(0, o));
-        float denom=Integer.parseInt(infodatos.substring(o+1, infodatos.length()));
+        float numer=Float.parseFloat(infodatos.substring(0, o));
+        float denom=Float.parseFloat(infodatos.substring(o+1, infodatos.length()));
         
         float total=0;
         total=numer/denom;
@@ -844,6 +846,7 @@ public void generalm(){
         
        
 }
+
 
 
     
