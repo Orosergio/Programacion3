@@ -7,6 +7,9 @@ package excel;
 import java.awt.Font;
 import java.sql.*;
 import java.awt.event.KeyEvent;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -35,7 +38,7 @@ public class Vista extends javax.swing.JFrame {
     String sCopiado,sTipoLetra;
     String simbolo;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
-     int itOp=0, itNegr=0, itCursiva=0;//variable pivote de ayuda
+     int itOp=0, itNegr=0, itCursiva=0,itSubrayado=0;//variable pivote de ayuda
      int iTamañoLetra=12;
       int x=0,y=0;        //variables para obtener las cooredenadas de seleccion en la tabla
     /**
@@ -107,6 +110,21 @@ public class Vista extends javax.swing.JFrame {
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
+        public void subrayado(){
+           if(itSubrayado==0){           
+    Font font = tblexcel.getFont();
+    Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+    tblexcel.setFont(font.deriveFont(attributes));
+    itSubrayado=1;
+        }else{
+            Font font = tblexcel.getFont();
+    Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+    attributes.put(TextAttribute.UNDERLINE, -1);
+    tblexcel.setFont(font.deriveFont(attributes));
+    itSubrayado=0;
+            }
+        }
     public void llenadocmbArchivos(){
      this.cmblistado.removeAllItems();
       this.cmbcodigo.removeAllItems();
@@ -528,6 +546,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
         jMenuItem8.setText("S");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem24.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
@@ -926,8 +949,22 @@ public void AlinearIzquierda(){
             while(r){       
                tblexcel.setValueAt(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum")));
                miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));
+                r=rs.next();
+                x++;               
+            }                   
+            System.out.println(miLista.Listar());  
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
+        }
+        try{//obtencion de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){                    
                itNegr=Integer.parseInt(rs.getString("negrita"));
                itCursiva=Integer.parseInt(rs.getString("cursiva"));
+               itSubrayado=Integer.parseInt(rs.getString("subrayada"));
                 r=rs.next();
                 x++;               
             }
@@ -937,6 +974,10 @@ public void AlinearIzquierda(){
             }            
              if(itCursiva==1){
             itCursiva=0;
+            cursiva();
+            } 
+            if(itSubrayado==1){
+            itSubrayado=0;
             cursiva();
             } 
         
@@ -995,17 +1036,21 @@ public void AlinearIzquierda(){
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         String strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE);
         try{
+            JOptionPane.showMessageDialog(this, intCod+"  "+itNegr+"  "+ itCursiva+" "+itSubrayado,"ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             //Conección con la base de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("insert into tblarchivo values(?,?)");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`) VALUES (?,?,?,?,?)");
             pst.setString(1, String.valueOf(intCod));
             pst.setString(2, strNombreAr.trim());
+            pst.setString(3, String.valueOf(itNegr));
+            pst.setString(4, String.valueOf(itCursiva));
+            pst.setString(5, String.valueOf(itSubrayado));
             pst.executeUpdate();
             //se agregan los datos ingresados a la base de datos 
             JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
         }catch (Exception e){
             System.out.println("le dio un error");
-        }
+        }        
         for (int i = 0; i < miLista.contar(); i++) {
             String strCont=miLista.obtenerNodo(i);
             String[] strPartes=strCont.split(";");
@@ -1016,13 +1061,11 @@ public void AlinearIzquierda(){
             try{
                 //Conección con la base de datos
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("insert into tblcontenido (fila,colum,codarch,contenido,negrita,cursiva) values(?,?,?,?,?,?)");
+                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
                 pst.setString(1, String.valueOf(fila));
                 pst.setString(2, String.valueOf(col));
                 pst.setString(3, String.valueOf(intCod));
-                pst.setString(4, String.valueOf(cont));
-                pst.setString(5, String.valueOf(itNegr));
-                pst.setString(6, String.valueOf(itCursiva));
+                pst.setString(4, String.valueOf(cont));               
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
                 JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1173,6 +1216,10 @@ public void AlinearIzquierda(){
             negrita();
         cursiva();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+                subrayado();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
        public void Lista(){
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
                 miLista.insertarDato(new Celda(datos,intFila,intColumna));
