@@ -5,6 +5,7 @@
  */
 package excel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.sql.*;
 import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
@@ -65,6 +66,8 @@ public class Vista extends javax.swing.JFrame {
             System.out.println("No conecta");
         }
         initComponents();
+        tblexcel.setAutoResizeMode(tblexcel.AUTO_RESIZE_OFF);
+        tblexcel.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
         //oculta algunos obtjetos
         this.cmbcodigo.setVisible(false);
         this.lblsel.setVisible(false);
