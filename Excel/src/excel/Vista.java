@@ -34,7 +34,8 @@ public class Vista extends javax.swing.JFrame {
      public static int intCod=0;
     public static int intFila, intColumna;
     public static Lista miLista=new Lista();
-    public static String datos;
+    public static Lista miAlineado=new Lista();
+    public static String datos, alineado;
     DefaultTableModel tm;
     String sCopiado,sTipoLetra;
     String simbolo;
@@ -616,6 +617,11 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/general.png"))); // NOI18N
         jMenuItem12.setText("General");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem12);
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/porcentaje.png"))); // NOI18N
@@ -635,6 +641,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
         jMenuItem9.setText("Manual de Usuario");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
@@ -853,7 +864,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+       Porcentaje();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -878,24 +889,33 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-      //alinea la celda a la izquierda
+        //alinea la celda a la derecha
+      alineado="2";
+      ListaAlienado();
+      System.out.println(miAlineado.ListarAlineado());
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
       tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-      //alinea la celda a la izquierda
+  //alinea la celda a la izquierda
+     alineado="1";
+     ListaAlienado();
+    System.out.println(miAlineado.ListarAlineado());
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);            
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-     //alinea la celda a la izquierda
+     //alinea la celda al centro
+      alineado="3";
+      ListaAlienado();
+      System.out.println(miAlineado.ListarAlineado());
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);        
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void txtBarraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarraKeyReleased
@@ -1003,11 +1023,20 @@ public void AlinearIzquierda(){
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
         }
+        ConsultaAlinear();
         }
         if(itOp==2){
      int itres, iterror=0;
      itres=  JOptionPane.showConfirmDialog(this,"¿Esta seguro de eliminar los datos?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
      if(itres==JOptionPane.YES_OPTION){
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            pst.executeUpdate(); 
+            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        } 
                try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
@@ -1024,6 +1053,7 @@ public void AlinearIzquierda(){
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
+   
          if(iterror==2){                  
          JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");
          }
@@ -1090,6 +1120,26 @@ public void AlinearIzquierda(){
                 System.out.println("le dio un error "+e);
             }
             //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
+        }
+         for (int i = 0; i < miAlineado.Tamaño(); i++) {
+            String sContar=miAlineado.obtenerNodoAlienar(i);
+            String[] sPartes=sContar.split(";");            
+            int icol=Integer.parseInt(sPartes[1]);
+            String cont=sPartes[0];
+            System.out.println("contenido "+cont+"columna "+icol);
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
+                pst.setString(1, String.valueOf(icol));
+                pst.setString(2, String.valueOf(cont)); 
+                pst.setString(3, String.valueOf(intCod));
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("le dio un errorsote "+e);
+            }
         }
         llenadocmbArchivos();
         intCod++;
@@ -1214,7 +1264,7 @@ public void AlinearIzquierda(){
         tm=(DefaultTableModel) tblexcel.getModel();
         datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
         System.out.println(datos);
-
+        VerificarVacio();
         Lista();
         //limpia barra principal
         this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
@@ -1237,6 +1287,14 @@ public void AlinearIzquierda(){
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
                 subrayado();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        new ManualdeUsuario().setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+      generalm();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
        public void Lista(){
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
                 miLista.insertarDato(new Celda(datos,intFila,intColumna));
@@ -1255,6 +1313,14 @@ public void AlinearIzquierda(){
            }
        
        }
+    public void ListaAlienado(){
+           if (miAlineado.obtenerColumna(intColumna)==-1) {
+                miAlineado.insertarAlineado(new Alinear( alineado,intColumna));
+            }
+           if (alineado.length()>=1) {
+               miAlineado.modificarPorColumna(intColumna, alineado);              
+           }
+   }
        public void DetenerEditarCelda(){
           CellEditor cellEditor = tblexcel.getCellEditor();           
              if (cellEditor != null) {          
@@ -1265,6 +1331,36 @@ public void AlinearIzquierda(){
                }
            }
        }
+  public void ConsultaAlinear(){
+      try{//obtencion de datos
+          int iAlinear,integerColumna;
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            while(r){                   
+              integerColumna=Integer.parseInt(rs.getString("codalinea"));
+              iAlinear=Integer.parseInt(rs.getString("nombre"));
+                if (iAlinear==1) {
+                     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                     modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
+                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                }else if (iAlinear==2) {
+                    DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                     modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                }else if (iAlinear==3) {
+                     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                     modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                }
+                r=rs.next();
+                           
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
+        }
+}
     /**
      * @param args the command line arguments
      */

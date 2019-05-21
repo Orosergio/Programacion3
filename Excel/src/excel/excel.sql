@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 21-05-2019 a las 04:08:50
--- Versión del servidor: 5.7.21
--- Versión de PHP: 5.6.35
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-05-2019 a las 07:15:40
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,20 +28,19 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `tblalineacion`
 --
 
-DROP TABLE IF EXISTS `tblalineacion`;
-CREATE TABLE IF NOT EXISTS `tblalineacion` (
-  `codalinea` int(2) NOT NULL,
-  `nombre` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`codalinea`)
+CREATE TABLE `tblalineacion` (
+  `codalinea` int(3) NOT NULL,
+  `codarch` int(3) NOT NULL,
+  `nombre` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tblalineacion`
 --
 
-INSERT INTO `tblalineacion` (`codalinea`, `nombre`) VALUES
-(1, 'derecha'),
-(2, 'centrada');
+INSERT INTO `tblalineacion` (`codalinea`, `codarch`, `nombre`) VALUES
+(5, 11, '3'),
+(5, 12, '2');
 
 -- --------------------------------------------------------
 
@@ -49,8 +48,7 @@ INSERT INTO `tblalineacion` (`codalinea`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `tblarchivo`
 --
 
-DROP TABLE IF EXISTS `tblarchivo`;
-CREATE TABLE IF NOT EXISTS `tblarchivo` (
+CREATE TABLE `tblarchivo` (
   `codarch` int(3) NOT NULL,
   `nombre` varchar(15) DEFAULT NULL,
   `tamano` int(2) DEFAULT NULL,
@@ -59,8 +57,7 @@ CREATE TABLE IF NOT EXISTS `tblarchivo` (
   `colorcelda` varchar(10) DEFAULT NULL,
   `negrita` int(2) DEFAULT NULL,
   `cursiva` int(2) DEFAULT NULL,
-  `subrayada` int(2) DEFAULT NULL,
-  PRIMARY KEY (`codarch`)
+  `subrayada` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -70,7 +67,13 @@ CREATE TABLE IF NOT EXISTS `tblarchivo` (
 INSERT INTO `tblarchivo` (`codarch`, `nombre`, `tamano`, `tipoletra`, `colorletra`, `colorcelda`, `negrita`, `cursiva`, `subrayada`) VALUES
 (1, 'notocar', 1, '1', '1', '1', 0, 0, 0),
 (4, 'negri', NULL, NULL, NULL, NULL, 1, 0, 0),
-(5, 'prueba', NULL, NULL, NULL, NULL, 1, 0, 0);
+(5, 'prueba', NULL, NULL, NULL, NULL, 1, 0, 0),
+(6, 'alineadopreuba', NULL, NULL, NULL, NULL, 0, 0, 0),
+(8, 'prueba 2', NULL, NULL, NULL, NULL, 0, 0, 1),
+(9, 'nose', NULL, NULL, NULL, NULL, 0, 0, 0),
+(10, 'nose1', NULL, NULL, NULL, NULL, 0, 0, 0),
+(11, '1', NULL, NULL, NULL, NULL, 0, 0, 0),
+(12, '2', NULL, NULL, NULL, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -78,33 +81,49 @@ INSERT INTO `tblarchivo` (`codarch`, `nombre`, `tamano`, `tipoletra`, `colorletr
 -- Estructura de tabla para la tabla `tblcontenido`
 --
 
-DROP TABLE IF EXISTS `tblcontenido`;
-CREATE TABLE IF NOT EXISTS `tblcontenido` (
+CREATE TABLE `tblcontenido` (
   `fila` int(3) NOT NULL,
   `colum` int(3) NOT NULL,
   `codarch` int(3) NOT NULL,
   `contenido` varchar(50) DEFAULT NULL,
-  `codtipod` int(2) DEFAULT NULL,
-  `codalinea` int(2) DEFAULT NULL,
-  PRIMARY KEY (`fila`,`colum`,`codarch`),
-  KEY `fk1` (`codarch`),
-  KEY `fk2` (`codtipod`),
-  KEY `fk3` (`codalinea`)
+  `codtipod` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tblcontenido`
 --
 
-INSERT INTO `tblcontenido` (`fila`, `colum`, `codarch`, `contenido`, `codtipod`, `codalinea`) VALUES
-(2, 5, 5, 'ad', NULL, NULL),
-(3, 2, 5, 'asd', NULL, NULL),
-(3, 6, 4, 'null', NULL, NULL),
-(4, 11, 5, 'ad', NULL, NULL),
-(5, 0, 5, '5', NULL, NULL),
-(7, 7, 4, 'negrita', NULL, NULL),
-(11, 14, 4, 'null', NULL, NULL),
-(12, 13, 4, 'negrtia', NULL, NULL);
+INSERT INTO `tblcontenido` (`fila`, `colum`, `codarch`, `contenido`, `codtipod`) VALUES
+(0, 5, 12, 'df', NULL),
+(1, 11, 6, 'fsdf', NULL),
+(2, 3, 8, 'hola', NULL),
+(2, 5, 5, 'ad', NULL),
+(2, 8, 6, 'fsdf', NULL),
+(3, 2, 5, 'asd', NULL),
+(3, 5, 9, 'gg', NULL),
+(3, 5, 12, 'fs', NULL),
+(3, 6, 4, 'null', NULL),
+(3, 8, 6, 'sdf', NULL),
+(3, 8, 8, 'hola', NULL),
+(4, 5, 9, 'gg', NULL),
+(4, 8, 6, 'sdf', NULL),
+(4, 8, 9, 'gg', NULL),
+(4, 11, 5, 'ad', NULL),
+(5, 0, 5, '5', NULL),
+(7, 7, 4, 'negrita', NULL),
+(8, 8, 8, 'no pos gg', NULL),
+(8, 8, 9, 'gg', NULL),
+(11, 14, 4, 'null', NULL),
+(12, 5, 12, 'sdf', NULL),
+(12, 10, 10, 'f', NULL),
+(12, 11, 8, 'hola', NULL),
+(12, 13, 4, 'negrtia', NULL),
+(13, 4, 10, 'fgh', NULL),
+(13, 13, 9, 'gg', NULL),
+(15, 11, 8, 'hola', NULL),
+(16, 3, 8, 'hola', NULL),
+(16, 4, 10, 'fgd', NULL),
+(18, 6, 8, 'hola', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,11 +131,9 @@ INSERT INTO `tblcontenido` (`fila`, `colum`, `codarch`, `contenido`, `codtipod`,
 -- Estructura de tabla para la tabla `tbltipodato`
 --
 
-DROP TABLE IF EXISTS `tbltipodato`;
-CREATE TABLE IF NOT EXISTS `tbltipodato` (
+CREATE TABLE `tbltipodato` (
   `codtipod` int(2) NOT NULL,
-  `nombre` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`codtipod`)
+  `nombre` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -128,16 +145,52 @@ INSERT INTO `tbltipodato` (`codtipod`, `nombre`) VALUES
 (2, 'texto');
 
 --
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tblalineacion`
+--
+ALTER TABLE `tblalineacion`
+  ADD PRIMARY KEY (`codalinea`,`codarch`),
+  ADD KEY `codarch` (`codarch`);
+
+--
+-- Indices de la tabla `tblarchivo`
+--
+ALTER TABLE `tblarchivo`
+  ADD PRIMARY KEY (`codarch`);
+
+--
+-- Indices de la tabla `tblcontenido`
+--
+ALTER TABLE `tblcontenido`
+  ADD PRIMARY KEY (`fila`,`colum`,`codarch`),
+  ADD KEY `fk1` (`codarch`),
+  ADD KEY `fk2` (`codtipod`);
+
+--
+-- Indices de la tabla `tbltipodato`
+--
+ALTER TABLE `tbltipodato`
+  ADD PRIMARY KEY (`codtipod`);
+
+--
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `tblalineacion`
+--
+ALTER TABLE `tblalineacion`
+  ADD CONSTRAINT `tblalineacion_ibfk_1` FOREIGN KEY (`codarch`) REFERENCES `tblarchivo` (`codarch`);
 
 --
 -- Filtros para la tabla `tblcontenido`
 --
 ALTER TABLE `tblcontenido`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`codarch`) REFERENCES `tblarchivo` (`codarch`),
-  ADD CONSTRAINT `fk2` FOREIGN KEY (`codtipod`) REFERENCES `tbltipodato` (`codtipod`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`codalinea`) REFERENCES `tblalineacion` (`codalinea`);
+  ADD CONSTRAINT `fk2` FOREIGN KEY (`codtipod`) REFERENCES `tbltipodato` (`codtipod`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

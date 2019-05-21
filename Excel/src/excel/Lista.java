@@ -13,7 +13,9 @@ package excel;
  */
 public class Lista {
 	private Nodo cabeza=null;
+        private NodoAlinear inicio=null;
 	private int longitud=0;
+        private int largo=0;
         //crear clase de nodo
 	private class Nodo {
 		public Celda celda;
@@ -22,7 +24,16 @@ public class Lista {
 		public Nodo(Celda celda) {
 			this.celda=celda;
 		}
-	}
+	}        
+                ///crear clase para el alineado por columna        
+        private class NodoAlinear{
+                public Alinear alinear;
+                 public NodoAlinear Siguiente=null;
+                 public NodoAlinear(Alinear alinear){
+                     this.alinear=alinear;
+                 }
+         }        
+        ///
         //metodo para ingresar el nodo en posicion vacia
 	public void insertarDato(Celda celda) {
 		Nodo nodo=new Nodo(celda);
@@ -130,6 +141,96 @@ public class Lista {
 		{
 			Dato+="{Titulo: " + aux.celda.getDato()+"\n  Autor:"+aux.celda.getFila()+"\n  Isbn: "+aux.celda.getColumna() + "}\n\n";
 			aux=aux.siguiente;
+		}
+		return(Dato);
+	}
+         //
+        //
+        ///Apartir de aqui es para la alineacion
+        public void insertarAlineado(Alinear alinear) {
+		NodoAlinear nodo=new NodoAlinear(alinear);
+		if (inicio==null) {
+			inicio=nodo;
+		} else {
+			NodoAlinear puntero=inicio;
+			while (puntero.Siguiente!=null) {
+				puntero=puntero.Siguiente;
+			}
+			nodo.Siguiente=puntero.Siguiente;
+			puntero.Siguiente=nodo;
+		}
+		largo++;
+	}
+        
+       public int obtenerColumna(int columna) {
+            int intPos=-1;
+            NodoAlinear aux = inicio;
+            boolean encontrado = false;
+            // Recorre la lista hasta encontrar el elemento o al final 
+            while(aux != null && encontrado != true){
+                intPos++;
+                if (columna == aux.alinear.getColumna()){
+                    encontrado = true;
+                }
+                else{
+                    aux = aux.Siguiente;
+                }
+                if (aux==null) {
+                    intPos=-1;
+                }
+            }
+            return intPos;
+	}
+       
+             //metodo para modificar dato de la celda buscándolo por la fila y la columna
+        public void modificarPorColumna(int columna, String Alineado){
+            NodoAlinear aux = inicio;
+            boolean encontrado = false;
+            // Recorre la lista hasta encontrar el elemento o al final 
+            while(aux != null && encontrado != true){
+                if (columna == aux.alinear.getColumna()){
+                    encontrado = true;
+                    aux.alinear.setAlienado(Alineado);                                      
+                }
+                else{
+                    aux = aux.Siguiente;
+                }
+            }
+        }
+        //
+            //metodo para obtener la longitud de la lista
+	public int Tamaño() {
+		return largo;
+	}
+        
+            //metodo para ver la lista guardada
+        public String obtenerNodoAlienar(int pos)
+	{
+		String Dato="";
+		NodoAlinear aux=inicio;
+                int intContador=0;
+                //ciclo para obtener los datos que contiene la lista
+		while (aux!=null)
+		{
+                    if (intContador==pos) {
+                        Dato=aux.alinear.getAlineado()+";"+aux.alinear.getColumna()+ ";";
+                    }
+                    intContador++;
+                    aux=aux.Siguiente;
+		}
+		return(Dato);
+	}
+        //       
+             //metodo para ver la lista guardada
+        public String ListarAlineado()
+	{
+		String Dato=" ";
+		NodoAlinear aux=inicio;
+                //ciclo para obtener los datos que contiene la lista
+		while (aux!=null)
+		{
+			Dato+="{Titulo: " + aux.alinear.getAlineado()+"\n  Isbn: "+aux.alinear.getColumna() + "}\n\n";
+			aux=aux.Siguiente;
 		}
 		return(Dato);
 	}
