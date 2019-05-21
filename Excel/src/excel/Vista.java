@@ -316,6 +316,9 @@ public class Vista extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblexcel);
         tblexcel.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblexcel.getColumnModel().getColumnCount() > 0) {
+            tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
+        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 1228, 550));
 
