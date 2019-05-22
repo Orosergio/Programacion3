@@ -1421,32 +1421,33 @@ public void Guardar(){
         }catch (Exception e){
             System.out.println("le dio un error ar " +e);
         }
-    }
-    try{//elimina de la base de datos de acuerdo con el codigo del archivo
-        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-        PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= " + intCod);
-        pst.setString(1, String.valueOf(iTamañoLetra));
-        pst.setString(2, String.valueOf(sTipoLetra));
-        pst.setString(3, String.valueOf(itNegr));
-        pst.setString(4, String.valueOf(itCursiva));   
-        pst.setString(5, String.valueOf(itSubrayado));   
-        pst.executeUpdate(); 
-    }catch (Exception e){
-        JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
-    }
-    try{//elimina de la base de datos de acuerdo con el codigo del archivo
-        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-        PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+intCod+";");
-        pst.executeUpdate(); 
-    }catch (Exception e){
-        JOptionPane.showMessageDialog(null,"le dio un error "+e);
-    }
-    try{//elimina de la base de datos de acuerdo con el codigo del archivo
-        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-        PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+intCod+";");
-        pst.executeUpdate(); 
-    }catch (Exception e){
-        JOptionPane.showMessageDialog(null,"le dio un error "+e);
+    }else{
+        try{//elimina de la base de datos de acuerdo con el codigo del archivo
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= " + intCod);
+            pst.setString(1, String.valueOf(iTamañoLetra));
+            pst.setString(2, String.valueOf(sTipoLetra));
+            pst.setString(3, String.valueOf(itNegr));
+            pst.setString(4, String.valueOf(itCursiva));   
+            pst.setString(5, String.valueOf(itSubrayado));   
+            pst.executeUpdate(); 
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
+        }
+        try{//elimina de la base de datos de acuerdo con el codigo del archivo
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+intCod+";");
+            pst.executeUpdate(); 
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
+        try{//elimina de la base de datos de acuerdo con el codigo del archivo
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+intCod+";");
+            pst.executeUpdate(); 
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"le dio un error "+e);
+        }
     }
     for (int i = 0; i < miLista.contar(); i++) {
           String strCont=miLista.obtenerNodo(i);
