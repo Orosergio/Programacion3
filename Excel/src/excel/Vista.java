@@ -1399,75 +1399,100 @@ public void AlinearIzquierda(){
             System.out.println("No conecta");
         }
   }
-  public void Guardar(){
-      if (!this.getTitle().equals(strNombreAr)) {
-          obtenerCodigoAr();
-            strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE+JOptionPane.OK_OPTION);
-              try{
-                  //Conección con la base de datos
-                  Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                  PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
-                  pst.setString(1, String.valueOf(intCod));
-                  pst.setString(2, strNombreAr.trim());
-                  pst.setString(3, String.valueOf(itNegr));
-                  pst.setString(4, String.valueOf(itCursiva));
-                  pst.setString(5, String.valueOf(itSubrayado));
-                  pst.setString(6, String.valueOf(iTamañoLetra));
-                  pst.setString(7, String.valueOf(sTipoLetra));
-                  pst.executeUpdate();
-                  //se agregan los datos ingresados a la base de datos 
-                  JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-                  this.setTitle(strNombreAr);
-              }catch (Exception e){
-                  System.out.println("le dio un error ar " +e);
-              }
+public void Guardar(){
+    if (!this.getTitle().equals(strNombreAr)) {
+      obtenerCodigoAr();
+      strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE+JOptionPane.OK_OPTION);
+        try{
+            //Conección con la base de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
+            pst.setString(1, String.valueOf(intCod));
+            pst.setString(2, strNombreAr.trim());
+            pst.setString(3, String.valueOf(itNegr));
+            pst.setString(4, String.valueOf(itCursiva));
+            pst.setString(5, String.valueOf(itSubrayado));
+            pst.setString(6, String.valueOf(iTamañoLetra));
+            pst.setString(7, String.valueOf(sTipoLetra));
+            pst.executeUpdate();
+            //se agregan los datos ingresados a la base de datos 
+            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            this.setTitle(strNombreAr);
+        }catch (Exception e){
+            System.out.println("le dio un error ar " +e);
+        }
+    }
+    try{//elimina de la base de datos de acuerdo con el codigo del archivo
+        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+        PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= " + intCod);
+        pst.setString(1, String.valueOf(iTamañoLetra));
+        pst.setString(2, String.valueOf(sTipoLetra));
+        pst.setString(3, String.valueOf(itNegr));
+        pst.setString(4, String.valueOf(itCursiva));   
+        pst.setString(5, String.valueOf(itSubrayado));   
+        pst.executeUpdate(); 
+    }catch (Exception e){
+        JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
+    }
+    try{//elimina de la base de datos de acuerdo con el codigo del archivo
+        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+        PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+intCod+";");
+        pst.executeUpdate(); 
+    }catch (Exception e){
+        JOptionPane.showMessageDialog(null,"le dio un error "+e);
+    }
+    try{//elimina de la base de datos de acuerdo con el codigo del archivo
+        Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+        PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+intCod+";");
+        pst.executeUpdate(); 
+    }catch (Exception e){
+        JOptionPane.showMessageDialog(null,"le dio un error "+e);
+    }
+    for (int i = 0; i < miLista.contar(); i++) {
+          String strCont=miLista.obtenerNodo(i);
+          String[] strPartes=strCont.split(";");
+          int fila=Integer.parseInt(strPartes[1]);
+          int col=Integer.parseInt(strPartes[2]);
+          String cont=strPartes[0];
+          System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
+          try{
+              //Conección con la base de datos
+              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+              PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
+              pst.setString(1, String.valueOf(fila));
+              pst.setString(2, String.valueOf(col));
+              pst.setString(3, String.valueOf(intCod));
+              pst.setString(4, String.valueOf(cont));               
+              pst.executeUpdate();
+              //se agregan los datos ingresados a la base de datos 
+              JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+          }catch (Exception e){
+              System.out.println("celda ya guardada"+e);
+          }
+          //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
       }
-              
-        for (int i = 0; i < miLista.contar(); i++) {
-            String strCont=miLista.obtenerNodo(i);
-            String[] strPartes=strCont.split(";");
-            int fila=Integer.parseInt(strPartes[1]);
-            int col=Integer.parseInt(strPartes[2]);
-            String cont=strPartes[0];
-            System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
-            try{
-                //Conección con la base de datos
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
-                pst.setString(1, String.valueOf(fila));
-                pst.setString(2, String.valueOf(col));
-                pst.setString(3, String.valueOf(intCod));
-                pst.setString(4, String.valueOf(cont));               
-                pst.executeUpdate();
-                //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception e){
-                System.out.println("celda ya guardada"+e);
-            }
-            //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
-        }
-         for (int i = 0; i < miAlineado.Tamaño(); i++) {
-            String sContar=miAlineado.obtenerNodoAlienar(i);
-            String[] sPartes=sContar.split(";");            
-            int icol=Integer.parseInt(sPartes[1]);
-            String cont=sPartes[0];
-            System.out.println("contenido "+cont+"columna "+icol);
-            try{
-                //Conección con la base de datos
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
-                pst.setString(1, String.valueOf(icol));
-                pst.setString(2, String.valueOf(cont)); 
-                pst.setString(3, String.valueOf(intCod));
-                pst.executeUpdate();
-                //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception e){
-                System.out.println("le dio un errorsote "+e);
-            }
-        }
-        llenadocmbArchivos();
-  }
+       for (int i = 0; i < miAlineado.Tamaño(); i++) {
+          String sContar=miAlineado.obtenerNodoAlienar(i);
+          String[] sPartes=sContar.split(";");            
+          int icol=Integer.parseInt(sPartes[1]);
+          String cont=sPartes[0];
+          System.out.println("contenido "+cont+"columna "+icol);
+          try{
+              //Conección con la base de datos
+              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+              PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
+              pst.setString(1, String.valueOf(icol));
+              pst.setString(2, String.valueOf(cont)); 
+              pst.setString(3, String.valueOf(intCod));
+              pst.executeUpdate();
+              //se agregan los datos ingresados a la base de datos 
+              JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+          }catch (Exception e){
+              System.out.println("le dio un errorsote "+e);
+          }
+      }
+      llenadocmbArchivos();
+}
   public void EncabezadoNoFilas(){
       for(int i=0; i<tblexcel.getRowCount();i++){
         tblexcel.setValueAt(i+1, i, 0);//coloca el numero de fila
