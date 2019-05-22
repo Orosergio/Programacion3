@@ -138,7 +138,7 @@ public class Vista extends javax.swing.JFrame {
         }
     }
    public void cmbllenado(){
-      for(int i=1; i<=20;i++){// se llena los combobox de fila
+      for(int i=1; i<=50;i++){// se llena los combobox de fila
       cmbfil.addItem(String.valueOf(i));
       }
       //vector con las letras de las columnas
@@ -660,19 +660,22 @@ public void Porcentaje(){
          infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
-          tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+          String sMostrarValor=Float.toString(intvalormostrar);
+         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
        
        }else if(infodatos.matches("\\d+\\/\\d+")){
            generalm();
             infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
-         tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+              String sMostrarValor=Float.toString(intvalormostrar);
+         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
        }else{
             infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
-         tblexcel.setValueAt(intvalormostrar, intFila, intColumna);
+         String sMostrarValor=Float.toString(intvalormostrar);
+         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
          
        }
 }
@@ -721,7 +724,7 @@ public void moneda(){
                 
         
            System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
-        tblexcel.setValueAt(total, intFila, intColumna);
+        tblexcel.setValueAt(nuevodato, intFila, intColumna);
         
        }
           
@@ -751,8 +754,11 @@ public void fractoria(){
         double decimal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
         
        ControllerGeneral control=new ControllerGeneral(decimal);
+   
        JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-       tblexcel.setValueAt(control.toFraccion(decimal), intFila, intColumna);
+           String SValorMostrar=control.toFraccion(decimal);
+       System.out.println(SValorMostrar.toString());
+       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
        
         String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
            
@@ -764,7 +770,9 @@ public void fractoria(){
         
        ControllerGeneral control=new ControllerGeneral(decimal);
        JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-       tblexcel.setValueAt(control.toFraccion(decimal), intFila, intColumna);
+                String SValorMostrar=control.toFraccion(decimal);
+       System.out.println(SValorMostrar.toString());
+       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
        
         String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
            
@@ -806,7 +814,7 @@ public void generalm(){
         
         double normal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
         
-       tblexcel.setValueAt(normal, intFila, intColumna);
+       tblexcel.setValueAt(Double.toString(normal), intFila, intColumna);
        
        }else{
           int o=0;
@@ -825,7 +833,7 @@ public void generalm(){
         total=numer/denom;
         float total2=5/2;
            System.out.println("num: "+numer+" denom: "+denom+" total: "+total+" total2: "+total2);
-        tblexcel.setValueAt(total, intFila, intColumna);
+        tblexcel.setValueAt(Double.toString(total), intFila, intColumna);
         
        }
        
@@ -857,16 +865,25 @@ public void AlinearIzquierda(){
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
        Porcentaje();
+       VerificarVacio();
+       Lista();
+       System.out.println(miLista.Listar());
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
         fractoria();
+        VerificarVacio();
+        Lista();
+        System.out.println(miLista.Listar());
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:.
         moneda();
+        Lista();
+        VerificarVacio();
+       System.out.println(miLista.Listar());
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed

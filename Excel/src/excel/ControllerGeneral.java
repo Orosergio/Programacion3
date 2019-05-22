@@ -19,7 +19,7 @@ public ControllerGeneral(double decimal){
 }    
     
 
-public fraccion toFraccion(double decimal){
+public String toFraccion(double decimal){
      fraccion newFraccion;
      String partInt=getPartInt(String.valueOf(decimal));
      String partDecimal=getPartDecimal(String.valueOf(decimal));
@@ -34,10 +34,9 @@ public fraccion toFraccion(double decimal){
          fraccion f1=new fraccion(n,1);
          fraccion f2=new fraccion(d,factorMultiplicador);
          newFraccion=f1.sumar(f2);
-     }
-     
-     
-     return newFraccion;
+     }     
+ 
+     return newFraccion.toString();
 }
 //Metodo para obtener la parte entera del numero decimal
     private String getPartInt(String val){
