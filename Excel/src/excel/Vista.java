@@ -86,20 +86,24 @@ public class Vista extends javax.swing.JFrame {
     }
     public void negrita(){
         if(itNegr==0){//si la variable pivote es scero, colocara negrita
+             itCursiva=0;//cambio de dato en variable pivote
+             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.BOLD, iTamañoLetra));
             itNegr=1;//cambio de dato en variable pivote
         }else{//si la variable no es cero quitara lo negrita
             itNegr=0;//cambio de dato en variable pivote
-        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
         public void cursiva(){
         if(itCursiva==0){//si la variable pivote es cero, colocara cursiva
+             itNegr=0;//cambio de dato en variable pivote
+             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.ITALIC, iTamañoLetra));
             itCursiva=1;//cambio de dato en variable pivote
         }else{//si la variable pivote es diferente de cero, quitara cursiva
             itCursiva=0;//cambio de dato en variable pivote
-        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
         public void subrayado(){
@@ -161,7 +165,6 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblexcel = new javax.swing.JTable();
         txtBarra = new javax.swing.JTextField();
@@ -208,17 +211,9 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 690, -1, -1));
 
         tblexcel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -309,8 +304,6 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 1228, 550));
-
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBarraKeyPressed(evt);
@@ -319,7 +312,6 @@ public class Vista extends javax.swing.JFrame {
                 txtBarraKeyReleased(evt);
             }
         });
-        getContentPane().add(txtBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 1090, -1));
 
         cmbfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbfil.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -337,7 +329,6 @@ public class Vista extends javax.swing.JFrame {
                 cmbfilKeyReleased(evt);
             }
         });
-        getContentPane().add(cmbfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
 
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbcol.addActionListener(new java.awt.event.ActionListener() {
@@ -345,7 +336,6 @@ public class Vista extends javax.swing.JFrame {
                 cmbcolActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbcol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, -1));
 
         cmblistado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmblistado.addItemListener(new java.awt.event.ItemListener() {
@@ -353,10 +343,8 @@ public class Vista extends javax.swing.JFrame {
                 cmblistadoItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmblistado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 170, -1));
 
         cmbcodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 50, 170, -1));
 
         btnabrireli.setText("Eliminar");
         btnabrireli.addActionListener(new java.awt.event.ActionListener() {
@@ -364,12 +352,8 @@ public class Vista extends javax.swing.JFrame {
                 btnabrireliActionPerformed(evt);
             }
         });
-        getContentPane().add(btnabrireli, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, -1, -1));
 
         lblsel.setText("Seleccione");
-        getContentPane().add(lblsel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
-        getContentPane().add(numer, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 70, 50, -1));
-        getContentPane().add(denom, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 50, -1));
 
         calcular.setText("Calcular");
         calcular.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +361,6 @@ public class Vista extends javax.swing.JFrame {
                 calcularActionPerformed(evt);
             }
         });
-        getContentPane().add(calcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         jMenu1.setText("Archivo");
@@ -643,7 +626,81 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu8.setText("copiar");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenu8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu8ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu8);
+
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbcol, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cmbfil, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtBarra))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(460, 460, 460)
+                .addComponent(lblsel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnabrireli)
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(denom, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(calcular)
+                .addGap(68, 68, 68)
+                .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbcol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblsel)
+                            .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnabrireli)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(calcular))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(numer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(denom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -859,10 +916,6 @@ public void AlinearIzquierda(){
       tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
     
 }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     tblexcel.setValueAt("asdad", 1, 1);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
        Porcentaje();
        VerificarVacio();
@@ -1012,13 +1065,17 @@ public void AlinearIzquierda(){
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){          //obtencion de propiedades de la tabla          
+                       while(r){          //obtencion de propiedades de la tabla          
                itNegr=Integer.parseInt(rs.getString("negrita"));
                itCursiva=Integer.parseInt(rs.getString("cursiva"));
                itSubrayado=Integer.parseInt(rs.getString("subrayada"));
+               sTipoLetra=String.valueOf(rs.getString("tipoletra"));
+               iTamañoLetra=Integer.parseInt(rs.getString("tamano"));
                 r=rs.next();
                 x++;               
             }
+            //se aplica el tamaño y tipo de letra         
+           tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
             //se colocan las caracteristicas de cada cosa
             if(itNegr==1){
             itNegr=0;
@@ -1226,25 +1283,15 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-            cursiva();
             negrita(); 
-            subrayado();
-            JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-          
-            negrita();
-            cursiva();
-            subrayado();
-             JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
+            cursiva();           
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-            subrayado();
-            negrita();
-            cursiva();
-             JOptionPane.showMessageDialog(null,itNegr+" "+itCursiva+" "+itSubrayado);
+            subrayado();           
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -1258,6 +1305,16 @@ public void AlinearIzquierda(){
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
         NuevoArchivo();
     }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "kike es bien mula");
+    }//GEN-LAST:event_jMenu8MouseClicked
     public void NuevoArchivo(){
         //Pregunta si desea guardar el archivo, si si, llama el método de guardar
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
@@ -1275,20 +1332,30 @@ public void AlinearIzquierda(){
         miLista.vaciarLista();
     }
     public void Lista(){
+          try{
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
-                miLista.insertarDato(new Celda(datos,intFila,intColumna));
+               if (intColumna!=-1) {
+                miLista.insertarDato(new Celda(datos,intFila,intColumna));   
+               }
             }
            if (datos.length()>=1) {
                miLista.modifyPorFilaColumna(intFila, intColumna, datos);
            }else{
                miLista.eliminarCelda(miLista.obtenerPos(intFila, intColumna));
            }
+    } catch(Exception e){
+              System.out.println("no tiene que guarda en la lista");
+           }
        }
             public void VerificarVacio(){
+                try{
            if (tm.getValueAt(intFila, intColumna)==null) {
                datos="";
            }else{
                datos=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+           }} 
+                catch(Exception e){
+           
            }
        
        }
@@ -1479,7 +1546,6 @@ public void AlinearIzquierda(){
     private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JComboBox<String> cmblistado;
     private javax.swing.JTextField denom;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1487,6 +1553,7 @@ public void AlinearIzquierda(){
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
