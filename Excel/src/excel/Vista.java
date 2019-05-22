@@ -178,26 +178,19 @@ public class Vista extends javax.swing.JFrame {
         denom = new javax.swing.JTextField();
         calcular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        btnFile = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        bntNumber = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        btnHelp = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -208,10 +201,19 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        btnSize = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        btnBold = new javax.swing.JMenu();
+        btnUnder = new javax.swing.JMenu();
+        btnItalic = new javax.swing.JMenu();
+        btnCopy = new javax.swing.JMenu();
+        btnPaste = new javax.swing.JMenu();
+        btnOper = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,8 +364,8 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
-        jMenu1.setText("Archivo");
+        btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
+        btnFile.setText("Archivo");
 
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
         jMenuItem26.setText("Nuevo");
@@ -372,7 +374,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem26ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem26);
+        btnFile.add(jMenuItem26);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder1.png"))); // NOI18N
@@ -382,7 +384,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        btnFile.add(jMenuItem3);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/save.png"))); // NOI18N
@@ -392,7 +394,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        btnFile.add(jMenuItem2);
 
         jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
         jMenuItem25.setText("Eliminar");
@@ -401,71 +403,16 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem25ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem25);
+        btnFile.add(jMenuItem25);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout.png"))); // NOI18N
         jMenuItem4.setText("Cerrar");
-        jMenu1.add(jMenuItem4);
+        btnFile.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(btnFile);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.png"))); // NOI18N
-        jMenu2.setText("Inicio");
-
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
-        jMenuItem6.setText("K");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem6);
-
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
-        jMenuItem7.setText("N");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem7);
-
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
-        jMenuItem8.setText("S");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem8);
-
-        jMenuItem24.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
-        jMenuItem24.setText("Pegar");
-        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem24ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem24);
-
-        jMenuItem23.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
-        jMenuItem23.setText("Copiar");
-        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem23ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem23);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/numero.png"))); // NOI18N
-        jMenu4.setText("Número");
+        bntNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/numero.png"))); // NOI18N
+        bntNumber.setText("Número");
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fraccion.png"))); // NOI18N
         jMenuItem10.setText("Fracción 1/2");
@@ -474,7 +421,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem10);
+        bntNumber.add(jMenuItem10);
 
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/moneda.png"))); // NOI18N
         jMenuItem11.setText("Moneda  Q.");
@@ -483,7 +430,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem11ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem11);
+        bntNumber.add(jMenuItem11);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/general.png"))); // NOI18N
         jMenuItem12.setText("General");
@@ -492,7 +439,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem12);
+        bntNumber.add(jMenuItem12);
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/porcentaje.png"))); // NOI18N
         jMenuItem13.setText("Porcentaje %");
@@ -501,12 +448,12 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem13);
+        bntNumber.add(jMenuItem13);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(bntNumber);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
-        jMenu3.setText("Ayuda");
+        btnHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
+        btnHelp.setText("Ayuda");
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
@@ -516,22 +463,9 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        btnHelp.add(jMenuItem9);
 
-        jMenuBar1.add(jMenu3);
-
-        jMenu8.setText("copiar");
-        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu8MouseClicked(evt);
-            }
-        });
-        jMenu8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu8ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(btnHelp);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
         jMenu5.setText("Letra");
@@ -610,8 +544,8 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
-        jMenu6.setText("Tamaño de Letra");
+        btnSize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
+        btnSize.setText("Tamaño de Letra");
 
         jMenuItem1.setText("12");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +553,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem1);
+        btnSize.add(jMenuItem1);
 
         jMenuItem19.setText("15");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
@@ -627,7 +561,7 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem19ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem19);
+        btnSize.add(jMenuItem19);
 
         jMenuItem20.setText("20");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
@@ -635,9 +569,67 @@ public class Vista extends javax.swing.JFrame {
                 jMenuItem20ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem20);
+        btnSize.add(jMenuItem20);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(btnSize);
+
+        btnBold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
+        btnBold.setText("Negrita");
+        btnBold.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBoldMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btnBold);
+
+        btnUnder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
+        btnUnder.setText("Subrayado");
+        btnUnder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUnderMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btnUnder);
+
+        btnItalic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
+        btnItalic.setText("Cursiva");
+        btnItalic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnItalicMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btnItalic);
+
+        btnCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
+        btnCopy.setText("Copiar");
+        btnCopy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCopyMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btnCopy);
+
+        btnPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
+        btnPaste.setText("Pegar");
+        btnPaste.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPasteMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btnPaste);
+
+        btnOper.setText("Operaciones");
+
+        jMenuItem6.setText("Suma");
+        btnOper.add(jMenuItem6);
+
+        jMenuItem7.setText("Productoria");
+        btnOper.add(jMenuItem7);
+
+        jMenuItem8.setText("Promedio");
+        btnOper.add(jMenuItem8);
+
+        jMenuBar1.add(btnOper);
 
         setJMenuBar(jMenuBar1);
 
@@ -996,27 +988,6 @@ public void AlinearIzquierda(){
       System.out.println(miLista.Listar());      
     }//GEN-LAST:event_txtBarraKeyReleased
 
-    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-         if (tm.getValueAt(intFila, intColumna)==null) {
-            sCopiado="";
-        }else{
-            sCopiado=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
-        }  
-    }//GEN-LAST:event_jMenuItem23ActionPerformed
-
-    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-      
-        System.out.println(sCopiado+"-"+intFila+"-"+intColumna);            
-        tblexcel.setValueAt(sCopiado, intFila, intColumna);
-        tblexcel.requestFocus();          
-        tblexcel.editCellAt(intFila,intColumna);       
-        VerificarVacio();   
-        this.txtBarra.setText(datos); 
-        
-        Lista();
-        System.out.println(miLista.Listar());     
-    }//GEN-LAST:event_jMenuItem24ActionPerformed
-
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
       //se obtinen los indeces de los combobox, el cual nos permite saber la fila y columna
         intColumna=cmbcol.getSelectedIndex();
@@ -1291,18 +1262,6 @@ public void AlinearIzquierda(){
         cmbfil.setSelectedIndex(intFila);
     }//GEN-LAST:event_tblexcelMouseClicked
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-            negrita(); 
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-            cursiva();           
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-            subrayado();           
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         new ManualdeUsuario().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
@@ -1315,15 +1274,42 @@ public void AlinearIzquierda(){
         NuevoArchivo();
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
-    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+    private void btnItalicMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnItalicMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenu8ActionPerformed
+        cursiva();
+    }//GEN-LAST:event_btnItalicMouseClicked
 
-    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+    private void btnBoldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBoldMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "kike es bien mula");
-    }//GEN-LAST:event_jMenu8MouseClicked
+          negrita(); 
+    }//GEN-LAST:event_btnBoldMouseClicked
+
+    private void btnUnderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnderMouseClicked
+        // TODO add your handling code here:
+        subrayado();     
+    }//GEN-LAST:event_btnUnderMouseClicked
+
+    private void btnCopyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCopyMouseClicked
+        // TODO add your handling code here:
+        if (tm.getValueAt(intFila, intColumna)==null) {
+            sCopiado="";
+        }else{
+            sCopiado=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+        }
+    }//GEN-LAST:event_btnCopyMouseClicked
+
+    private void btnPasteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPasteMouseClicked
+        // TODO add your handling code here:
+         System.out.println(sCopiado+"-"+intFila+"-"+intColumna);            
+        tblexcel.setValueAt(sCopiado, intFila, intColumna);
+        tblexcel.requestFocus();          
+        tblexcel.editCellAt(intFila,intColumna);       
+        VerificarVacio();   
+        this.txtBarra.setText(datos); 
+        
+        Lista();
+        System.out.println(miLista.Listar());
+    }//GEN-LAST:event_btnPasteMouseClicked
     public void NuevoArchivo(){
         //Pregunta si desea guardar el archivo, si si, llama el método de guardar
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
@@ -1574,6 +1560,16 @@ public void Guardar(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu bntNumber;
+    private javax.swing.JMenu btnBold;
+    private javax.swing.JMenu btnCopy;
+    private javax.swing.JMenu btnFile;
+    private javax.swing.JMenu btnHelp;
+    private javax.swing.JMenu btnItalic;
+    private javax.swing.JMenu btnOper;
+    private javax.swing.JMenu btnPaste;
+    private javax.swing.JMenu btnSize;
+    private javax.swing.JMenu btnUnder;
     private javax.swing.JButton btnabrireli;
     private javax.swing.JButton calcular;
     private javax.swing.JComboBox<String> cmbcodigo;
@@ -1581,14 +1577,8 @@ public void Guardar(){
     private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JComboBox<String> cmblistado;
     private javax.swing.JTextField denom;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -1605,8 +1595,6 @@ public void Guardar(){
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem3;
