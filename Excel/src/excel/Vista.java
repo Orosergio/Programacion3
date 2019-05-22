@@ -185,6 +185,19 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -199,19 +212,6 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -412,112 +412,6 @@ public class Vista extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.png"))); // NOI18N
         jMenu2.setText("Inicio");
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
-        jMenu5.setText("Letra");
-
-        jMenuItem16.setText("Calibri");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem16);
-
-        jMenuItem14.setText("Palatino Linotype");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem14);
-
-        jMenuItem17.setText("Arial");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem17);
-
-        jMenuItem18.setText("Century");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem18);
-
-        jMenuItem15.setText("Comic Sans Ms");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem15);
-
-        jMenu2.add(jMenu5);
-
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/align2.png"))); // NOI18N
-        jMenu7.setText("Alineado");
-
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left.png"))); // NOI18N
-        jMenuItem5.setText("Izquierda");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem5);
-
-        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/center.png"))); // NOI18N
-        jMenuItem21.setText("Centro");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem21);
-
-        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/right.png"))); // NOI18N
-        jMenuItem22.setText("Derecha");
-        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem22);
-
-        jMenu2.add(jMenu7);
-
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
-        jMenu6.setText("Tamaño de Letra");
-
-        jMenuItem1.setText("12");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem1);
-
-        jMenuItem19.setText("15");
-        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem19ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem19);
-
-        jMenuItem20.setText("20");
-        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem20);
-
-        jMenu2.add(jMenu6);
-
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
         jMenuItem6.setText("K");
@@ -639,6 +533,112 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu8);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
+        jMenu5.setText("Letra");
+
+        jMenuItem16.setText("Calibri");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem16);
+
+        jMenuItem14.setText("Palatino Linotype");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem14);
+
+        jMenuItem17.setText("Arial");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem17);
+
+        jMenuItem18.setText("Century");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem18);
+
+        jMenuItem15.setText("Comic Sans Ms");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem15);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/align2.png"))); // NOI18N
+        jMenu7.setText("Alineado");
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left.png"))); // NOI18N
+        jMenuItem5.setText("Izquierda");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem5);
+
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/center.png"))); // NOI18N
+        jMenuItem21.setText("Centro");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem21);
+
+        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/right.png"))); // NOI18N
+        jMenuItem22.setText("Derecha");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem22);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
+        jMenu6.setText("Tamaño de Letra");
+
+        jMenuItem1.setText("12");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem1);
+
+        jMenuItem19.setText("15");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem19);
+
+        jMenuItem20.setText("20");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem20);
+
+        jMenuBar1.add(jMenu6);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -706,8 +706,8 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
  
+
 public void Porcentaje(){
-    
        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
@@ -718,7 +718,7 @@ public void Porcentaje(){
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
           String sMostrarValor=Float.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
+         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
        
        }else if(infodatos.matches("\\d+\\/\\d+")){
            generalm();
@@ -726,16 +726,17 @@ public void Porcentaje(){
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
               String sMostrarValor=Float.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
+         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
        }else{
             infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-         float Intporcen=Float.parseFloat(infodatos);
-         float intvalormostrar=Intporcen*100;
-         String sMostrarValor=Float.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor, intFila, intColumna);
+         double Intporcen=Double.parseDouble(infodatos);
+         double intvalormostrar=Intporcen*100;
+         String sMostrarValor=Double.toString(intvalormostrar);
+         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
          
        }
 }
+
 public void moneda(){
         //Agrega a cada valor simbolo de moneda
        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
@@ -783,9 +784,24 @@ public void moneda(){
            System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
         tblexcel.setValueAt(nuevodato, intFila, intColumna);
         
-       }
+       } else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+            //COMPROBACION DE PORCENTAJE
+      int intsigno=0,intlast=infodatos.length();
+      while(infodatos.charAt(intsigno)!='%'){
+            intsigno++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(intsigno==infodatos.length()){
+                break;
+            }
+        } 
+           
+          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
+          double intTotal2=flnumero/100;
+          tblexcel.setValueAt(Double.toString(intTotal2), intFila, intColumna);
+      }
           
     }
+
 
 
 public void fractoria(){
@@ -793,9 +809,7 @@ public void fractoria(){
         String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
-           
-       
-                 
+              
        if(infodatos.charAt(0)=='Q'){
           
            int p=0;
@@ -806,58 +820,51 @@ public void fractoria(){
                 break;
             }
         } 
-        
         //envio de parametro
-        double decimal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
-        
-       ControllerGeneral control=new ControllerGeneral(decimal);
-   
-       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-           String SValorMostrar=control.toFraccion(decimal);
-       System.out.println(SValorMostrar.toString());
-       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-       
-        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-           
-           
-           
-       }else{
-           
-            double decimal=Double.parseDouble(infodatos);
-        
+       double decimal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
        ControllerGeneral control=new ControllerGeneral(decimal);
        JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-                String SValorMostrar=control.toFraccion(decimal);
+       String SValorMostrar=control.toFraccion(decimal);
        System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-       
-        String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-           
-       }   
-       
-       /*int i=0;
-        while(infodatos2.charAt(i)!='/'){
-            i++;
+       String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+       }else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+            //COMPROBACION DE PORCENTAJE
+      int intsigno=0,intlast=infodatos.length();
+      while(infodatos.charAt(intsigno)!='%'){
+            intsigno++;
             //Validacion por si no tuviera punto decimal y no se quede en bucle
-            if(i==infodatos2.length()){
+            if(intsigno==infodatos.length()){
                 break;
             }
-        }*/
-       
-        /*fraccion frac = new fraccion(Integer.parseInt(numer.getText()),Integer.parseInt(denom.getText()));
-        JOptionPane.showMessageDialog(null, frac.toString());*/
-      /////////////////////////////////////////////
-    }
+        } 
+          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
+          double intTotal2=flnumero/100;
+          double decimal=intTotal2;
+          ControllerGeneral control=new ControllerGeneral(decimal);
+          String SValorMostrar=control.toFraccion(decimal);
+          tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
+      }
+       else{
+       double decimal=Double.parseDouble(infodatos);
+       ControllerGeneral control=new ControllerGeneral(decimal);
+       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
+       String SValorMostrar=control.toFraccion(decimal);
+       System.out.println(SValorMostrar.toString());
+       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
+       String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+           
+       }   
+     }
+
     
 public void generalm(){
 //Guardando un valor de la celda en variable string
-     String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
-       
-          //Recorrido del String
-       if(infodatos.charAt(0)=='Q'){
-           
+//Recorrido del String
+       if(infodatos.charAt(0)=='Q'){           
                  int p=0;
         while(infodatos.charAt(p)!='Q'){
             p++;
@@ -866,14 +873,26 @@ public void generalm(){
                 break;
             }
         } 
-        
-        //envio de parametro
-        
-        double normal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
-        
+//envio de parametro
+       double normal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
        tblexcel.setValueAt(Double.toString(normal), intFila, intColumna);
+       } else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+            //COMPROBACION DE PORCENTAJE
+      int intsigno=0,intlast=infodatos.length();
+      while(infodatos.charAt(intsigno)!='%'){
+            intsigno++;
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
+            if(intsigno==infodatos.length()){
+                break;
+            }
+        } 
+           
+          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
+          double intTotal2=flnumero/100;
+          tblexcel.setValueAt(Double.toString(intTotal2), intFila, intColumna);
+      }
        
-       }else{
+       else{
           int o=0;
         while(infodatos.charAt(o)!='/'){
             o++;
@@ -882,26 +901,16 @@ public void generalm(){
                 break;
             }
         } 
-        
-        float numer=Float.parseFloat(infodatos.substring(0, o));
-        float denom=Float.parseFloat(infodatos.substring(o+1, infodatos.length()));
-        
-        float total=0;
+        double numer=Double.parseDouble(infodatos.substring(0, o));
+        double denom=Double.parseDouble(infodatos.substring(o+1, infodatos.length()));
+        double total=0;
+           System.out.println("daots: "+numer+" denom: "+denom);
         total=numer/denom;
-        float total2=5/2;
-           System.out.println("num: "+numer+" denom: "+denom+" total: "+total+" total2: "+total2);
         tblexcel.setValueAt(Double.toString(total), intFila, intColumna);
         
-       }
-       
-          
-        
-       
+   }
 }
 
-
-
-    
     public void AlinearDerecha(){
    //alinea la celda a la derecha
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
