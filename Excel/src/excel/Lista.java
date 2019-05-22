@@ -234,4 +234,11 @@ public class Lista {
 		}
 		return(Dato);
 	}
+        public void vaciarLista() {
+            if (cabeza!=null){ //Si el nodo caeza no está vacío
+                Nodo primer = cabeza;
+                cabeza=cabeza.siguiente=null; //el nodo cabeza se igual al siguiente que se igual como vacío
+                longitud=0; //se resta uno a la longitud de la lista
+            }
+        }
 }

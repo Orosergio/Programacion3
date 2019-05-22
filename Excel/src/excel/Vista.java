@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.table.TableModel;
 
 
 /**
@@ -38,9 +39,10 @@ public class Vista extends javax.swing.JFrame {
     public static int intFila, intColumna;
     public static Lista miLista=new Lista();
     public static Lista miAlineado=new Lista();
-    public static String datos, alineado;
-    DefaultTableModel tm;
-    String sCopiado,sTipoLetra;
+    public static String datos, alineado, strNombreAr;
+    DefaultTableModel tm ;
+    TableModel tmInicial;
+    String sCopiado,sTipoLetra="Tahoma";
     String simbolo;
      String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
      int itOp=0, itNegr=0, itCursiva=0,itSubrayado=0;//variable pivote de ayuda
@@ -50,26 +52,8 @@ public class Vista extends javax.swing.JFrame {
      * Creates new form Vista
      */
     public Vista() {
-        try{
-            //Conección con la base de datos
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("select * from tblarchivo");
-            ResultSet rs = pst.executeQuery();
-            boolean r=rs.next();
-            //mientras encuentre datos en la tabla y campo especificado
-            while(r){
-                //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
-                if (intCod< Integer.parseInt(rs.getString("codarch"))) {
-                    intCod=Integer.parseInt(rs.getString("codarch"));
-                }
-                r=rs.next();
-            }
-            intCod++;
-            System.out.println(intCod);
-        }catch (Exception e){
-            System.out.println("No conecta");
-        }
         initComponents();
+        tmInicial=tblexcel.getModel();
         tblexcel.setAutoResizeMode(tblexcel.AUTO_RESIZE_OFF);
         tblexcel.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
         //oculta algunos obtjetos
@@ -82,6 +66,7 @@ public class Vista extends javax.swing.JFrame {
         this.cmbfil.removeAllItems();
         //llamado de metodos para llenado de combobox, de los 2 grupos
         llenadocmbArchivos();
+        EncabezadoNoFilas();
         cmbllenado();      
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()  ){
@@ -155,9 +140,6 @@ public class Vista extends javax.swing.JFrame {
    public void cmbllenado(){
       for(int i=1; i<=20;i++){// se llena los combobox de fila
       cmbfil.addItem(String.valueOf(i));
-      }
-      for(int i=1; i<tblexcel.getRowCount();i++){
-      tblexcel.setValueAt(i, i, 0);//coloca el numero de fila
       }
       //vector con las letras de las columnas
       vctAbc[1]="A";vctAbc[2]="B";vctAbc[3]="C";vctAbc[4]="D";vctAbc[5]="E";vctAbc[6]="F";vctAbc[7]="G";vctAbc[8]="H";vctAbc[9]="I";vctAbc[10]="J";vctAbc[11]="K";vctAbc[12]="L";vctAbc[13]="M";
@@ -402,6 +384,11 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
         jMenuItem26.setText("Nuevo");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem26);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
@@ -995,7 +982,10 @@ public void AlinearIzquierda(){
                miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));//agrega a lista
                 r=rs.next();
                 x++;               
-            }                   
+            }
+            this.setTitle(cmblistado.getSelectedItem().toString());
+            intCod=Integer.parseInt(cmbcodigo.getSelectedItem().toString());
+            strNombreAr=this.cmblistado.getSelectedItem().toString();
             System.out.println(miLista.Listar());  
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
@@ -1087,67 +1077,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_calcularActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        String strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE);
-        try{
-            //Conección con la base de datos
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`) VALUES (?,?,?,?,?)");
-            pst.setString(1, String.valueOf(intCod));
-            pst.setString(2, strNombreAr.trim());
-            pst.setString(3, String.valueOf(itNegr));
-            pst.setString(4, String.valueOf(itCursiva));
-            pst.setString(5, String.valueOf(itSubrayado));
-            pst.executeUpdate();
-            //se agregan los datos ingresados a la base de datos 
-            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception e){
-            System.out.println("le dio un error");
-        }        
-        for (int i = 0; i < miLista.contar(); i++) {
-            String strCont=miLista.obtenerNodo(i);
-            String[] strPartes=strCont.split(";");
-            int fila=Integer.parseInt(strPartes[1]);
-            int col=Integer.parseInt(strPartes[2]);
-            String cont=strPartes[0];
-            System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
-            try{
-                //Conección con la base de datos
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
-                pst.setString(1, String.valueOf(fila));
-                pst.setString(2, String.valueOf(col));
-                pst.setString(3, String.valueOf(intCod));
-                pst.setString(4, String.valueOf(cont));               
-                pst.executeUpdate();
-                //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception e){
-                System.out.println("le dio un error "+e);
-            }
-            //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
-        }
-         for (int i = 0; i < miAlineado.Tamaño(); i++) {
-            String sContar=miAlineado.obtenerNodoAlienar(i);
-            String[] sPartes=sContar.split(";");            
-            int icol=Integer.parseInt(sPartes[1]);
-            String cont=sPartes[0];
-            System.out.println("contenido "+cont+"columna "+icol);
-            try{
-                //Conección con la base de datos
-                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
-                pst.setString(1, String.valueOf(icol));
-                pst.setString(2, String.valueOf(cont)); 
-                pst.setString(3, String.valueOf(intCod));
-                pst.executeUpdate();
-                //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception e){
-                System.out.println("le dio un errorsote "+e);
-            }
-        }
-        llenadocmbArchivos();
-        intCod++;
+        Guardar();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void cmbcolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbcolActionPerformed
@@ -1307,7 +1237,27 @@ public void AlinearIzquierda(){
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
       generalm();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
-       public void Lista(){
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        NuevoArchivo();
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+    public void NuevoArchivo(){
+        //Pregunta si desea guardar el archivo, si si, llama el método de guardar
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            Guardar();
+        }
+        this.setTitle("");
+        this.DetenerEditarCelda();
+        for (int i = 0; i < tblexcel.getRowCount(); i++) {
+            for (int j = 0; j < tblexcel.getColumnCount(); j++) {
+                tblexcel.setValueAt("", i, j);
+            }
+        }
+        txtBarra.setText("");
+        EncabezadoNoFilas();
+        miLista.vaciarLista();
+    }
+    public void Lista(){
            if (miLista.obtenerPos(intFila, intColumna)==-1) {
                 miLista.insertarDato(new Celda(datos,intFila,intColumna));
             }
@@ -1343,6 +1293,102 @@ public void AlinearIzquierda(){
                }
            }
        }
+       
+  public void obtenerCodigoAr(){
+      try{
+            //Conección con la base de datos
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            PreparedStatement pst = cn.prepareStatement("select * from tblarchivo");
+            ResultSet rs = pst.executeQuery();
+            boolean r=rs.next();
+            //mientras encuentre datos en la tabla y campo especificado
+            while(r){
+                //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
+                if (intCod< Integer.parseInt(rs.getString("codarch"))) {
+                    intCod=Integer.parseInt(rs.getString("codarch"));
+                }
+                r=rs.next();
+            }
+            intCod++;
+            System.out.println(intCod);
+        }catch (Exception e){
+            System.out.println("No conecta");
+        }
+  }
+  public void Guardar(){
+      if (!this.getTitle().equals(strNombreAr)) {
+          obtenerCodigoAr();
+            strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE+JOptionPane.OK_OPTION);
+              try{
+                  //Conección con la base de datos
+                  Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                  PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
+                  pst.setString(1, String.valueOf(intCod));
+                  pst.setString(2, strNombreAr.trim());
+                  pst.setString(3, String.valueOf(itNegr));
+                  pst.setString(4, String.valueOf(itCursiva));
+                  pst.setString(5, String.valueOf(itSubrayado));
+                  pst.setString(6, String.valueOf(iTamañoLetra));
+                  pst.setString(7, String.valueOf(sTipoLetra));
+                  pst.executeUpdate();
+                  //se agregan los datos ingresados a la base de datos 
+                  JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+                  this.setTitle(strNombreAr);
+              }catch (Exception e){
+                  System.out.println("le dio un error ar " +e);
+              }
+      }
+              
+        for (int i = 0; i < miLista.contar(); i++) {
+            String strCont=miLista.obtenerNodo(i);
+            String[] strPartes=strCont.split(";");
+            int fila=Integer.parseInt(strPartes[1]);
+            int col=Integer.parseInt(strPartes[2]);
+            String cont=strPartes[0];
+            System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
+                pst.setString(1, String.valueOf(fila));
+                pst.setString(2, String.valueOf(col));
+                pst.setString(3, String.valueOf(intCod));
+                pst.setString(4, String.valueOf(cont));               
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("celda ya guardada"+e);
+            }
+            //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
+        }
+         for (int i = 0; i < miAlineado.Tamaño(); i++) {
+            String sContar=miAlineado.obtenerNodoAlienar(i);
+            String[] sPartes=sContar.split(";");            
+            int icol=Integer.parseInt(sPartes[1]);
+            String cont=sPartes[0];
+            System.out.println("contenido "+cont+"columna "+icol);
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
+                pst.setString(1, String.valueOf(icol));
+                pst.setString(2, String.valueOf(cont)); 
+                pst.setString(3, String.valueOf(intCod));
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("le dio un errorsote "+e);
+            }
+        }
+        llenadocmbArchivos();
+  }
+  public void EncabezadoNoFilas(){
+      for(int i=0; i<tblexcel.getRowCount();i++){
+        tblexcel.setValueAt(i+1, i, 0);//coloca el numero de fila
+      }
+  }
   public void ConsultaAlinear(){
       try{//obtencion de datos
           int iAlinear,integerColumna;
