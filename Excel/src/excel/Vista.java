@@ -632,9 +632,19 @@ public class Vista extends javax.swing.JFrame {
         btnOper.add(jMenuItem6);
 
         jMenuItem7.setText("Productoria");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         btnOper.add(jMenuItem7);
 
         jMenuItem8.setText("Promedio");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         btnOper.add(jMenuItem8);
 
         jMenuBar1.add(btnOper);
@@ -1322,7 +1332,106 @@ public void AlinearIzquierda(){
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
+        Operaciones(1);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Operaciones(2);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        Operaciones(3);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    public void Operaciones(int op){
+        int intColumas,intFilass[], intCantDatos=0, intUltFila=0;
+        Double dblSuma=0.0, dblProductoria=1.0, dblProm=0.0;
+        String strDatos="";
+        intColumas=tblexcel.getSelectedColumn();
+        intFilass=tblexcel.getSelectedRows();
+        for (int i = 0; i < intFilass.length; i++) {
+            try{
+                if (tblexcel.getValueAt(intFilass[i], intColumas)==null) {
+                    strDatos="";
+                }else{
+                    strDatos=tblexcel.getValueAt(intFilass[i], intColumas).toString().trim();
+                }
+            }catch(Exception e){
+                
+            }
+            if (!strDatos.equals("")) {
+                strDatos=CambiarValor(strDatos);
+                if (strDatos.matches("\\d+")|| strDatos.matches("\\d+.\\d+")) {
+                    intCantDatos++;
+                    dblSuma+=Double.parseDouble(strDatos);
+                    dblProductoria*=Double.parseDouble(strDatos);
+                }
+            }
+            intUltFila=intFilass[i];
+        }
+        dblProm=dblSuma/intCantDatos;
+        switch(op){
+            case 1: tblexcel.setValueAt(dblSuma.toString(), intUltFila+1, intColumas);
+                break;
+            case 2: tblexcel.setValueAt(dblProductoria.toString(), intUltFila+1, intColumas);
+                break;
+            case 3: tblexcel.setValueAt(dblProm.toString(), intUltFila+1, intColumas);
+                break;
+        }
+        tblexcel.requestFocus();          
+        tblexcel.editCellAt(intUltFila+1,intColumas);
+        VerificarVacio();   
+        Lista();
+        System.out.println(miLista.Listar());
+    }
+    public String CambiarValor(String texto){
+    //Recorrido del String
+           if(texto.charAt(0)=='Q'){           
+                int p=0;
+                while(texto.charAt(p)!='Q'){
+                    p++;
+                    //Validacion por si no tuviera punto decimal y no se quede en bucle
+                    if(p==texto.length()){
+                        break;
+                    }
+                } 
+    //envio de parametro
+                
+                double normal=Double.parseDouble(texto.substring(p+1, texto.length()));
+                return String.valueOf(normal);
+           } else  if(texto.matches("\\d+\\.\\d+\\%")){
+                //COMPROBACION DE PORCENTAJE
+          int intsigno=0,intlast=texto.length();
+          while(texto.charAt(intsigno)!='%'){
+                intsigno++;
+                //Validacion por si no tuviera punto decimal y no se quede en bucle
+                if(intsigno==texto.length()){
+                    break;
+                }
+            } 
+              double flnumero=Double.parseDouble(texto.substring(0, intsigno-1));
+              double intTotal2=flnumero/100;
+              return String.valueOf(intTotal2);
+          }else if(texto.matches("\\d+\\/\\d+")){
+              int o=0;
+            while(texto.charAt(o)!='/'){
+                o++;
+                //Validacion por si no tuviera punto decimal y no se quede en bucle
+                if(o==texto.length()){
+                    break;
+                }
+            } 
+            double numer=Double.parseDouble(texto.substring(0, o));
+            double denom=Double.parseDouble(texto.substring(o+1, texto.length()));
+            double total=0;
+            total=numer/denom;
+            return String.valueOf(total);
+
+       }else{
+              return texto;
+          }
+    }
     public void NuevoArchivo(){
         //Pregunta si desea guardar el archivo, si si, llama el método de guardar
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
