@@ -624,6 +624,11 @@ public class Vista extends javax.swing.JFrame {
         btnOper.setText("Operaciones");
 
         jMenuItem6.setText("Suma");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         btnOper.add(jMenuItem6);
 
         jMenuItem7.setText("Productoria");
@@ -1314,6 +1319,10 @@ public void AlinearIzquierda(){
         Lista();
         System.out.println(miLista.Listar());
     }//GEN-LAST:event_btnPasteMouseClicked
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
     public void NuevoArchivo(){
         //Pregunta si desea guardar el archivo, si si, llama el método de guardar
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
@@ -1328,7 +1337,11 @@ public void AlinearIzquierda(){
         }
         txtBarra.setText("");
         EncabezadoNoFilas();
+        tblexcel.setFont(new java.awt.Font("Tahoma",0, 12));
+        iTamañoLetra=12;
+        sTipoLetra="Tahoma";
         miLista.vaciarLista();
+        miAlineado.vaciarListadeAlineacion();
     }
     public void Lista(){
           try{
@@ -1360,7 +1373,7 @@ public void AlinearIzquierda(){
        }
     public void ListaAlienado(){
            if (miAlineado.obtenerColumna(intColumna)==-1) {
-                miAlineado.insertarAlineado(new Alinear( alineado,intColumna));
+                miAlineado.insertarAlineado(new Alinear(alineado,intColumna));
             }
            if (alineado.length()>=1) {
                miAlineado.modificarPorColumna(intColumna, alineado);              
@@ -1505,7 +1518,7 @@ public void Guardar(){
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
-            while(r){                   
+            while(r){     
               integerColumna=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")));
               iAlinear=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("nombre")));
                 if (iAlinear==1) {
@@ -1521,9 +1534,11 @@ public void Guardar(){
                      modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
                      tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
                 }
+                miAlineado.insertarAlineado(new Alinear(Encriptacion.Desencriptar(rs.getString("nombre")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")))));
                 r=rs.next();
                            
             }
+             System.out.println(miAlineado.ListarAlineado());  
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
         }

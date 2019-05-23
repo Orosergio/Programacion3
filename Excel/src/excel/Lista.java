@@ -241,4 +241,11 @@ public class Lista {
                 longitud=0; //se resta uno a la longitud de la lista
             }
         }
+            public void vaciarListadeAlineacion() {
+            if (inicio!=null){ //Si el nodo caeza no está vacío
+                NodoAlinear primer = inicio;
+                inicio=inicio.Siguiente=null; //el nodo cabeza se igual al siguiente que se igual como vacío
+                largo=0; //se resta uno a la longitud de la lista
+            }
+        }
 }
