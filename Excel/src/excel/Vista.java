@@ -86,7 +86,7 @@ public class Vista extends javax.swing.JFrame {
     }
     public void negrita(){
         if(itNegr==0){//si la variable pivote es scero, colocara negrita
-             itCursiva=0;//cambio de dato en variable pivote
+             itCursiva=0; itSubrayado=0;//cambio de dato en variable pivote
              tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.BOLD, iTamañoLetra));
             itNegr=1;//cambio de dato en variable pivote
@@ -97,7 +97,7 @@ public class Vista extends javax.swing.JFrame {
     }
         public void cursiva(){
         if(itCursiva==0){//si la variable pivote es cero, colocara cursiva
-             itNegr=0;//cambio de dato en variable pivote
+             itNegr=0;itSubrayado=0;//cambio de dato en variable pivote
              tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
             tblexcel.setFont(new java.awt.Font(sTipoLetra,Font.ITALIC, iTamañoLetra));
             itCursiva=1;//cambio de dato en variable pivote
@@ -107,25 +107,28 @@ public class Vista extends javax.swing.JFrame {
         }
     }
         public void subrayado(){
-           if(itSubrayado==0){    //si la variable pivote es cero, colocara el subrayado   
-    Font font = tblexcel.getFont();
-    Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
-    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    tblexcel.setFont(font.deriveFont(attributes));
-    itSubrayado=1;//cambio de dato en variable pivote
+           if(itSubrayado==0){    //si la variable pivote es cero, colocara el subrayado 
+                itNegr=0;//cambio de dato en variable pivote
+                itCursiva=0;//cambio de dato en variable pivote
+                tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+                Font font = tblexcel.getFont();
+                Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+                attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                tblexcel.setFont(font.deriveFont(attributes));
+                itSubrayado=1;//cambio de dato en variable pivote
         }else{//si la variable pivote es diferente de cero, quitara el subrayado
-            Font font = tblexcel.getFont();
-    Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
-    attributes.put(TextAttribute.UNDERLINE, -1);
-    tblexcel.setFont(font.deriveFont(attributes));
-    itSubrayado=0;//cambio de dato en variable pivote
+                Font font = tblexcel.getFont();
+                Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+                attributes.put(TextAttribute.UNDERLINE, -1);
+                tblexcel.setFont(font.deriveFont(attributes));
+                itSubrayado=0;//cambio de dato en variable pivote
             }
         }
     public void llenadocmbArchivos(){
         //limpia lo que tienen los combobox
      this.cmblistado.removeAllItems();
       this.cmbcodigo.removeAllItems();
-        try{
+         try{
             //conexion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM tblarchivo");
@@ -133,8 +136,8 @@ public class Vista extends javax.swing.JFrame {
             boolean r=rs.next();
             while(r){
                 //ingresa los datos de la consulta en los combobox
-                this.cmbcodigo.addItem(rs.getString("codarch"));
-                this.cmblistado.addItem(rs.getString("nombre"));
+                this.cmbcodigo.addItem(Encriptacion.Desencriptar(rs.getString("codarch")));
+                this.cmblistado.addItem(Encriptacion.Desencriptar(rs.getString("nombre")));
                 r=rs.next();            
             }
         }catch (Exception e){
@@ -1019,17 +1022,18 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_cmblistadoItemStateChanged
 
     private void btnabrireliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrireliActionPerformed
-        //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOp,
+       //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOp,
         //entonces entrara en el if y luego de realizar la accion vuelve a cerrar el combobox y el boton
-        if(itOp==1){            
+        if(itOp==1){   
+            NuevoArchivo();
         try{//obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblcontenido` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){//obtencion de base de datos
-               tblexcel.setValueAt(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum")));
-               miLista.insertarDato(new Celda(rs.getString("contenido"), Integer.parseInt(rs.getString("fila")), Integer.parseInt(rs.getString("colum"))));//agrega a lista
+               tblexcel.setValueAt(Encriptacion.Desencriptar(rs.getString("contenido")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("fila"))), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("colum"))));
+               miLista.insertarDato(new Celda(Encriptacion.Desencriptar(rs.getString("contenido")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("fila"))), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("colum")))));//agrega a lista
                 r=rs.next();
                 x++;               
             }
@@ -1042,15 +1046,15 @@ public void AlinearIzquierda(){
         }
         try{//obtencion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblarchivo` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
                        while(r){          //obtencion de propiedades de la tabla          
-               itNegr=Integer.parseInt(rs.getString("negrita"));
-               itCursiva=Integer.parseInt(rs.getString("cursiva"));
-               itSubrayado=Integer.parseInt(rs.getString("subrayada"));
-               sTipoLetra=String.valueOf(rs.getString("tipoletra"));
-               iTamañoLetra=Integer.parseInt(rs.getString("tamano"));
+               itNegr=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("negrita")));
+               itCursiva=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("cursiva")));
+               itSubrayado=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("subrayada")));
+               sTipoLetra=String.valueOf(Encriptacion.Desencriptar(rs.getString("tipoletra")));
+               iTamañoLetra=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("tamano")));
                 r=rs.next();
                 x++;               
             }
@@ -1080,7 +1084,7 @@ public void AlinearIzquierda(){
      if(itres==JOptionPane.YES_OPTION){//si esta seguro de eliminar
         try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             pst.executeUpdate(); 
             
         }catch (Exception e){
@@ -1088,7 +1092,7 @@ public void AlinearIzquierda(){
         } 
                try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             pst.executeUpdate(); 
             iterror=1;
         }catch (Exception e){
@@ -1096,7 +1100,7 @@ public void AlinearIzquierda(){
      }
          try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             pst.executeUpdate();  
             iterror=1+iterror;
         }catch (Exception e){
@@ -1373,7 +1377,7 @@ public void AlinearIzquierda(){
            }
        }
        
-  public void obtenerCodigoAr(){
+ public void obtenerCodigoAr(){
       try{
             //Conección con la base de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
@@ -1383,8 +1387,8 @@ public void AlinearIzquierda(){
             //mientras encuentre datos en la tabla y campo especificado
             while(r){
                 //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
-                if (intCod< Integer.parseInt(rs.getString("codarch"))) {
-                    intCod=Integer.parseInt(rs.getString("codarch"));
+                if (intCod< Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")))) {
+                    intCod=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")));
                 }
                 r=rs.next();
             }
@@ -1402,13 +1406,13 @@ public void Guardar(){
             //Conección con la base de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
-            pst.setString(1, String.valueOf(intCod));
-            pst.setString(2, strNombreAr.trim());
-            pst.setString(3, String.valueOf(itNegr));
-            pst.setString(4, String.valueOf(itCursiva));
-            pst.setString(5, String.valueOf(itSubrayado));
-            pst.setString(6, String.valueOf(iTamañoLetra));
-            pst.setString(7, String.valueOf(sTipoLetra));
+            pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
+            pst.setString(2, Encriptacion.Encriptar(String.valueOf(strNombreAr.trim())));
+            pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegr))));
+            pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));
+            pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));
+            pst.setString(6, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
+            pst.setString(7, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
             pst.executeUpdate();
             //se agregan los datos ingresados a la base de datos 
             JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1419,26 +1423,26 @@ public void Guardar(){
     }else{
         try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= " + intCod);
-            pst.setString(1, String.valueOf(iTamañoLetra));
-            pst.setString(2, String.valueOf(sTipoLetra));
-            pst.setString(3, String.valueOf(itNegr));
-            pst.setString(4, String.valueOf(itCursiva));   
-            pst.setString(5, String.valueOf(itSubrayado));   
+            PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= '"+Encriptacion.Encriptar(String.valueOf(intCod))+"'");
+            pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
+            pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
+            pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegr))));
+            pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));   
+            pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));   
             pst.executeUpdate(); 
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
         }
         try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch="+intCod+";");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
             pst.executeUpdate(); 
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
         try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch="+intCod+";");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
             pst.executeUpdate(); 
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
@@ -1455,10 +1459,10 @@ public void Guardar(){
               //Conección con la base de datos
               Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
               PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
-              pst.setString(1, String.valueOf(fila));
-              pst.setString(2, String.valueOf(col));
-              pst.setString(3, String.valueOf(intCod));
-              pst.setString(4, String.valueOf(cont));               
+              pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(fila))));
+              pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(col))));
+              pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
+              pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont))));               
               pst.executeUpdate();
               //se agregan los datos ingresados a la base de datos 
               JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1477,9 +1481,9 @@ public void Guardar(){
               //Conección con la base de datos
               Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
               PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
-              pst.setString(1, String.valueOf(icol));
-              pst.setString(2, String.valueOf(cont)); 
-              pst.setString(3, String.valueOf(intCod));
+              pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(icol))));
+              pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont)))); 
+              pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
               pst.executeUpdate();
               //se agregan los datos ingresados a la base de datos 
               JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
@@ -1498,12 +1502,12 @@ public void Guardar(){
       try{//obtencion de datos
           int iAlinear,integerColumna;
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch="+cmbcodigo.getSelectedItem()+";");
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             ResultSet rs = pst.executeQuery();
             boolean r=rs.next();
             while(r){                   
-              integerColumna=Integer.parseInt(rs.getString("codalinea"));
-              iAlinear=Integer.parseInt(rs.getString("nombre"));
+              integerColumna=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")));
+              iAlinear=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("nombre")));
                 if (iAlinear==1) {
                      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
                      modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
