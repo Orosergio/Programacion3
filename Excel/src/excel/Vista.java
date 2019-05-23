@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package excel;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.*;
@@ -27,6 +28,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
 
@@ -53,6 +55,9 @@ public class Vista extends javax.swing.JFrame {
      */
     public Vista() {
         initComponents();
+         construirTabla();
+        this.getContentPane().setBackground(Color.white);
+        
         tmInicial=tblexcel.getModel();
         tblexcel.setAutoResizeMode(tblexcel.AUTO_RESIZE_OFF);
         tblexcel.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -84,6 +89,17 @@ public class Vista extends javax.swing.JFrame {
         miLista.modifyPorFilaColumna(3,3,"hi");
         JOptionPane.showMessageDialog(this, miLista.Listar());*/
     }
+    
+    
+    private void construirTabla (){
+      JTableHeader jtableheader=tblexcel.getTableHeader();
+      jtableheader.setDefaultRenderer(new EncabezadoTabla());
+      tblexcel.setTableHeader(jtableheader);
+
+    }
+    
+
+
     public void negrita(){
         if(itNegr==0){//si la variable pivote es scero, colocara negrita
              itCursiva=0; itSubrayado=0;//cambio de dato en variable pivote
@@ -177,9 +193,6 @@ public class Vista extends javax.swing.JFrame {
         cmbcodigo = new javax.swing.JComboBox<>();
         btnabrireli = new javax.swing.JButton();
         lblsel = new javax.swing.JLabel();
-        numer = new javax.swing.JTextField();
-        denom = new javax.swing.JTextField();
-        calcular = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnFile = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
@@ -219,6 +232,7 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Excel");
 
         tblexcel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -309,6 +323,7 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
+        txtBarra.setBackground(new java.awt.Color(148, 216, 142));
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBarraKeyPressed(evt);
@@ -360,16 +375,12 @@ public class Vista extends javax.swing.JFrame {
 
         lblsel.setText("Seleccione");
 
-        calcular.setText("Calcular");
-        calcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcularActionPerformed(evt);
-            }
-        });
+        jMenuBar1.setBackground(new java.awt.Color(0, 195, 243));
 
         btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
         btnFile.setText("Archivo");
 
+        jMenuItem26.setBackground(new java.awt.Color(255, 204, 204));
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
         jMenuItem26.setText("Nuevo");
         jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
@@ -621,8 +632,10 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnPaste);
 
+        btnOper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calculator.png"))); // NOI18N
         btnOper.setText("Operaciones");
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sigma (1).png"))); // NOI18N
         jMenuItem6.setText("Suma");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -631,6 +644,7 @@ public class Vista extends javax.swing.JFrame {
         });
         btnOper.add(jMenuItem6);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/multiply.png"))); // NOI18N
         jMenuItem7.setText("Productoria");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -639,6 +653,7 @@ public class Vista extends javax.swing.JFrame {
         });
         btnOper.add(jMenuItem7);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/average.png"))); // NOI18N
         jMenuItem8.setText("Promedio");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -663,21 +678,15 @@ public class Vista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBarra))
             .addGroup(layout.createSequentialGroup()
-                .addGap(460, 460, 460)
+                .addGap(397, 397, 397)
                 .addComponent(lblsel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnabrireli)
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(numer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(denom, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(calcular)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
                 .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -688,27 +697,14 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(txtBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbcol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblsel)
-                            .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnabrireli)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(calcular))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(numer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(denom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblsel)
+                        .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnabrireli)))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
         );
 
@@ -1141,13 +1137,6 @@ public void AlinearIzquierda(){
        cmblistado.setVisible(true);
        this.lblsel.setVisible(true);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
-
-    private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        // TODO add your handling code here:
-        fraccion frac = new fraccion(Integer.parseInt(numer.getText()),Integer.parseInt(denom.getText()));
-        JOptionPane.showMessageDialog(null, frac.toString());
-        
-    }//GEN-LAST:event_calcularActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         Guardar();
@@ -1663,22 +1652,7 @@ public void Guardar(){
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+      
         //</editor-fold>
 
         /* Create and display the form */
@@ -1701,12 +1675,10 @@ public void Guardar(){
     private javax.swing.JMenu btnSize;
     private javax.swing.JMenu btnUnder;
     private javax.swing.JButton btnabrireli;
-    private javax.swing.JButton calcular;
     private javax.swing.JComboBox<String> cmbcodigo;
     private javax.swing.JComboBox<String> cmbcol;
     private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JComboBox<String> cmblistado;
-    private javax.swing.JTextField denom;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1736,7 +1708,6 @@ public void Guardar(){
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblsel;
-    private javax.swing.JTextField numer;
     private javax.swing.JTable tblexcel;
     private javax.swing.JTextField txtBarra;
     // End of variables declaration//GEN-END:variables
