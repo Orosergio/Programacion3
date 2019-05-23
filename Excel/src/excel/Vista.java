@@ -1381,6 +1381,8 @@ public void AlinearIzquierda(){
         }
         tblexcel.requestFocus();          
         tblexcel.editCellAt(intUltFila+1,intColumas);
+        intFila=intUltFila+1;
+        intColumna=intColumas;
         VerificarVacio();   
         Lista();
         System.out.println(miLista.Listar());
