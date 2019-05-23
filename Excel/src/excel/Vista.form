@@ -442,13 +442,13 @@
                   <Component id="cmbfil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbcodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="lblsel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cmblistado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnabrireli" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="cmbcodigo" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="629" max="32767" attributes="0"/>
