@@ -42,7 +42,7 @@ public class Vista extends javax.swing.JFrame {
     DefaultTableModel dftModeloTabla ;
     TableModel tmInicial;
     String sCopiado,sTipoLetra="Tahoma";
-    String simbolo;
+    String strSimbolo;
     String vctAbc[]=new String[27];//vector para el llenado de la busqueda de celda
     int itOpcion=0, itNegrita=0, itCursiva=0,itSubrayado=0;//variable pivote de ayuda, ricardo perez 1255
     int iTamañoLetra=12;
@@ -760,204 +760,185 @@ public class Vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void Porcentaje(){
-       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
+    public void Porcentaje(){
+       String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
-    
-            if(infodatos.charAt(0)=='Q'){
-         generalm();
-         infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-         float Intporcen=Float.parseFloat(infodatos);
-         float intvalormostrar=Intporcen*100;
-          String sMostrarValor=Float.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
-       
-       }else if(infodatos.matches("\\d+\\/\\d+")){
-           generalm();
-            infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-         float Intporcen=Float.parseFloat(infodatos);
-         float intvalormostrar=Intporcen*100;
-              String sMostrarValor=Float.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
-       }else{
-            infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-         double Intporcen=Double.parseDouble(infodatos);
-         double intvalormostrar=Intporcen*100;
-         String sMostrarValor=Double.toString(intvalormostrar);
-         tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
-         
-       }
+            //Verifica si el parametro esta situado en quetzales
+            if(strInfodatos.charAt(0)=='Q'){
+                generalm();
+                strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+                float floatPorcen=Float.parseFloat(strInfodatos);
+                float floatValormostrar=floatPorcen*100; //Obtiene el valor y los multiplica por 100
+                String strMostrarValor=Float.toString(floatValormostrar);
+                tblexcel.setValueAt(strMostrarValor+"%", intFila, intColumna);//Muestra el valor en la tabla
+            //Verifica si el parametro esta situado en fracción        
+            }else if(strInfodatos.matches("\\d+\\/\\d+")){
+                generalm();//Llama la funcion general para transformar
+                strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+                float floatPorcen=Float.parseFloat(strInfodatos);
+                float floatValormostrar=floatPorcen*100;
+                String sMostrarValor=Float.toString(floatValormostrar);
+                tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna); //Muestra el valor en la tabla
+            }else{//Si no se encuentra en los casos anteriores
+                strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+                double dblPorcen=Double.parseDouble(strInfodatos);
+                double dblValormostrar=dblPorcen*100;
+                String sMostrarValor=Double.toString(dblValormostrar);
+                tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
+                }
 }
-
+//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
 public void moneda(){
-        //Agrega a cada valor simbolo de moneda
-       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        //Agrega a cada valor strSimbolo de moneda
+       String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
-       
-       String regex="\\d+\\.\\d+";
-       /*Pattern pattern = Pattern.compile(regex);
-       Matcher matcher=pattern.matcher(infodatos);
-       System.out.println(matcher.find());*/
-                
-       if(infodatos.matches("\\d+")){
-           tblexcel.setValueAt("Q"+infodatos+".00", intFila, intColumna);
+      //Creacion de una variable con verificacion de matches 
+       String strRegex="\\d+\\.\\d+";
+       if(strInfodatos.matches("\\d+")){ //Si solo hay digitos
+           tblexcel.setValueAt("Q"+strInfodatos+".00", intFila, intColumna);
        }
-       
-       if(infodatos.matches(regex)){
-           
-           infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-           simbolo="Q"+infodatos;
-           tblexcel.setValueAt(simbolo, intFila, intColumna);
+       if(strInfodatos.matches(strRegex)){
+           //Si lo que existe en celda es igual a regex
+           strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+           strSimbolo="Q"+strInfodatos;
+           tblexcel.setValueAt(strSimbolo, intFila, intColumna);
        }    
-       
-       //CONVIRTIENDO FRACCION A MONEDA------------------------------------------------------------------------
-          if(infodatos.matches("\\d+\\/\\d+")){
-           
-          int o=0;
-        while(infodatos.charAt(o)!='/'){
-            o++;
-            //Validacion por si no tuviera punto decimal y no se quede en bucle
-            if(o==infodatos.length()){
-                break;
-            }
-        } 
-        
-        float numer=Integer.parseInt(infodatos.substring(0, o));
-        float denom=Integer.parseInt(infodatos.substring(o+1, infodatos.length()));
-        float total=0;
-        total=numer/denom;
-        String nuevodato=Float.toString(total);
-        System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
-        tblexcel.setValueAt("Q"+nuevodato, intFila, intColumna);
-        
-        
-       } else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+       //CONVIRTIENDO FRACCION A MONEDA----
+          if(strInfodatos.matches("\\d+\\/\\d+")){
+                int o=0;
+                while(strInfodatos.charAt(o)!='/'){
+                    o++;
+                  //Validacion por si no tuviera punto decimal y no se quede en bucle
+                    if(o==strInfodatos.length()){
+                             break;
+                    }
+                } 
+             float floatNumer=Integer.parseInt(strInfodatos.substring(0, o));
+             float floatDenom=Integer.parseInt(strInfodatos.substring(o+1, strInfodatos.length()));
+             float floatTotal=0;
+             floatTotal=floatNumer/floatDenom;
+             String nuevodato=Float.toString(floatTotal);
+             System.out.println("num: "+floatNumer+" denom: "+floatDenom+" total: "+floatTotal);
+             tblexcel.setValueAt("Q"+nuevodato, intFila, intColumna);
+          } else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){
             //COMPROBACION DE PORCENTAJE
-      int intsigno=0,intlast=infodatos.length();
-      while(infodatos.charAt(intsigno)!='%'){
-            intsigno++;
-            //Validacion por si no tuviera punto decimal y no se quede en bucle
-            if(intsigno==infodatos.length()){
-                break;
-            }
-        } 
+                int intsigno=0,intlast=strInfodatos.length();
+                while(strInfodatos.charAt(intsigno)!='%'){
+                    intsigno++;
+                    //Validacion por si no tuviera punto decimal y no se quede en bucle
+                    if(intsigno==strInfodatos.length()){
+                        break;
+                    }
+                } 
            
-          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
-          double intTotal2=flnumero/100;
-          tblexcel.setValueAt("Q"+Double.toString(intTotal2), intFila, intColumna);
+                 double flnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
+                 double intTotal2=flnumero/100;
+                 tblexcel.setValueAt("Q"+Double.toString(intTotal2), intFila, intColumna);
       }
           
     }
-
-
-
+//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
 public void fractoria(){
-        //Agrega a cada valor simbolo de moneda
-        String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        //Agrega a cada valor strSimbolo de moneda
+       String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
               
-       if(infodatos.charAt(0)=='Q'){
-          
-           int p=0;
-        while(infodatos.charAt(p)!='Q'){
-            p++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
-            if(p==infodatos.length()){
+       if(strInfodatos.charAt(0)=='Q'){
+          int p=0;
+          while(strInfodatos.charAt(p)!='Q'){
+                  p++;
+                    //Validacion por si no tuviera punto decimal itY no se quede en bucle
+             if(p==strInfodatos.length()){
                 break;
-            }
-        } 
+              }
+            } 
         //envio de parametro
-       double decimal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
-       ControllerGeneral control=new ControllerGeneral(decimal);
-       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-       String SValorMostrar=control.toFraccion(decimal);
+       double dblDecimal=Double.parseDouble(strInfodatos.substring(p+1, strInfodatos.length()));
+       ControllerGeneral control=new ControllerGeneral(dblDecimal);
+       String SValorMostrar=control.toFraccion(dblDecimal);
        System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-       String infodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-       }else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+       String strInfodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+       }else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){
             //COMPROBACION DE PORCENTAJE
-      int intsigno=0,intlast=infodatos.length();
-      while(infodatos.charAt(intsigno)!='%'){
+            int intsigno=0,intlast=strInfodatos.length();
+            while(strInfodatos.charAt(intsigno)!='%'){
             intsigno++;
             //Validacion por si no tuviera punto decimal itY no se quede en bucle
-            if(intsigno==infodatos.length()){
+            if(intsigno==strInfodatos.length()){
                 break;
             }
-        } 
-          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
-          double intTotal2=flnumero/100;
-          double decimal=intTotal2;
-          ControllerGeneral control=new ControllerGeneral(decimal);
-          String SValorMostrar=control.toFraccion(decimal);
-          tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-      }
-       else{
-       double decimal=Double.parseDouble(infodatos);
-       ControllerGeneral control=new ControllerGeneral(decimal);
-       JOptionPane.showMessageDialog(null, control.toFraccion(decimal));
-       String SValorMostrar=control.toFraccion(decimal);
-       System.out.println(SValorMostrar.toString());
+            } 
+            double flnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
+            double intTotal2=flnumero/100;
+            double decimal=intTotal2;
+            ControllerGeneral control=new ControllerGeneral(decimal);
+            String SValorMostrar=control.toFraccion(decimal);
+            tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
+        }
+        else{
+             double dblDecimal=Double.parseDouble(strInfodatos);
+             ControllerGeneral control=new ControllerGeneral(dblDecimal);
+             String SValorMostrar=control.toFraccion(dblDecimal);
+              System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
        String infodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
            
        }   
      }
 
-    
+  //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739  
 public void generalm(){
 //Guardando un valor de la celda en variable string
-       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
 //Recorrido del String
-       if(infodatos.charAt(0)=='Q'){           
+       if(strInfodatos.charAt(0)=='Q'){           
                  int p=0;
-        while(infodatos.charAt(p)!='Q'){
-            p++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
-            if(p==infodatos.length()){
-                break;
-            }
-        } 
+             while(strInfodatos.charAt(p)!='Q'){
+             p++;
+             //Validacion por si no tuviera punto decimal itY no se quede en bucle
+             if(p==strInfodatos.length()){
+                 break;
+             }
+           } 
 //envio de parametro
-       double normal=Double.parseDouble(infodatos.substring(p+1, infodatos.length()));
-       tblexcel.setValueAt(Double.toString(normal), intFila, intColumna);
-       } else  if(infodatos.matches("\\d+\\.\\d+\\%")){
+       double dblNormal=Double.parseDouble(strInfodatos.substring(p+1, strInfodatos.length()));
+       tblexcel.setValueAt(Double.toString(dblNormal), intFila, intColumna);
+       } else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){
             //COMPROBACION DE PORCENTAJE
-      int intsigno=0,intlast=infodatos.length();
-      while(infodatos.charAt(intsigno)!='%'){
-            intsigno++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
-            if(intsigno==infodatos.length()){
-                break;
-            }
-        } 
-           
-          double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
-          double intTotal2=flnumero/100;
-          tblexcel.setValueAt(Double.toString(intTotal2), intFila, intColumna);
-      }
-       
-       else{
-          int o=0;
-        while(infodatos.charAt(o)!='/'){
-            o++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
-            if(o==infodatos.length()){
-                break;
-            }
-        } 
-        double numer=Double.parseDouble(infodatos.substring(0, o));
-        double denom=Double.parseDouble(infodatos.substring(o+1, infodatos.length()));
-        double total=0;
-           System.out.println("daots: "+numer+" denom: "+denom);
-        total=numer/denom;
-        tblexcel.setValueAt(Double.toString(total), intFila, intColumna);
-        
-   }
+              int intsigno=0,intlast=strInfodatos.length();
+              while(strInfodatos.charAt(intsigno)!='%'){
+              intsigno++;
+              //Validacion por si no tuviera punto decimal itY no se quede en bucle
+                    if(intsigno==strInfodatos.length()){
+                          break;
+                     }
+                 }
+             double dblflnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
+             double dbl=dblflnumero/100;
+             tblexcel.setValueAt(Double.toString(dbl), intFila, intColumna);
+        }else{
+             int o=0;
+             while(strInfodatos.charAt(o)!='/'){
+                    o++;
+                    //Validacion por si no tuviera punto decimal itY no se quede en bucle
+                    if(o==strInfodatos.length()){
+                                 break;
+                            }
+             } 
+            double dblnumer=Double.parseDouble(strInfodatos.substring(0, o));
+            double dbldenom=Double.parseDouble(strInfodatos.substring(o+1, strInfodatos.length()));
+            double dbltotal=0;
+            System.out.println("daots: "+dblnumer+" denom: "+dbldenom);
+            dbltotal=dblnumer/dbldenom;
+            tblexcel.setValueAt(Double.toString(dbltotal), intFila, intColumna);
+         }
 }
  public void AlinearDerecha(){
      //Hecho por Carlos Laib(Carkam) 0901-17-518
