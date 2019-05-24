@@ -657,6 +657,11 @@ public class Vista extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cortar.png"))); // NOI18N
         jMenu1.setText("Cortar");
         jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         btnOper.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -814,7 +819,7 @@ public void moneda(){
           int o=0;
         while(infodatos.charAt(o)!='/'){
             o++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
             if(o==infodatos.length()){
                 break;
             }
@@ -822,23 +827,19 @@ public void moneda(){
         
         float numer=Integer.parseInt(infodatos.substring(0, o));
         float denom=Integer.parseInt(infodatos.substring(o+1, infodatos.length()));
-        
         float total=0;
         total=numer/denom;
-                
         String nuevodato=Float.toString(total);
+        System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
+        tblexcel.setValueAt("Q"+nuevodato, intFila, intColumna);
         
-                
-        
-           System.out.println("num: "+numer+" denom: "+denom+" total: "+total);
-        tblexcel.setValueAt(nuevodato, intFila, intColumna);
         
        } else  if(infodatos.matches("\\d+\\.\\d+\\%")){
             //COMPROBACION DE PORCENTAJE
       int intsigno=0,intlast=infodatos.length();
       while(infodatos.charAt(intsigno)!='%'){
             intsigno++;
-            //Validacion por si no tuviera punto decimal itY no se quede en bucle
+            //Validacion por si no tuviera punto decimal y no se quede en bucle
             if(intsigno==infodatos.length()){
                 break;
             }
@@ -846,7 +847,7 @@ public void moneda(){
            
           double flnumero=Double.parseDouble(infodatos.substring(0, intsigno-1));
           double intTotal2=flnumero/100;
-          tblexcel.setValueAt(Double.toString(intTotal2), intFila, intColumna);
+          tblexcel.setValueAt("Q"+Double.toString(intTotal2), intFila, intColumna);
       }
           
     }
@@ -1391,6 +1392,20 @@ public void AlinearIzquierda(){
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         Operaciones(3);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+         if (tm.getValueAt(intFila, intColumna)==null) {
+            sCopiado="";
+        }else{
+            sCopiado=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+            tm.setValueAt("", intFila, intColumna);
+            tblexcel.requestFocus();          
+            tblexcel.editCellAt(intFila,intColumna);       
+            VerificarVacio();   
+            this.txtBarra.setText(datos); 
+            Lista();        
+        }
+    }//GEN-LAST:event_jMenu1MouseClicked
     
     //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
     //método para realizar operaciones de sumatoria, productoria y promedio
