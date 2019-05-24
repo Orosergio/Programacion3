@@ -37,7 +37,7 @@ public class ManualdeUsuario extends javax.swing.JFrame {
         jLabel1.setText("<html><body><b> Manual de Usuario</b><br>" +
             "El siguiente manual le dará instrucciones de cómo se podrán usar la hoja de cálculo, las herramientas que se pueden utilizar que trae incluidas:\n<br><br>" +
             "<b>Escritura en la hoja de calculo</b>\n<br><br>" +
-            "•	Para poder empezar a escribir en la hoja de calculo se le tiene que dar primero click a una celda, entonces a ese momento tenemos dos opciones 1 escribir desde la misma celda o bien escribir desde la barra de arriba.\n<br>" +
+            "•	Para poder empezar a escribir en la hoja de calculo se le tiene que dar primero clic a una celda, entonces en ese momento tenemos dos, opciones 1 escribir desde la misma celda o bien escribir desde la barra de arriba.\n<br>" +
             "•	Al momento de borrar de mismo modo se puede borrar desde la barra y desde la misma celda.\n<br>" +
             "•	Para desplazarnos sobre la tabla se pueden usar las flechas o la opción de buscar una celda por medio de columna y fila\n<br><br>" +
             "<b>Herramientas:\n</b><br>" +
@@ -47,22 +47,26 @@ public class ManualdeUsuario extends javax.swing.JFrame {
             "•	Guardar: Esta mostrara una pestaña para indicarle el nombre con el que se quiere guardar el archivo, para luego guardar toda la información en ella.\n<br>" +
             "•	Eliminar: da la opción de eliminar uno de los archivos guardados\n<br>" +
             "•	Cerrar: Cierra completamente el programa\n<br><br>" +
-            "<b>Inicio\n</b><br>" +
-            "•	Letra: La opción de letra nos mostrara 6 distintos tipos de letra de los cuales podemos elegir siendo estos los siguientes: Calibri, Palatino LinoType, Arial, Century, Comic Sans Ms. Tenga en cuenta que el tipo de letra afectara a toda la hoja y no a una celda por individual.\n<br>" +
-            "•	Alineado: Esta opción nos permite alinear completamente una columna a la izquierda, derecha y centro. Para poder alinear se le debe dar click en una celda de la columna y luego dar la alineación o seleccionar cuantas celdas de la columna se quieren alinear. Para las letras ya escritas de una columna se debe de seleccionar y después alinear.\n<br>" +
-            "•	Tamaño de Letra: En esta opción podemos elegir entre 3 tamaños de letra 12,15 y 20 que afectan a toda la tabla.\n<br>" +
-            "•	Cursiva (K): Esta aplica el estilo de letra cursiva para toda la tabla\n<br>" +
-            "•	Negrita (B): Esta aplica el estilo de negrito para toda la tabla\n<br>" +
-            "•	Subrayado (U): Esta subraya todo lo que hay en la tabla\n<br>" +
-            "•	Copiar: Para esta opción tenemos que marcar una celda que tenga ya palabras escritas, luego darle click en esta opción.\n<br>" +
-            "•	Pegar: Para la opción de pegar, ya una vez copiada una celda, centrarnos en una celda vacía para poder darle clic a esta opción. \n<br><br>" +
+            "<b>Letra</b>: La opción de letra nos mostrara 6 distintos tipos de letra de los cuales podemos elegir siendo estos los siguientes: Calibri, Palatino LinoType, Arial, Century, Comic Sans Ms. Tenga en cuenta que el tipo de letra afectara a toda la hoja y no a una celda por individual.\n<br>" +
+            "<b>Alineado</b>: Esta opción nos permite alinear completamente una columna a la izquierda, derecha y centro. Para poder alinear se le debe dar click en una celda de la columna y luego dar la alineación o seleccionar cuantas celdas de la columna se quieren alinear. Para las letras ya escritas de una columna se debe de seleccionar y después alinear.\n<br>" +
+            "<b>Tamaño de Letra</b>: En esta opción podemos elegir entre 3 tamaños de letra 12,15 y 20 que afectan a toda la tabla.\n<br>" +
+            "<b>Cursiva (K)</b>: Esta aplica el estilo de letra cursiva para toda la tabla\n<br>" +
+            "<b>Negrita (B)</b>: Esta aplica el estilo de negrito para toda la tabla\n<br>" +
+            "<b>Subrayado (U)</b>: Esta subraya todo lo que hay en la tabla\n<br>" +
+            "<b>Copiar</b>: Para esta opción tenemos que marcar una celda que tenga ya palabras escritas, luego darle click en esta opción.\n<br>" +
+            "<b>Pegar</b>: Para la opción de pegar, ya una vez copiada una celda, centrarnos en una celda vacía para poder darle clic a esta opción. \n<br>" +
+            "<b>Cortar</b>: En la siguiente opción al elegir una celda i al darle clic en esta opción quitara el texto y estará listo para pegar en otra celda\n<br><br>"+
             "<b>Número\n</b><br>" +
             "•	Fracción: Esta opción permite que los números enteros o decimales puedan ser convertidos a su equivalente en forma de fracción.\n<br>" +
             "•	Moneda: Esta permite que números enteros o decimales estén en formato de quetzales.\n<br>" +
             "•	General: Dependiendo si un numero esta en fracción, moneda o porcentaje, este lo ponga como solamente un número\n<br>" +
             "•	Porcentaje: Permite que un número se muestre en su forma equivalente de porcentaje\n<br><br>" +
             "<b>Ayuda\n</b><br>" +
-            "•	En esta opción se encuentra el manual de usuario.\n<br>" +
+            "•	En esta opción se encuentra el manual de usuario.\n<br><br>" +
+            "<b>Operaciones\n</b><br>" +
+            "•	Suma: Para esta opción el usuario tiene que marcar varias celdas donde cada una puede estar en formato distinto, donde le mostrara en la siguiente celda de abajo le tire el resultado de la suma\n<br>" +
+            "•	Productoria: para esta opción de igual manera se tienen que seleccionar las celdas de una misma columna que contengan números para que así esta pueda operar y mostrar el resultado en la celda siguiente de la misma columna.\n<br>" +
+            "•	Promedio: Esta opción saca el promedio de un numero de datos seleccionados de una misma columna.<br>"+
             "\n" +
             "</body></html>");
 

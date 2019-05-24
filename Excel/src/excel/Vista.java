@@ -329,7 +329,6 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
-        txtBarra.setEditable(false);
         txtBarra.setBackground(new java.awt.Color(255, 255, 255));
         txtBarra.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         txtBarra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
