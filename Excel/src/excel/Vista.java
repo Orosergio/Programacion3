@@ -329,7 +329,6 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
-        txtBarra.setBackground(new java.awt.Color(255, 255, 255));
         txtBarra.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         txtBarra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -394,7 +393,7 @@ public class Vista extends javax.swing.JFrame {
         btnFile.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo2.png"))); // NOI18N
         btnFile.setText("Archivo");
-        btnFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFile.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem26.setBackground(new java.awt.Color(255, 204, 204));
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
@@ -437,6 +436,11 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout.png"))); // NOI18N
         jMenuItem4.setText("Cerrar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         btnFile.add(jMenuItem4);
 
         jMenuBar1.add(btnFile);
@@ -444,7 +448,7 @@ public class Vista extends javax.swing.JFrame {
         bntNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bntNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha.png"))); // NOI18N
         bntNumber.setText("Número");
-        bntNumber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntNumber.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fraccion.png"))); // NOI18N
         jMenuItem10.setText("Fracción 1/2");
@@ -487,7 +491,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
         jMenu5.setText("Letra");
-        jMenu5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem16.setText("Calibri");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -534,7 +538,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/align2.png"))); // NOI18N
         jMenu7.setText("Alineado");
-        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left.png"))); // NOI18N
         jMenuItem5.setText("Izquierda");
@@ -568,7 +572,7 @@ public class Vista extends javax.swing.JFrame {
         btnSize.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
         btnSize.setText("Tamaño de Letra");
-        btnSize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSize.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem1.setText("12");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -599,7 +603,7 @@ public class Vista extends javax.swing.JFrame {
         btnBold.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
         btnBold.setText("Negrita");
-        btnBold.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBold.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBold.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBoldMouseClicked(evt);
@@ -610,7 +614,7 @@ public class Vista extends javax.swing.JFrame {
         btnUnder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUnder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
         btnUnder.setText("Subrayado");
-        btnUnder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUnder.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUnder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnUnderMouseClicked(evt);
@@ -621,7 +625,7 @@ public class Vista extends javax.swing.JFrame {
         btnItalic.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnItalic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
         btnItalic.setText("Cursiva");
-        btnItalic.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnItalic.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnItalic.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnItalicMouseClicked(evt);
@@ -632,7 +636,7 @@ public class Vista extends javax.swing.JFrame {
         btnCopy.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
         btnCopy.setText("Copiar");
-        btnCopy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCopy.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCopy.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
         btnCopy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -644,7 +648,7 @@ public class Vista extends javax.swing.JFrame {
         btnPaste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
         btnPaste.setText("Pegar");
-        btnPaste.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPaste.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPaste.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPasteMouseClicked(evt);
@@ -655,7 +659,7 @@ public class Vista extends javax.swing.JFrame {
         jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cortar.png"))); // NOI18N
         jMenu1.setText("Cortar");
-        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -666,7 +670,7 @@ public class Vista extends javax.swing.JFrame {
         btnOper.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnOper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calculator.png"))); // NOI18N
         btnOper.setText("Operaciones");
-        btnOper.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOper.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sigma (1).png"))); // NOI18N
         jMenuItem6.setText("Suma");
@@ -700,7 +704,7 @@ public class Vista extends javax.swing.JFrame {
         btnHelp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/apoyo-tecnico.png"))); // NOI18N
         btnHelp.setText("Ayuda");
-        btnHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
@@ -760,25 +764,27 @@ public class Vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
+        //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739 (Orosergio)
     public void Porcentaje(){
+        //Obtiene los datos de la celda
        String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
             //Verifica si el parametro esta situado en quetzales
             if(strInfodatos.charAt(0)=='Q'){
-                generalm();
+                generalm();//Llama al metodo general
+                //Guarda el valor de celda en la variable string
                 strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-                float floatPorcen=Float.parseFloat(strInfodatos);
+                float floatPorcen=Float.parseFloat(strInfodatos); //Conversion de string a float
                 float floatValormostrar=floatPorcen*100; //Obtiene el valor y los multiplica por 100
-                String strMostrarValor=Float.toString(floatValormostrar);
+                String strMostrarValor=Float.toString(floatValormostrar);//Conversion de float a string
                 tblexcel.setValueAt(strMostrarValor+"%", intFila, intColumna);//Muestra el valor en la tabla
             //Verifica si el parametro esta situado en fracción        
             }else if(strInfodatos.matches("\\d+\\/\\d+")){
                 generalm();//Llama la funcion general para transformar
                 strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-                float floatPorcen=Float.parseFloat(strInfodatos);
-                float floatValormostrar=floatPorcen*100;
+                float floatPorcen=Float.parseFloat(strInfodatos);//Conversion de string a float
+                float floatValormostrar=floatPorcen*100;//Conversion de porcentaje
                 String sMostrarValor=Float.toString(floatValormostrar);
                 tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna); //Muestra el valor en la tabla
             }else{//Si no se encuentra en los casos anteriores
@@ -789,7 +795,7 @@ public class Vista extends javax.swing.JFrame {
                 tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
                 }
 }
-//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
+//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739 (Orosergio)
 public void moneda(){
         //Agrega a cada valor strSimbolo de moneda
        String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
@@ -809,6 +815,7 @@ public void moneda(){
        //CONVIRTIENDO FRACCION A MONEDA----
           if(strInfodatos.matches("\\d+\\/\\d+")){
                 int o=0;
+                //recorre el string hasta que encuentre un /
                 while(strInfodatos.charAt(o)!='/'){
                     o++;
                   //Validacion por si no tuviera punto decimal y no se quede en bucle
@@ -816,15 +823,16 @@ public void moneda(){
                              break;
                     }
                 } 
+             //Se asigna a la variable float el substring obtenido desde 0 hasta que encuentre el /
              float floatNumer=Integer.parseInt(strInfodatos.substring(0, o));
-             float floatDenom=Integer.parseInt(strInfodatos.substring(o+1, strInfodatos.length()));
+             //Se asigna a la variable float el substring obtenido desde 0+1 hasta el tamanio del string
+             float floatDenom=Integer.parseInt(strInfodatos.substring(o+1, strInfodatos.length())); 
              float floatTotal=0;
-             floatTotal=floatNumer/floatDenom;
+             floatTotal=floatNumer/floatDenom;//Calculo de la division de numerador entre denominador
              String nuevodato=Float.toString(floatTotal);
-             System.out.println("num: "+floatNumer+" denom: "+floatDenom+" total: "+floatTotal);
-             tblexcel.setValueAt("Q"+nuevodato, intFila, intColumna);
+             tblexcel.setValueAt("Q"+nuevodato, intFila, intColumna);//Coloca en la celda el valor con el signo del quetzal
           } else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){
-            //COMPROBACION DE PORCENTAJE
+            //COMPROBACION DE PORCENTAJE, recorrido del string hasta que encuentre un %
                 int intsigno=0,intlast=strInfodatos.length();
                 while(strInfodatos.charAt(intsigno)!='%'){
                     intsigno++;
@@ -833,20 +841,20 @@ public void moneda(){
                         break;
                     }
                 } 
-           
+                 //Asignacion a la variable de double el valor del string desde 0 a el recorrido menos 1
                  double flnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
-                 double intTotal2=flnumero/100;
-                 tblexcel.setValueAt("Q"+Double.toString(intTotal2), intFila, intColumna);
+                 double intTotal2=flnumero/100; //Conversion a general
+                 tblexcel.setValueAt("Q"+Double.toString(intTotal2), intFila, intColumna);//Asignacion de valor a la celda
       }
           
     }
-//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739
+//Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739 (Orosergio)
 public void fractoria(){
         //Agrega a cada valor strSimbolo de moneda
        String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
-       intColumna=tblexcel.getSelectedColumn();
+       intColumna=tblexcel.getSelectedColumn();//Obtiene columna
        intFila=tblexcel.getSelectedRow();
-              
+              //Recorrido des string hasta que encuentre Q
        if(strInfodatos.charAt(0)=='Q'){
           int p=0;
           while(strInfodatos.charAt(p)!='Q'){
@@ -856,16 +864,18 @@ public void fractoria(){
                 break;
               }
             } 
-        //envio de parametro
+        //Coloca el valor en variable tipo double del substring desde p+1 hasta el tamanio del string
        double dblDecimal=Double.parseDouble(strInfodatos.substring(p+1, strInfodatos.length()));
+       //Crea una variable de tipo controllerGeneral y envia un parametro
        ControllerGeneral control=new ControllerGeneral(dblDecimal);
-       String SValorMostrar=control.toFraccion(dblDecimal);
+       String SValorMostrar=control.toFraccion(dblDecimal); //para obtener valor a fraccion
        System.out.println(SValorMostrar.toString());
-       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
+       tblexcel.setValueAt(SValorMostrar, intFila, intColumna);//Asignacion a la celda de la tabla
        String strInfodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-       }else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){
-            //COMPROBACION DE PORCENTAJE
+       }else  if(strInfodatos.matches("\\d+\\.\\d+\\%")){ //Comprueba por medio de matches lo que hay en la celda
+            //COMPROBACION DE PORCENTAJE, recorre el string hasta encontrar %
             int intsigno=0,intlast=strInfodatos.length();
+            //Recorre el string hasta encontrar el %
             while(strInfodatos.charAt(intsigno)!='%'){
             intsigno++;
             //Validacion por si no tuviera punto decimal itY no se quede en bucle
@@ -873,16 +883,18 @@ public void fractoria(){
                 break;
             }
             } 
+            //Asignacion del substring a variable double desde 0 a intsigno-1
             double flnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
-            double intTotal2=flnumero/100;
+            double intTotal2=flnumero/100; //Calculo para volver a normal
             double decimal=intTotal2;
-            ControllerGeneral control=new ControllerGeneral(decimal);
+            ControllerGeneral control=new ControllerGeneral(decimal);//Variable tipo ControllerGeneral
             String SValorMostrar=control.toFraccion(decimal);
-            tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
+            tblexcel.setValueAt(SValorMostrar, intFila, intColumna); //Colocacion de valor en la celda de la tabla
         }
         else{
+                //Asignacion a variable double un string
              double dblDecimal=Double.parseDouble(strInfodatos);
-             ControllerGeneral control=new ControllerGeneral(dblDecimal);
+             ControllerGeneral control=new ControllerGeneral(dblDecimal);//Variable tipo ControllerGeneral
              String SValorMostrar=control.toFraccion(dblDecimal);
               System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
@@ -891,7 +903,7 @@ public void fractoria(){
        }   
      }
 
-  //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739  
+  //Hecho por Yavhé Sergio Enrique Orozco Valle 0901-17-6739   (Orosergio)
 public void generalm(){
 //Guardando un valor de la celda en variable string
        String strInfodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
@@ -899,7 +911,7 @@ public void generalm(){
        intFila=tblexcel.getSelectedRow();
 //Recorrido del String
        if(strInfodatos.charAt(0)=='Q'){           
-                 int p=0;
+            int p=0;
              while(strInfodatos.charAt(p)!='Q'){
              p++;
              //Validacion por si no tuviera punto decimal itY no se quede en bucle
@@ -923,7 +935,7 @@ public void generalm(){
              double dblflnumero=Double.parseDouble(strInfodatos.substring(0, intsigno-1));
              double dbl=dblflnumero/100;
              tblexcel.setValueAt(Double.toString(dbl), intFila, intColumna);
-        }else{
+        }else if(strInfodatos.matches("\\d+\\/\\d+")){
              int o=0;
              while(strInfodatos.charAt(o)!='/'){
                     o++;
@@ -938,7 +950,9 @@ public void generalm(){
             System.out.println("daots: "+dblnumer+" denom: "+dbldenom);
             dbltotal=dblnumer/dbldenom;
             tblexcel.setValueAt(Double.toString(dbltotal), intFila, intColumna);
-         }
+         }else{
+            tblexcel.setValueAt(strInfodatos, intFila, intColumna);
+        }
 }
  public void AlinearDerecha(){
      //Hecho por Carlos Laib(Carkam) 0901-17-518
@@ -957,20 +971,21 @@ public void AlinearIzquierda(){
     
 }
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+       //Hecho por Yavhe Orozco (Orosergio) 0901-17-6739
        Porcentaje();
        VerificarVacio();
        Lista();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        // TODO add your handling code here:
+        // Hecho por Yavhe Orozco (Orosergio) 0901-17-6739
         fractoria();
         VerificarVacio();
         Lista();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:.
+        //Hecho por Yavhe Orozco (Orosergio) 0901-17-6739.
         moneda();
         VerificarVacio();
         Lista();        
@@ -1319,7 +1334,10 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-      generalm();
+        //Hecho por Yavhe Orozco (Orosergio) 0901-17-6739
+        generalm();
+        VerificarVacio();
+        Lista();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
@@ -1399,6 +1417,17 @@ public void AlinearIzquierda(){
             Lista();//y por medio de lista lo elimina de la lista enlazada        
         }
     }//GEN-LAST:event_jMenu1MouseClicked
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Esta seguro de salir del programa?","Salir", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que estaba actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                Guardar();
+            }
+            System.exit(0);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     
     //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
     //método para realizar operaciones de sumatoria, productoria y promedio
@@ -1531,7 +1560,7 @@ public void AlinearIzquierda(){
     //método para ajustar el tamaño de las columnas
     public void TamañoCol(int tamaño){
         for (int i = 0; i <= tblexcel.getRowCount(); i++) {
-            tblexcel.setRowHeight(i, tamaño);
+            tblexcel.setRowHeight(i, tamaño+5);
         }
     }
     
@@ -1593,6 +1622,7 @@ public void AlinearIzquierda(){
         }catch(Exception e){
             System.out.println("no tiene que guarda en la lista");
         }
+        System.out.println(miLista.Listar());
     }
       //Hecho por Carlos Laib(Carkam) 0901-17-518 
     //Metodo para verificar si una celda esta vacia y evitar que en la lista se almacenen datos nulos
@@ -1685,7 +1715,7 @@ public void AlinearIzquierda(){
                 pst.setString(7, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Archivo guardado correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
                 this.setTitle(strNombreAr);
             }catch (Exception e){
                 System.out.println("le dio un error ar " +e);
@@ -1744,7 +1774,6 @@ public void AlinearIzquierda(){
                 pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont))));               
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch (Exception e){
                 System.out.println("celda ya guardada"+e);
             }
@@ -1769,7 +1798,6 @@ public void AlinearIzquierda(){
                 pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
                 pst.executeUpdate();
                 //se agregan los datos ingresados a la base de datos 
-                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch (Exception e){
                 System.out.println("le dio un errorsote "+e);
             }
