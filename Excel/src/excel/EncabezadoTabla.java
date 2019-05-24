@@ -35,7 +35,7 @@ public class EncabezadoTabla implements TableCellRenderer {
         //jcomponent.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(221, 211, 211)));
         jcomponent.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(255, 255, 255)));
         jcomponent.setOpaque(true);
-        jcomponent.setBackground( new Color(236, 84, 89) );
+        jcomponent.setBackground( new Color(94,100,114) );
         //jcomponent.setBackground( new Color(65,65,65) );
         jcomponent.setToolTipText("Tabla Seguimiento");
         jcomponent.setForeground(Color.white);

@@ -53,7 +53,7 @@ public class Vista extends javax.swing.JFrame {
     public Vista() {
         initComponents();
         construirTabla();
-        this.getContentPane().setBackground(Color.white);        
+        this.getContentPane().setBackground(new java.awt.Color(184,242,230));        
         tmInicial=tblexcel.getModel();
         //codigo para barra horizontal, hecho por ricardo perez 1255
         tblexcel.setAutoResizeMode(tblexcel.AUTO_RESIZE_OFF);
@@ -210,8 +210,6 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
-        btnHelp = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -231,10 +229,13 @@ public class Vista extends javax.swing.JFrame {
         btnItalic = new javax.swing.JMenu();
         btnCopy = new javax.swing.JMenu();
         btnPaste = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         btnOper = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        btnHelp = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Excel");
@@ -328,7 +329,10 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
-        txtBarra.setBackground(new java.awt.Color(148, 216, 142));
+        txtBarra.setEditable(false);
+        txtBarra.setBackground(new java.awt.Color(255, 255, 255));
+        txtBarra.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        txtBarra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtBarra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBarraKeyPressed(evt);
@@ -338,6 +342,7 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        cmbfil.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         cmbfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -355,6 +360,7 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        cmbcol.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         cmbcol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbcol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,6 +368,7 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        cmblistado.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         cmblistado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmblistado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -369,8 +376,10 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        cmbcodigo.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         cmbcodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnabrireli.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         btnabrireli.setText("Eliminar");
         btnabrireli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,12 +387,15 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        lblsel.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
         lblsel.setText("Seleccione");
 
-        jMenuBar1.setBackground(new java.awt.Color(0, 195, 243));
+        jMenuBar1.setBackground(new java.awt.Color(174, 217, 224));
 
-        btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file.png"))); // NOI18N
+        btnFile.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo2.png"))); // NOI18N
         btnFile.setText("Archivo");
+        btnFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem26.setBackground(new java.awt.Color(255, 204, 204));
         jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-file.png"))); // NOI18N
@@ -430,8 +442,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(btnFile);
 
-        bntNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/numero.png"))); // NOI18N
+        bntNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bntNumber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha.png"))); // NOI18N
         bntNumber.setText("Número");
+        bntNumber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fraccion.png"))); // NOI18N
         jMenuItem10.setText("Fracción 1/2");
@@ -471,23 +485,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(bntNumber);
 
-        btnHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
-        btnHelp.setText("Ayuda");
-
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
-        jMenuItem9.setText("Manual de Usuario");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        btnHelp.add(jMenuItem9);
-
-        jMenuBar1.add(btnHelp);
-
+        jMenu5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/letra.png"))); // NOI18N
         jMenu5.setText("Letra");
+        jMenu5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem16.setText("Calibri");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -531,8 +532,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/align2.png"))); // NOI18N
         jMenu7.setText("Alineado");
+        jMenu7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left.png"))); // NOI18N
         jMenuItem5.setText("Izquierda");
@@ -563,8 +566,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        btnSize.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/size.png"))); // NOI18N
         btnSize.setText("Tamaño de Letra");
+        btnSize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem1.setText("12");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -592,8 +597,10 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(btnSize);
 
+        btnBold.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bold.png"))); // NOI18N
         btnBold.setText("Negrita");
+        btnBold.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBold.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBoldMouseClicked(evt);
@@ -601,8 +608,10 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnBold);
 
+        btnUnder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUnder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/underline.png"))); // NOI18N
         btnUnder.setText("Subrayado");
+        btnUnder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUnder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnUnderMouseClicked(evt);
@@ -610,8 +619,10 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnUnder);
 
+        btnItalic.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnItalic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/italix.png"))); // NOI18N
         btnItalic.setText("Cursiva");
+        btnItalic.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnItalic.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnItalicMouseClicked(evt);
@@ -619,8 +630,11 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnItalic);
 
+        btnCopy.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pst.png"))); // NOI18N
         btnCopy.setText("Copiar");
+        btnCopy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCopy.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
         btnCopy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCopyMouseClicked(evt);
@@ -628,8 +642,10 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnCopy);
 
+        btnPaste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cpy.png"))); // NOI18N
         btnPaste.setText("Pegar");
+        btnPaste.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPaste.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPasteMouseClicked(evt);
@@ -637,8 +653,16 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnPaste);
 
+        jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cortar.png"))); // NOI18N
+        jMenu1.setText("Cortar");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuBar1.add(jMenu1);
+
+        btnOper.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnOper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calculator.png"))); // NOI18N
         btnOper.setText("Operaciones");
+        btnOper.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sigma (1).png"))); // NOI18N
         jMenuItem6.setText("Suma");
@@ -669,6 +693,23 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(btnOper);
 
+        btnHelp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/apoyo-tecnico.png"))); // NOI18N
+        btnHelp.setText("Ayuda");
+        btnHelp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/libro.png"))); // NOI18N
+        jMenuItem9.setText("Manual de Usuario");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        btnHelp.add(jMenuItem9);
+
+        jMenuBar1.add(btnHelp);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -689,7 +730,7 @@ public class Vista extends javax.swing.JFrame {
                 .addComponent(cmblistado, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnabrireli)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 504, Short.MAX_VALUE)
                 .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addComponent(jScrollPane1)
@@ -710,7 +751,7 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(btnabrireli))
                     .addComponent(cmbcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
         );
 
         pack();
@@ -1788,6 +1829,7 @@ public void AlinearIzquierda(){
     private javax.swing.JComboBox<String> cmbcol;
     private javax.swing.JComboBox<String> cmbfil;
     private javax.swing.JComboBox<String> cmblistado;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
