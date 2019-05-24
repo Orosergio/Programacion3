@@ -34,7 +34,7 @@ import javax.swing.table.TableModel;
  * @author Sergio Orozco
  */
 public class Vista extends javax.swing.JFrame {
-     public static int intCod=0;
+    public static int intCod=0;
     public static int intFila, intColumna;
     public static Lista miLista=new Lista();
     public static Lista miAlineado=new Lista();
@@ -58,12 +58,12 @@ public class Vista extends javax.swing.JFrame {
         //codigo para barra horizontal, hecho por ricardo perez 1255
         tblexcel.setAutoResizeMode(tblexcel.AUTO_RESIZE_OFF);
         tblexcel.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
-        //oculta algunos obtjetos hecho por ricardo perez 1255
+        //oculta algunos obtjetos 
         this.cmbcodigo.setVisible(false);
         this.lblsel.setVisible(false);
         this.cmblistado.setVisible(false);
         btnabrireli.setVisible(false); 
-        //limpia algunos combobox hecho por ricardo perez 1255
+        //limpia algunos combobox 
         this.cmbcol.removeAllItems();
         this.cmbfil.removeAllItems();
         //llamado de metodos para llenado de combobox, de los 2 grupos hecho por ricardo perez 1255
@@ -80,11 +80,6 @@ public class Vista extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.getMessage();
         }
-     
-        /*miLista.insertarPrincipio(new Celda("10", 3, 3));
-        JOptionPane.showMessageDialog(this, miLista.Listar());
-        miLista.modifyPorFilaColumna(3,3,"hi");
-        JOptionPane.showMessageDialog(this, miLista.Listar());*/
     }
         
     private void construirTabla (){
@@ -93,7 +88,8 @@ public class Vista extends javax.swing.JFrame {
       tblexcel.setTableHeader(jtableheader);
 
     }
-    public void negrita(){//hecho por ricardo perez 1255
+    //hecho por ricardo perez 0901-17-1255
+    public void negrita(){
         if(itNegrita==0){//si la variable pivote es scero, colocara negrita
             itCursiva=0; itSubrayado=0;//cambio de dato en variable pivote
             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
@@ -104,7 +100,9 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
-        public void cursiva(){//hecho por ricardo perez 1255
+    
+    //hecho por ricardo perez 0901-17-1255
+    public void cursiva(){
         if(itCursiva==0){//si la variable pivote es cero, colocara cursiva
             itNegrita=0;itSubrayado=0;//cambio de dato en variable pivote
             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
@@ -115,35 +113,41 @@ public class Vista extends javax.swing.JFrame {
             tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
         }
     }
-        public void subrayado(){//hecho por ricardo perez 1255
-           if(itSubrayado==0){    //si la variable pivote es cero, colocara el subrayado 
-                itNegrita=0;//cambio de dato en variable pivote
-                itCursiva=0;//cambio de dato en variable pivote
-                tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
-                Font font = tblexcel.getFont();
-                Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
-                attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-                tblexcel.setFont(font.deriveFont(attributes));
-                itSubrayado=1;//cambio de dato en variable pivote
-        }else{//si la variable pivote es diferente de cero, quitara el subrayado
-                Font font = tblexcel.getFont();
-                Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
-                attributes.put(TextAttribute.UNDERLINE, -1);
-                tblexcel.setFont(font.deriveFont(attributes));
-                itSubrayado=0;//cambio de dato en variable pivote
-            }
+    
+    //hecho por ricardo perez 0901-17-1255
+    public void subrayado(){
+       if(itSubrayado==0){    //si la variable pivote es cero, colocara el subrayado 
+            itNegrita=0;//cambio de dato en variable pivote
+            itCursiva=0;//cambio de dato en variable pivote
+            tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));
+            Font font = tblexcel.getFont();
+            Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+            tblexcel.setFont(font.deriveFont(attributes));
+            itSubrayado=1;//cambio de dato en variable pivote
+    }else{//si la variable pivote es diferente de cero, quitara el subrayado
+            Font font = tblexcel.getFont();
+            Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+            attributes.put(TextAttribute.UNDERLINE, -1);
+            tblexcel.setFont(font.deriveFont(attributes));
+            itSubrayado=0;//cambio de dato en variable pivote
         }
-        public void ocultarobjetos(){//hecho por ricardo perez 1255
+    }
+    
+    //hecho por ricardo perez 0901-17-1255
+    public void ocultarobjetos(){
         //oculta cierto elementos al no ser utilizados    
         cmblistado.setVisible(false);
         btnabrireli.setVisible(false);
         this.lblsel.setVisible(false);
-        }
-    public void llenadocmbArchivos(){//hecho por ricardo perez 1255
+    }
+    
+    //hecho por ricardo perez 0901-17-1255
+    public void llenadocmbArchivos(){
         //limpia lo que tienen los combobox
-     this.cmblistado.removeAllItems();
-     this.cmbcodigo.removeAllItems();
-         try{
+        this.cmblistado.removeAllItems();
+        this.cmbcodigo.removeAllItems();
+        try{
             //conexion de datos
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM tblarchivo");
@@ -159,20 +163,22 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Base de datos no enlazada");
         }
     }
-   public void cmbllenado(){//hecho por ricardo perez 1255
-      for(int i=1; i<=50;i++){// se llena los combobox de fila
-      cmbfil.addItem(String.valueOf(i));
-      }
-      //vector con las letras de las columnas
-      vctAbc[1]="A";vctAbc[2]="B";vctAbc[3]="C";vctAbc[4]="D";vctAbc[5]="E";vctAbc[6]="F";vctAbc[7]="G";vctAbc[8]="H";vctAbc[9]="I";vctAbc[10]="J";vctAbc[11]="K";vctAbc[12]="L";vctAbc[13]="M";
-      vctAbc[14]="N";vctAbc[15]="O";vctAbc[16]="P";vctAbc[17]="Q";vctAbc[18]="R";vctAbc[19]="S";vctAbc[20]="T";vctAbc[21]="U";vctAbc[22]="V";vctAbc[23]="W";vctAbc[24]="X";vctAbc[25]="Y";vctAbc[26]="Z";      
-      cmbcol.addItem(String.valueOf(""));// como la primera columna contiene las filas no mostrara nada
-       for(int i=1; i<=26;i++){      //primera lista de columnas     
-        cmbcol.addItem(String.valueOf(vctAbc[i]));
-      }
+    
+   //hecho por ricardo perez 0901-17-1255 
+   public void cmbllenado(){
+        for(int i=1; i<=50;i++){// se llena los combobox de fila
+            cmbfil.addItem(String.valueOf(i));
+        }
+        //vector con las letras de las columnas
+        vctAbc[1]="A";vctAbc[2]="B";vctAbc[3]="C";vctAbc[4]="D";vctAbc[5]="E";vctAbc[6]="F";vctAbc[7]="G";vctAbc[8]="H";vctAbc[9]="I";vctAbc[10]="J";vctAbc[11]="K";vctAbc[12]="L";vctAbc[13]="M";
+        vctAbc[14]="N";vctAbc[15]="O";vctAbc[16]="P";vctAbc[17]="Q";vctAbc[18]="R";vctAbc[19]="S";vctAbc[20]="T";vctAbc[21]="U";vctAbc[22]="V";vctAbc[23]="W";vctAbc[24]="X";vctAbc[25]="Y";vctAbc[26]="Z";      
+        cmbcol.addItem(String.valueOf(""));// como la primera columna contiene las filas no mostrara nada
+        for(int i=1; i<=26;i++){      //primera lista de columnas     
+            cmbcol.addItem(String.valueOf(vctAbc[i]));
+        }
         for(int i=1; i<=15;i++){//segunda lista con las columnas 
-        cmbcol.addItem(String.valueOf("A"+vctAbc[i]));
-      }
+            cmbcol.addItem(String.valueOf("A"+vctAbc[i]));
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -956,9 +962,9 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
- 
        iTamañoLetra=15;
        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
+       TamañoCol(iTamañoLetra);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
@@ -997,9 +1003,9 @@ public void AlinearIzquierda(){
       Lista();
       System.out.println(miLista.Listar());      
     }//GEN-LAST:event_txtBarraKeyReleased
-
+    
+    //hecho por ricardo perez 0901-17-1255
     private void cmbfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbfilActionPerformed
-        //hecho por ricardo perez 1255        
         //se obtinen los indeces de los combobox, el cual nos permite saber la fila itY columna
         intColumna=cmbcol.getSelectedIndex();
         intFila=cmbfil.getSelectedIndex();    
@@ -1014,8 +1020,8 @@ public void AlinearIzquierda(){
         }   
     }//GEN-LAST:event_cmbfilActionPerformed
 
+    //hecho por ricardo perez 0901-17-1255
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       //hecho por ricardo perez 1255
        //muestra un combobox itY un boton para que pueda seleccionar el archivo que desea abrir        
        itOpcion=1;
        btnabrireli.setText("Abrir");
@@ -1025,15 +1031,15 @@ public void AlinearIzquierda(){
        NuevoArchivo();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    //hecho por ricardo perez 0901-17-1255
     private void cmblistadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmblistadoItemStateChanged
-        //hecho por ricardo perez 1255
         try{ cmbcodigo.setSelectedIndex(cmblistado.getSelectedIndex());}// se cambia el indice del combo junto con el otro
         catch(Exception e){
         }
     }//GEN-LAST:event_cmblistadoItemStateChanged
 
+    //hecho por ricardo perez 0901-17-1255
     private void btnabrireliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrireliActionPerformed
-        //hecho por ricardo perez 1255
         //dependiendo si eleigio eliminar o abrir, eso esta en la variabel itOpcion,
         //entonces entrara en el if itY luego de realizar la accion vuelve a cerrar el combobox itY el boton
         if(itOpcion==1){               
@@ -1094,12 +1100,12 @@ public void AlinearIzquierda(){
              itres=  JOptionPane.showConfirmDialog(this,"¿Esta seguro de eliminar los datos?","Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
              if(itres==JOptionPane.YES_OPTION){//si esta seguro de eliminar
                 try{//elimina de la base de datos de acuerdo con el codigo del archivo
-                      Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                      PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
-                      pst.executeUpdate();            
-                    }catch (Exception e){
-                       JOptionPane.showMessageDialog(null,"le dio un error "+e);
-                    } 
+                    Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                    PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
+                    pst.executeUpdate();            
+                }catch (Exception e){
+                   JOptionPane.showMessageDialog(null,"le dio un error "+e);
+                } 
             try{//elimina de la base de datos de acuerdo con el codigo del archivo
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
                 PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
@@ -1116,10 +1122,9 @@ public void AlinearIzquierda(){
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
-   
-         if(iterror==2){                  
-              JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");// si no hubieron errores se muestra que se elimino todo
-         }
+        if(iterror==2){                  
+             JOptionPane.showMessageDialog(null,"Dato Eliminado con exito");// si no hubieron errores se muestra que se elimino todo
+        }
         llenadocmbArchivos();//actualiza los combobox de los archivos
        }     
     }  //se ocultan algunos objetos que ya no se usaran
@@ -1127,9 +1132,9 @@ public void AlinearIzquierda(){
         btnabrireli.setVisible(false);
         this.lblsel.setVisible(false);
     }//GEN-LAST:event_btnabrireliActionPerformed
-
+    
+    //hecho por ricardo perez 1255
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        //hecho por ricardo perez 1255
         //muestra un combobox itY un boton para que pueda seleccionar el archivo que desea eliminar       
        itOpcion=2;
        btnabrireli.setText("Eliminar");
@@ -1139,6 +1144,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        //Hecho por Bryan Aguirre(Colossatrox)0901-17-646
         Guardar();
         ocultarobjetos();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -1185,13 +1191,15 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-           iTamañoLetra=12;
-        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));   
+        iTamañoLetra=12;
+        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
+        TamañoCol(iTamañoLetra);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
        iTamañoLetra=20;
-       tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
+       tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
+       TamañoCol(iTamañoLetra);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void tblexcelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyTyped
@@ -1284,6 +1292,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        //Hecho por Bryan Aguirre(Colossatrox)0901-17-646
         NuevoArchivo();
         ocultarobjetos();
     }//GEN-LAST:event_jMenuItem26ActionPerformed
@@ -1302,7 +1311,6 @@ public void AlinearIzquierda(){
 
     private void btnUnderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnderMouseClicked
         //hecho por ricardo perez 1255
-        // TODO add your handling code here:
         subrayado();     
     }//GEN-LAST:event_btnUnderMouseClicked
 
@@ -1328,93 +1336,126 @@ public void AlinearIzquierda(){
         System.out.println(miLista.Listar());
     }//GEN-LAST:event_btnPasteMouseClicked
 
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
         Operaciones(1);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
         Operaciones(2);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
         Operaciones(3);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para realizar operaciones de sumatoria, productoria y promedio
     public void Operaciones(int op){
+        //declaración de variables
         int intColumas,intFilass[], intCantDatos=0, intUltFila=0;
         Double dblSuma=0.0, dblProductoria=1.0, dblProm=0.0;
         String strDatos="";
+        //se obtiene el número de columna que se tiene seleccionado
         intColumas=tblexcel.getSelectedColumn();
+        //se obtiene el número de filas seleccionadas y se guarda en un vector de tipo int
         intFilass=tblexcel.getSelectedRows();
+        //ciclo desde 0 hasta menor al tamaño del vector intFilass para obtener sus valores
         for (int i = 0; i < intFilass.length; i++) {
             try{
+                //si lo obtenido de la celda es nulo se guarda la variable como vacío
                 if (tblexcel.getValueAt(intFilass[i], intColumas)==null) {
                     strDatos="";
+                // sino se guarda con el valor obtenido de la celda
                 }else{
                     strDatos=tblexcel.getValueAt(intFilass[i], intColumas).toString().trim();
                 }
             }catch(Exception e){
-                
             }
+            //si strDatos no está vacía
             if (!strDatos.equals("")) {
+                //la variable se guarda con el valor obtenido de llamar al método CambiarValor
                 strDatos=CambiarValor(strDatos);
+                //si la variable contiene solo números o números decimales
                 if (strDatos.matches("\\d+")|| strDatos.matches("\\d+.\\d+")) {
+                    //se suma uno a la cantidad de datos para luego usarla en promedio
                     intCantDatos++;
+                    //la variable de suma va sumando los valores obtenidos
                     dblSuma+=Double.parseDouble(strDatos);
+                    //la variable de productoria va multiplicando los valores obtenidos
                     dblProductoria*=Double.parseDouble(strDatos);
                 }
             }
+            //se guarda el último valor obtenido del vector 
             intUltFila=intFilass[i];
         }
+        //se saca el promedio con la suma divido la cantidad de datos
         dblProm=dblSuma/intCantDatos;
         switch(op){
+            //si la opción obtenida es uno escribe abajo de la selección el resultado de la suma
             case 1: tblexcel.setValueAt(dblSuma.toString(), intUltFila+1, intColumas);
                 break;
+            //si la opción obtenida es dos escribe abajo de la selección el resultado de la productoria
             case 2: tblexcel.setValueAt(dblProductoria.toString(), intUltFila+1, intColumas);
                 break;
+            //si la opción obtenida es tre escribe abajo de la selección el resultado del promedio
             case 3: tblexcel.setValueAt(dblProm.toString(), intUltFila+1, intColumas);
                 break;
         }
+        //pide que la tabla se vuelva a enfocar
         tblexcel.requestFocus();          
         tblexcel.editCellAt(intUltFila+1,intColumas);
+        //se cambian los valores globales de intFila e intColumna
         intFila=intUltFila+1;
         intColumna=intColumas;
+        //se llaman los 2 siguientes métodos para agregar los resultados a la lista
         VerificarVacio();   
         Lista();
         System.out.println(miLista.Listar());
     }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para cambiar el número si tiene porcentaje, moneda o fracción
     public String CambiarValor(String texto){
-    //Recorrido del String
-           if(texto.charAt(0)=='Q'){           
-                int p=0;
-                while(texto.charAt(p)!='Q'){
-                    p++;
-                    //Validacion por si no tuviera punto decimal itY no se quede en bucle
-                    if(p==texto.length()){
-                        break;
-                    }
-                } 
-    //envio de parametro
-                
-                double normal=Double.parseDouble(texto.substring(p+1, texto.length()));
-                return String.valueOf(normal);
-           } else  if(texto.matches("\\d+\\.\\d+\\%")){
-                //COMPROBACION DE PORCENTAJE
-          int intsigno=0,intlast=texto.length();
-          while(texto.charAt(intsigno)!='%'){
+        //si el primer caracter del texto obtenido es una Q
+        if(texto.charAt(0)=='Q'){           
+            int p=0;
+            while(texto.charAt(p)!='Q'){
+                p++;
+                //Validacion por si no tuviera punto decimal itY no se quede en bucle
+                if(p==texto.length()){
+                    break;
+                }
+            } 
+            //se guarda en una variable el valor obtenido despues de la Q
+            double normal=Double.parseDouble(texto.substring(p+1, texto.length()));
+            //devuelve el valor de normal
+            return String.valueOf(normal);
+        //verificación si el texto obtenido es porcentaje    
+        }else  if(texto.matches("\\d+\\.\\d+\\%")){
+            //declaración de variables
+            int intsigno=0,intlast=texto.length();
+            //mientras el caracter del texto no sea porcentaje
+            while(texto.charAt(intsigno)!='%'){
+                //se suma uno 
                 intsigno++;
                 //Validacion por si no tuviera punto decimal itY no se quede en bucle
                 if(intsigno==texto.length()){
                     break;
                 }
-            } 
-              double flnumero=Double.parseDouble(texto.substring(0, intsigno-1));
-              double intTotal2=flnumero/100;
-              return String.valueOf(intTotal2);
-          }else if(texto.matches("\\d+\\/\\d+")){
-              int o=0;
+            }
+            //se guarda en una variable el texto desde 0 hasta que encuentre el % -1
+            double flnumero=Double.parseDouble(texto.substring(0, intsigno-1));
+            //se divide el numero entre 100 para sacar el valor 
+            double intTotal2=flnumero/100;
+            //se devuelve la variable
+            return String.valueOf(intTotal2);
+        //verificación si el texto es fracción
+        }else if(texto.matches("\\d+\\/\\d+")){
+            int o=0;
+            //mientras el caracter no tenga la diagonal
             while(texto.charAt(o)!='/'){
                 o++;
                 //Validacion por si no tuviera punto decimal itY no se quede en bucle
@@ -1422,65 +1463,99 @@ public void AlinearIzquierda(){
                     break;
                 }
             } 
+            //se guarda en una variable el texto desde 0 hasta donde encuentre la diagonal
             double numer=Double.parseDouble(texto.substring(0, o));
+            //se guarda el denominador del texto obtenido de despues de la diagonal hasta el final
             double denom=Double.parseDouble(texto.substring(o+1, texto.length()));
             double total=0;
+            //se saca el número dividiendo el numerador entre el denominador
             total=numer/denom;
+            //se devuelve la variable
             return String.valueOf(total);
-
-       }else{
-              return texto;
-          }
+        //sino tiene ningún formato de los anteriores solo devuelve el texto normal
+        }else{
+            return texto;
+        }
     }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para ajustar el tamaño de las columnas
+    public void TamañoCol(int tamaño){
+        for (int i = 0; i <= tblexcel.getRowCount(); i++) {
+            tblexcel.setRowHeight(i, tamaño);
+        }
+    }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para crear un nuevo archivo
     public void NuevoArchivo(){
         //Pregunta si desea guardar el archivo, si si, llama el método de guardar
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar el archivo en el que está actualmente trabajando?","Guardar actual", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             Guardar();
         }
+        //se pone la barra del frame vacía
         this.setTitle("");
+        //se llama el método para que pare de editar la celda
         this.DetenerEditarCelda();
+        //ciclo para limpiar todo el contenido de la tabla
         for (int i = 0; i < tblexcel.getRowCount(); i++) {
             for (int j = 0; j < tblexcel.getColumnCount(); j++) {
+                //pone en blanco cada celda de la tabla
                 tblexcel.setValueAt("", i, j);
             }
         }
+        //limpia el contenido de la barra donde se escribe
         txtBarra.setText("");
+        //se llama el método
         EncabezadoNoFilas();
+        //se pone la tabla con la letra y tamaño por defecto
         tblexcel.setFont(new java.awt.Font("Tahoma",0, 12));
         iTamañoLetra=12;
         sTipoLetra="Tahoma";
+        //se vacía la lista del contenido de las celdas
         miLista.vaciarLista();
+        //se vacía la lista del contenido de las alineaciones
         miAlineado.vaciarListadeAlineacion();
     }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para guardar las celdas escritas en la lista
     public void Lista(){
-          try{
-             if(intColumna!=0){
-           if (miLista.obtenerPos(intFila, intColumna)==-1) {
-               if (intColumna!=-1) {
-                miLista.insertarDato(new Celda(datos,intFila,intColumna));   
-               }
+        try{
+            //si la columa es diferente de 0
+            if(intColumna!=0){
+                //si no se encuentra el nodo de la fila y posicion actual de las variables
+                if (miLista.obtenerPos(intFila, intColumna)==-1) {
+                    //si la columna no es igual a -1
+                    if (intColumna!=-1) {
+                        //se inserta el dato de la celda en la lista
+                        miLista.insertarDato(new Celda(datos,intFila,intColumna));   
+                    }
+                }
+                //si el largo del contenido de la variable es mayor o igual a 1
+                if (datos.length()>=1) {
+                    //se modifica el nodo, buscándolo por fila y columna, se modifica por el dato nuevo
+                    miLista.modifyPorFilaColumna(intFila, intColumna, datos);
+                }else{
+                    //sino se elimina el nodo obteniendo la posicion por la fila y columna
+                    miLista.eliminarCelda(miLista.obtenerPos(intFila, intColumna));
+                }
             }
-           if (datos.length()>=1) {
-               miLista.modifyPorFilaColumna(intFila, intColumna, datos);
-           }else{
-               miLista.eliminarCelda(miLista.obtenerPos(intFila, intColumna));
-           }}
-    } catch(Exception e){
-              System.out.println("no tiene que guarda en la lista");
-           }
-       }
-            public void VerificarVacio(){
-                try{
-           if (tm.getValueAt(intFila, intColumna)==null) {
-               datos="";
-           }else{
-               datos=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
-           }} 
-                catch(Exception e){
-           
-           }
-       
-       }
+        }catch(Exception e){
+            System.out.println("no tiene que guarda en la lista");
+        }
+    }
+    public void VerificarVacio(){
+        try{
+            if (tm.getValueAt(intFila, intColumna)==null) {
+                datos="";
+            }else{
+                datos=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+            }
+        }catch(Exception e){
+        }
+
+    }
     public void ListaAlienado(){
            if (miAlineado.obtenerColumna(intColumna)==-1) {
                 miAlineado.insertarAlineado(new Alinear(alineado,intColumna));
@@ -1489,170 +1564,194 @@ public void AlinearIzquierda(){
                miAlineado.modificarPorColumna(intColumna, alineado);              
            }
    }
-       public void DetenerEditarCelda(){
-          CellEditor cellEditor = tblexcel.getCellEditor();           
-             if (cellEditor != null) {          
-               if (cellEditor.getCellEditorValue() != null) {
-                   cellEditor.stopCellEditing();
-               } else {
-                   cellEditor.cancelCellEditing();
-               }
-           }
-       }
-       
- public void obtenerCodigoAr(){
-      try{
-            //Conección con la base de datos
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("select * from tblarchivo");
-            ResultSet rs = pst.executeQuery();
-            boolean r=rs.next();
-            //mientras encuentre datos en la tabla itY campo especificado
-            while(r){
-                //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
-                if (intCod< Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")))) {
-                    intCod=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")));
-                }
-                r=rs.next();
+    public void DetenerEditarCelda(){
+        CellEditor cellEditor = tblexcel.getCellEditor();           
+        if (cellEditor != null) {          
+            if (cellEditor.getCellEditorValue() != null) {
+                cellEditor.stopCellEditing();
+            } else {
+                cellEditor.cancelCellEditing();
             }
-            intCod++;
-            System.out.println(intCod);
-        }catch (Exception e){
-            System.out.println("No conecta");
-        }
-  }
-public void Guardar(){
-    if (!this.getTitle().equals(strNombreAr)) {
-      obtenerCodigoAr();
-      strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE+JOptionPane.OK_OPTION);
-        try{
-            //Conección con la base de datos
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
-            pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
-            pst.setString(2, Encriptacion.Encriptar(String.valueOf(strNombreAr.trim())));
-            pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegrita))));
-            pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));
-            pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));
-            pst.setString(6, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
-            pst.setString(7, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
-            pst.executeUpdate();
-            //se agregan los datos ingresados a la base de datos 
-            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            this.setTitle(strNombreAr);
-        }catch (Exception e){
-            System.out.println("le dio un error ar " +e);
-        }
-    }else{
-        try{//elimina de la base de datos de acuerdo con el codigo del archivo
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= '"+Encriptacion.Encriptar(String.valueOf(intCod))+"'");
-            pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
-            pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
-            pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegrita))));
-            pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));   
-            pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));   
-            pst.executeUpdate(); 
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
-        }
-        try{//elimina de la base de datos de acuerdo con el codigo del archivo
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
-            pst.executeUpdate(); 
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un error "+e);
-        }
-        try{//elimina de la base de datos de acuerdo con el codigo del archivo
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
-            pst.executeUpdate(); 
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un error "+e);
         }
     }
-    for (int i = 0; i < miLista.contar(); i++) {
-          String strCont=miLista.obtenerNodo(i);
-          String[] strPartes=strCont.split(";");
-          int fila=Integer.parseInt(strPartes[1]);
-          int col=Integer.parseInt(strPartes[2]);
-          String cont=strPartes[0];
-          System.out.println("contenido "+cont+" fila "+fila+" columna "+col);
-          try{
-              //Conección con la base de datos
-              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-              PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
-              pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(fila))));
-              pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(col))));
-              pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
-              pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont))));               
-              pst.executeUpdate();
-              //se agregan los datos ingresados a la base de datos 
-              JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-          }catch (Exception e){
-              System.out.println("celda ya guardada"+e);
-          }
-          //JOptionPane.showMessageDialog(null, miLista.obtenerNodo(i));
-      }
-       for (int i = 0; i < miAlineado.Tamaño(); i++) {
-          String sContar=miAlineado.obtenerNodoAlienar(i);
-          String[] sPartes=sContar.split(";");            
-          int icol=Integer.parseInt(sPartes[1]);
-          String cont=sPartes[0];
-          System.out.println("contenido "+cont+"columna "+icol);
-          try{
-              //Conección con la base de datos
-              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-              PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
-              pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(icol))));
-              pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont)))); 
-              pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
-              pst.executeUpdate();
-              //se agregan los datos ingresados a la base de datos 
-              JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-          }catch (Exception e){
-              System.out.println("le dio un errorsote "+e);
-          }
-      }
-      llenadocmbArchivos();
-}
-  public void EncabezadoNoFilas(){
-      for(int i=0; i<tblexcel.getRowCount();i++){
-        tblexcel.setValueAt(i+1, i, 0);//coloca el numero de fila
-      }
-  }
-  public void ConsultaAlinear(){
-      try{//obtencion de datos
-          int iAlinear,integerColumna;
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
-            ResultSet rs = pst.executeQuery();
-            boolean r=rs.next();
-            while(r){     
-              integerColumna=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")));
-              iAlinear=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("nombre")));
-                if (iAlinear==1) {
-                     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-                     modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
-                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
-                }else if (iAlinear==2) {
-                    DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-                     modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
-                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
-                }else if (iAlinear==3) {
-                     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-                     modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-                     tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
-                }
-                miAlineado.insertarAlineado(new Alinear(Encriptacion.Desencriptar(rs.getString("nombre")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")))));
-                r=rs.next();
-                           
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para obtener el código del archivo con el que se va a guardar
+    public void obtenerCodigoAr(){
+         try{
+               //Conección con la base de datos
+               Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+               PreparedStatement pst = cn.prepareStatement("select * from tblarchivo");
+               ResultSet rs = pst.executeQuery();
+               boolean r=rs.next();
+               //mientras encuentre datos en la tabla itY campo especificado
+               while(r){
+                   //intCod servirá para código automático por lo que se busca el más grande guardado en la base de datos
+                   if (intCod< Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")))) {
+                       intCod=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codarch")));
+                   }
+                   r=rs.next();
+               }
+               //se suma uno
+               intCod++;
+           }catch (Exception e){
+               System.out.println("No conecta");
+           }
+    }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para guardar la lista en el archivo
+    public void Guardar(){
+        //si la barra del programa no es igual al nombre de la variable
+        if (!this.getTitle().equals(strNombreAr)) {
+            //se obtiene el código con el que se va a guardar   
+            obtenerCodigoAr();
+            //se pide que ingrese el nombre del archivo con el que se quiere guardar
+            strNombreAr=JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo con que desea guardar","Nombre Archivo",JOptionPane.QUESTION_MESSAGE+JOptionPane.OK_OPTION);
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblarchivo`(`codarch`, `nombre`,`negrita`, `cursiva`, `subrayada`,`tamano`, `tipoletra`) VALUES (?,?,?,?,?,?,?)");
+                pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
+                pst.setString(2, Encriptacion.Encriptar(String.valueOf(strNombreAr.trim())));
+                pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegrita))));
+                pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));
+                pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));
+                pst.setString(6, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
+                pst.setString(7, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+                this.setTitle(strNombreAr);
+            }catch (Exception e){
+                System.out.println("le dio un error ar " +e);
             }
-             System.out.println(miAlineado.ListarAlineado());  
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
+        //sino
+        }else{
+            //modifica la base de datos con los nuevos datos ingresados a la tabla
+            try{
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("update tblarchivo set tamano= ?, tipoletra= ?, negrita= ?, cursiva= ?, subrayada= ? where codarch= '"+Encriptacion.Encriptar(String.valueOf(intCod))+"'");
+                pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(iTamañoLetra))));
+                pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(sTipoLetra))));
+                pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(itNegrita))));
+                pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(itCursiva))));   
+                pst.setString(5, String.valueOf(Encriptacion.Encriptar(String.valueOf(itSubrayado))));   
+                pst.executeUpdate(); 
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null,"le dio un error modificacion"+e);
+            }
+            //elimina el contenido guardado para poder guardar el nuevo
+            try{
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
+                pst.executeUpdate(); 
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null,"le dio un error "+e);
+            }
+            //elimina el contenido guardado de alineación para poder guardar el nuevo
+            try{
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(intCod))+"';");
+                pst.executeUpdate(); 
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null,"le dio un error "+e);
+            }
         }
-}
+        //ciclo desde 0 hasta uno menos a la longitud de la lista
+        for (int i = 0; i < miLista.contar(); i++) {
+            //se guarda en una variable el contenido del nodo
+            String strCont=miLista.obtenerNodo(i);
+            //se divide el contenido por partes, dividiendolo por ; 
+            String[] strPartes=strCont.split(";");
+            //se guarda la segunda división como la fila
+            int fila=Integer.parseInt(strPartes[1]);
+            //se guarda la tercera división como la columna
+            int col=Integer.parseInt(strPartes[2]);
+            //se guarda la primera parte como el contenido
+            String cont=strPartes[0];
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("INSERT INTO `tblcontenido`(`fila`, `colum`, `codarch`, `contenido`) VALUES (?,?,?,?)");
+                pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(fila))));
+                pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(col))));
+                pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
+                pst.setString(4, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont))));               
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("celda ya guardada"+e);
+            }
+        }
+        //ciclo desde 0 hasta la longitud de la lista de alineado
+        for (int i = 0; i < miAlineado.Tamaño(); i++) {
+            //se guarda en una variable el contenido del nodo
+            String sContar=miAlineado.obtenerNodoAlienar(i);
+            //se divide el contenido por partes, dividiendolo por ; 
+            String[] sPartes=sContar.split(";");   
+            //se guarda la segunda división como la fila
+            int icol=Integer.parseInt(sPartes[1]);
+            //se guarda la primera división como la fila
+            String cont=sPartes[0];
+            try{
+                //Conección con la base de datos
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+                PreparedStatement pst = cn.prepareStatement("insert into tblalineacion (codalinea,nombre,codarch) values(?,?,?)");
+                pst.setString(1, String.valueOf(Encriptacion.Encriptar(String.valueOf(icol))));
+                pst.setString(2, String.valueOf(Encriptacion.Encriptar(String.valueOf(cont)))); 
+                pst.setString(3, String.valueOf(Encriptacion.Encriptar(String.valueOf(intCod))));
+                pst.executeUpdate();
+                //se agregan los datos ingresados a la base de datos 
+                JOptionPane.showMessageDialog(this, "Datos ingresados correctamente","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception e){
+                System.out.println("le dio un errorsote "+e);
+            }
+        }
+        //se actualiza el combo para abrir archivos
+        llenadocmbArchivos();
+    }
+    
+    //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+    //método para poner los números de filas
+    public void EncabezadoNoFilas(){
+        for(int i=0; i<tblexcel.getRowCount();i++){
+          tblexcel.setValueAt(i+1, i, 0);//coloca el numero de fila
+        }
+    }
+    public void ConsultaAlinear(){
+        try{//obtencion de datos
+            int iAlinear,integerColumna;
+              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+              PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
+              ResultSet rs = pst.executeQuery();
+              boolean r=rs.next();
+              while(r){     
+                integerColumna=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")));
+                iAlinear=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("nombre")));
+                  if (iAlinear==1) {
+                       DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                       modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
+                       tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                  }else if (iAlinear==2) {
+                      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                       modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+                       tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                  }else if (iAlinear==3) {
+                       DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+                       modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+                       tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
+                  }
+                  miAlineado.insertarAlineado(new Alinear(Encriptacion.Desencriptar(rs.getString("nombre")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")))));
+                  r=rs.next();
+
+              }
+               System.out.println(miAlineado.ListarAlineado());  
+          }catch (Exception e){
+              JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
+          }
+    }
     /**
      * @param args the command line arguments
      */

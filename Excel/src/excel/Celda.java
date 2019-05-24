@@ -9,6 +9,7 @@ package excel;
  *
  * @author Bryan
  */
+//Hecho por Bryan Aguirre(Colossatrox) 0901-17-646
 public class Celda {
         private String dato;
 	private int fila;

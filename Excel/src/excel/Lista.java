@@ -11,6 +11,8 @@ package excel;
  * Aguirre Sagastume 
  * 0901-17-646
  */
+//Hecho por Bryan Aguirre(Colossatrox) 0901-17-646
+//Y Carlos Laib(Carkam) 0901-17-518
 public class Lista {
 	private Nodo cabeza=null;
         private NodoAlinear inicio=null;

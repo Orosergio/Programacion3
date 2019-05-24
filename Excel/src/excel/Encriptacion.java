@@ -9,6 +9,7 @@ import org.apache.commons.codec.binary.Base64;
  *
  * @author ricardo perez
  */
+//hecho por Ricardo Perez(1Optimus) 0901-17-1255
 public class Encriptacion {
     
     public static String Encriptar(String texto) {
