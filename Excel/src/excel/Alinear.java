@@ -9,6 +9,7 @@ package excel;
  *
  * @author KAMINATOR
  */
+//Hecho por Carlos Laib(Carkam) 0901-17-518
 public class Alinear {  
         private String alineado;	
 	private int columna;
@@ -16,14 +17,14 @@ public class Alinear {
 		this.alineado=alineado;		
 		this.columna=columna;
 	}
-        //metodo para obtener el titulo del libro
+        //metodo para obtener el tipo de alineado
 	public String getAlineado() {
 		return alineado;
 	}
         public void setAlienado(String alineado) {
 		this.alineado=alineado;
 	}	
-	//metodo para obtener el Isbn
+	//metodo para obtener eel numero de columna
 	public int getColumna() {
 		return columna;
 	} 

@@ -39,7 +39,7 @@ public class Vista extends javax.swing.JFrame {
     public static Lista miLista=new Lista();
     public static Lista miAlineado=new Lista();
     public static String datos, alineado, strNombreAr;
-    DefaultTableModel tm ;
+    DefaultTableModel dftModeloTabla ;
     TableModel tmInicial;
     String sCopiado,sTipoLetra="Tahoma";
     String simbolo;
@@ -761,13 +761,13 @@ public class Vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 public void Porcentaje(){
-       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
     
             if(infodatos.charAt(0)=='Q'){
          generalm();
-         infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+         infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
           String sMostrarValor=Float.toString(intvalormostrar);
@@ -775,13 +775,13 @@ public void Porcentaje(){
        
        }else if(infodatos.matches("\\d+\\/\\d+")){
            generalm();
-            infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+            infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          float Intporcen=Float.parseFloat(infodatos);
          float intvalormostrar=Intporcen*100;
               String sMostrarValor=Float.toString(intvalormostrar);
          tblexcel.setValueAt(sMostrarValor+"%", intFila, intColumna);
        }else{
-            infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+            infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
          double Intporcen=Double.parseDouble(infodatos);
          double intvalormostrar=Intporcen*100;
          String sMostrarValor=Double.toString(intvalormostrar);
@@ -792,7 +792,7 @@ public void Porcentaje(){
 
 public void moneda(){
         //Agrega a cada valor simbolo de moneda
-       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
        
@@ -807,7 +807,7 @@ public void moneda(){
        
        if(infodatos.matches(regex)){
            
-           infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+           infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
            simbolo="Q"+infodatos;
            tblexcel.setValueAt(simbolo, intFila, intColumna);
        }    
@@ -855,7 +855,7 @@ public void moneda(){
 
 public void fractoria(){
         //Agrega a cada valor simbolo de moneda
-        String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+        String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
               
@@ -876,7 +876,7 @@ public void fractoria(){
        String SValorMostrar=control.toFraccion(decimal);
        System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-       String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+       String infodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
        }else  if(infodatos.matches("\\d+\\.\\d+\\%")){
             //COMPROBACION DE PORCENTAJE
       int intsigno=0,intlast=infodatos.length();
@@ -901,7 +901,7 @@ public void fractoria(){
        String SValorMostrar=control.toFraccion(decimal);
        System.out.println(SValorMostrar.toString());
        tblexcel.setValueAt(SValorMostrar, intFila, intColumna);
-       String infodatos2=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+       String infodatos2=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
            
        }   
      }
@@ -909,7 +909,7 @@ public void fractoria(){
     
 public void generalm(){
 //Guardando un valor de la celda en variable string
-       String infodatos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
+       String infodatos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));     
        intColumna=tblexcel.getSelectedColumn();
        intFila=tblexcel.getSelectedRow();
 //Recorrido del String
@@ -959,8 +959,8 @@ public void generalm(){
         
    }
 }
-
-    public void AlinearDerecha(){
+ public void AlinearDerecha(){
+     //Hecho por Carlos Laib(Carkam) 0901-17-518
    //alinea la celda a la derecha
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -968,17 +968,17 @@ public void generalm(){
 
 }
 public void AlinearIzquierda(){
+    //Hecho por Carlos Laib(Carkam) 0901-17-518
    //alinea la celda a la izquierda
      DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
       modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);      
     
 }
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
        Porcentaje();
        VerificarVacio();
        Lista();
-       System.out.println(miLista.Listar());
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -986,63 +986,66 @@ public void AlinearIzquierda(){
         fractoria();
         VerificarVacio();
         Lista();
-        System.out.println(miLista.Listar());
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:.
         moneda();
-        Lista();
         VerificarVacio();
-       System.out.println(miLista.Listar());
+        Lista();        
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-         sTipoLetra="Palatino Linotype";
+       //Hecho por Carlos Laib(Carkam) 0901-17-518
+       /*Muestra el tipo de letra en la Tabla*/
+        sTipoLetra="Palatino Linotype";
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));      
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-       iTamañoLetra=15;
-       tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
-       TamañoCol(iTamañoLetra);
+        //Hecho por Carlos Laib(Carkam) 0901-17-518
+        /*Cambia el tamaño de letra en la tabla*/
+        iTamañoLetra=15;
+        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
+        TamañoCol(iTamañoLetra);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        //Hecho por Carlos Laib(Carkam) 0901-17-518 
         //alinea la celda a la derecha
-      alineado="2";
-      ListaAlienado();
-      System.out.println(miAlineado.ListarAlineado());
-     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-      modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
+        alineado="2";
+        ListaAlienado();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+        tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);       
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-  //alinea la celda a la izquierda
-     alineado="1";
-     ListaAlienado();
-    System.out.println(miAlineado.ListarAlineado());
-     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-      modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);            
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
+        //alinea la celda a la izquierda
+        alineado="1";
+        ListaAlienado();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
+        tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);            
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-     //alinea la celda al centro
-      alineado="3";
-      ListaAlienado();
-      System.out.println(miAlineado.ListarAlineado());
-     DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-      modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-      tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);        
+        //Hecho por Carlos Laib(Carkam) 0901-17-518 
+        //alinea la celda al centro
+        alineado="3";
+        ListaAlienado();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        tblexcel.getColumnModel().getColumn(intColumna).setCellRenderer(modelocentrar);        
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void txtBarraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarraKeyReleased
-      tblexcel.setValueAt(this.txtBarra.getText(), intFila, intColumna);  
-      VerificarVacio();            
-      Lista();
-      System.out.println(miLista.Listar());      
+        //Hecho por Carlos Laib(Carkam) 0901-17-518 
+        //Aqui muestra todos los cambios que se realizan en la barra en la celda seleccionada
+        tblexcel.setValueAt(this.txtBarra.getText(), intFila, intColumna);  
+        VerificarVacio();            
+        Lista(); 
     }//GEN-LAST:event_txtBarraKeyReleased
     
     //hecho por ricardo perez 0901-17-1255
@@ -1142,14 +1145,14 @@ public void AlinearIzquierda(){
              if(itres==JOptionPane.YES_OPTION){//si esta seguro de eliminar
                 try{//elimina de la base de datos de acuerdo con el codigo del archivo
                     Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                    PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
+                    PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
                     pst.executeUpdate();            
                 }catch (Exception e){
                    JOptionPane.showMessageDialog(null,"le dio un error "+e);
                 } 
             try{//elimina de la base de datos de acuerdo con el codigo del archivo
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-                PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
+                PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblcontenido` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
                 pst.executeUpdate(); 
                 iterror=1;
             }catch (Exception e){
@@ -1157,7 +1160,7 @@ public void AlinearIzquierda(){
             }
          try{//elimina de la base de datos de acuerdo con el codigo del archivo
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch='"+Encriptacion.Desencriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM `tblarchivo` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
             pst.executeUpdate();  
             iterror=1+iterror;
         }catch (Exception e){
@@ -1203,41 +1206,54 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_cmbfilMouseReleased
 
     private void txtBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarraKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        //Hecho por Carlos Laib(Carkam) 0901-17-518 
+        //Si se presiona la tecla Enter cambia de fila y asi editar los datos de la anterior celda
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                  intFila=(tblexcel.getSelectedRow())+1;
                  tblexcel.requestFocus();
-                 System.out.println(intFila+" -"+intColumna+"-");
       }
     }//GEN-LAST:event_txtBarraKeyPressed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+          //Hecho por Carlos Laib(Carkam) 0901-17-518 
+          //Muestra el tipo de letra calibri en la tabla
         sTipoLetra="Calibri";
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-           sTipoLetra="Arial";
+          //Hecho por Carlos Laib(Carkam) 0901-17-518 
+          //Muestra el tipo de letra arial en la tabla
+        sTipoLetra="Arial";
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-       sTipoLetra="Century";
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
+         //Muestra el tipo de letra century en la tabla
+        sTipoLetra="Century";
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+          //Hecho por Carlos Laib(Carkam) 0901-17-518
+          //Muestra el tipo de letra Comic sans
         sTipoLetra="Comic Sans Ms";
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
       
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
+         //Cambaia el tamaño de letra de la tabla
         iTamañoLetra=12;
         tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra));  
         TamañoCol(iTamañoLetra);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
+         //Cambia el tamaño de letra de la tabla
        iTamañoLetra=20;
        tblexcel.setFont(new java.awt.Font(sTipoLetra,0, iTamañoLetra)); 
        TamañoCol(iTamañoLetra);
@@ -1248,7 +1264,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelKeyTyped
 
     private void tblexcelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyReleased
-        //se vuelve a centrar en la misma celda
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
         try{
             //método para obtener fila itY columna al moverse con las flechas del teclado
             //arriba o abajo
@@ -1261,33 +1277,26 @@ public void AlinearIzquierda(){
                 intColumna=tblexcel.getSelectedColumn();
                 Lista();
             }
-            /* pa mientras//obtiene la letra que ingreso
-            String dato=(String) evt.getKeyText(evt.getKeyCode());
-            //verifica si el dato es numero o letra
-            int ascii= dato.charAt(0);
-            if ((ascii >= 48) && (ascii <= 57)|| (ascii==84)) {
-                AlinearDerecha();
-            }else{
-                AlinearIzquierda();
-            }      */
+            //Verifica si la tabla es siendo editada
             if (tblexcel.isEditing()) {
+                //Si es asi se vuelve a centrar en la tabla
                 tblexcel.requestFocus();
-                // edita la celda
+                // y edita la celda
                 tblexcel.editCellAt(intFila,intColumna);
             }else{
+                //Si no solamente se centra en la tabla
                 tblexcel.requestFocus();
             }
 
             //Obtiene el dato de la celda
-            tm=(DefaultTableModel) tblexcel.getModel();
+            dftModeloTabla=(DefaultTableModel) tblexcel.getModel();
         }catch(Exception ex){
 
         }
+        //Llama a los metodos y muestra el barra principal los datos
         VerificarVacio();
         this.txtBarra.setText(datos);
         Lista();
-        System.out.println(datos);
-        System.out.println(miLista.Listar());
         // muestra la ubicacion actual en los combobox
         //hecho por ricardo perez 1255: lo siguiente
         cmbcol.setSelectedIndex(intColumna);
@@ -1297,27 +1306,26 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelKeyReleased
 
     private void tblexcelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblexcelKeyPressed
+        //Hecho por Carlos Laib(Carkam) 0901-17-518 
         //Si le da enter cambia el focus a la celda de abajo
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             intFila=(tblexcel.getSelectedRow())+1;
             tblexcel.requestFocus();
-            System.out.println(intFila+" -"+intColumna+"-");
         }
     }//GEN-LAST:event_tblexcelKeyPressed
 
     private void tblexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblexcelMouseClicked
-        // TODO add your handling code here:
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
         //método para obtener fila itY columna al dar click a la celda
-        intColumna=tblexcel.getSelectedColumn();
+        intColumna=tblexcel.getSelectedColumn();        
         intFila=tblexcel.getSelectedRow();
-        tm=(DefaultTableModel) tblexcel.getModel();
-        datos=String.valueOf(tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
-        System.out.println(datos);
+        dftModeloTabla=(DefaultTableModel) tblexcel.getModel();
+        datos=String.valueOf(dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
         VerificarVacio();
         Lista();
         //limpia barra principal
         try{
-        this.txtBarra.setText((String) tm.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
+        this.txtBarra.setText((String) dftModeloTabla.getValueAt(tblexcel.getSelectedRow(),tblexcel.getSelectedColumn()));
         }catch(Exception e){}
         //hecho por ricardo perez 1255: lo siguiente
         cmbcol.setSelectedIndex(intColumna);
@@ -1325,6 +1333,7 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_tblexcelMouseClicked
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
         new ManualdeUsuario().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -1356,25 +1365,26 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_btnUnderMouseClicked
 
     private void btnCopyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCopyMouseClicked
-        // TODO add your handling code here:
-        if (tm.getValueAt(intFila, intColumna)==null) {
+         //Hecho por Carlos Laib(Carkam) 0901-17-518 
+         //metodo donde verifica si lo que esta copiando es nulo o texto para almacenar
+         //el dato en una variable
+        if (dftModeloTabla.getValueAt(intFila, intColumna)==null) {
             sCopiado="";
         }else{
-            sCopiado=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+            sCopiado=String.valueOf(this.dftModeloTabla.getValueAt(intFila,intColumna)); 
         }
     }//GEN-LAST:event_btnCopyMouseClicked
 
     private void btnPasteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPasteMouseClicked
-        // TODO add your handling code here:
-         System.out.println(sCopiado+"-"+intFila+"-"+intColumna);            
+          //Hecho por Carlos Laib(Carkam) 0901-17-518 
+         //Metodo para pegar en una celda y que al mismo tiempo esta se agregue a la lista
+         //y modifique la barra principal de igual manera
         tblexcel.setValueAt(sCopiado, intFila, intColumna);
         tblexcel.requestFocus();          
         tblexcel.editCellAt(intFila,intColumna);       
-        VerificarVacio();   
-        this.txtBarra.setText(datos); 
-        
-        Lista();
-        System.out.println(miLista.Listar());
+        VerificarVacio(); //Llama al metodo  
+        this.txtBarra.setText(datos);      //modifica la barra principal   
+        Lista();//modifica la lista 
     }//GEN-LAST:event_btnPasteMouseClicked
 
     //hecho por Bryan Aguirre(Colossatrox) 0901-17-646
@@ -1393,16 +1403,19 @@ public void AlinearIzquierda(){
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-         if (tm.getValueAt(intFila, intColumna)==null) {
-            sCopiado="";
-        }else{
-            sCopiado=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
-            tm.setValueAt("", intFila, intColumna);
+          //Hecho por Carlos Laib(Carkam) 0901-17-518 
+          //metodo para cortar
+          //Verifica si el valor a obtener es nulo
+        if (dftModeloTabla.getValueAt(intFila, intColumna)==null) {
+            sCopiado="";//si es asi el valor sera vacio
+        }else{//sino
+            sCopiado=String.valueOf(this.dftModeloTabla.getValueAt(intFila,intColumna)); //almacena el valor en una variable
+            dftModeloTabla.setValueAt("", intFila, intColumna);//remueve el texto de esta
             tblexcel.requestFocus();          
             tblexcel.editCellAt(intFila,intColumna);       
-            VerificarVacio();   
-            this.txtBarra.setText(datos); 
-            Lista();        
+            VerificarVacio();//llama al metodo
+            this.txtBarra.setText(datos); //modifica la barra principal
+            Lista();//y por medio de lista lo elimina de la lista enlazada        
         }
     }//GEN-LAST:event_jMenu1MouseClicked
     
@@ -1600,31 +1613,46 @@ public void AlinearIzquierda(){
             System.out.println("no tiene que guarda en la lista");
         }
     }
+      //Hecho por Carlos Laib(Carkam) 0901-17-518 
+    //Metodo para verificar si una celda esta vacia y evitar que en la lista se almacenen datos nulos
     public void VerificarVacio(){
         try{
-            if (tm.getValueAt(intFila, intColumna)==null) {
-                datos="";
-            }else{
-                datos=String.valueOf(this.tm.getValueAt(intFila,intColumna)); 
+            //si el dato extraido es nulo
+            if (dftModeloTabla.getValueAt(intFila, intColumna)==null) {
+                datos="";//La variable almacenara un valor vacio
+            }else{//sino
+                //la variable obtendra el dato segun la fila y la columna
+                datos=String.valueOf(this.dftModeloTabla.getValueAt(intFila,intColumna)); 
             }
         }catch(Exception e){
         }
-
     }
+      //Hecho por Carlos Laib(Carkam) 0901-17-518 
+    //Metodo para insertar el tipo de alineado en la lista por columna
     public void ListaAlienado(){
+        //si el valor a obtener de la columna es -1
            if (miAlineado.obtenerColumna(intColumna)==-1) {
+               //inserta el dato en la lista
                 miAlineado.insertarAlineado(new Alinear(alineado,intColumna));
             }
+           //si el valor que tiene la variable es mayor o igual a 1
            if (alineado.length()>=1) {
+               //mofica el dato que tiene en la lista segun su columna y su fila
                miAlineado.modificarPorColumna(intColumna, alineado);              
            }
    }
+      //Hecho por Carlos Laib(Carkam) 0901-17-518 
+    //metodo para hacer que el editado de la celda se detenga inmediatemante
     public void DetenerEditarCelda(){
         CellEditor cellEditor = tblexcel.getCellEditor();           
+        //si el editor de celda es diferente de nulo
         if (cellEditor != null) {          
+            //si el valor del editor de la celda es diferente de nulo
             if (cellEditor.getCellEditorValue() != null) {
+                //detiene el editado
                 cellEditor.stopCellEditing();
-            } else {
+            } else {//sino
+                //Cancela el editado de la celda
                 cellEditor.cancelCellEditing();
             }
         }
@@ -1740,6 +1768,7 @@ public void AlinearIzquierda(){
                 System.out.println("celda ya guardada"+e);
             }
         }
+          //Hecho por Carlos Laib(Carkam) 0901-17-518 
         //ciclo desde 0 hasta la longitud de la lista de alineado
         for (int i = 0; i < miAlineado.Tamaño(); i++) {
             //se guarda en una variable el contenido del nodo
@@ -1775,34 +1804,43 @@ public void AlinearIzquierda(){
           tblexcel.setValueAt(i+1, i, 0);//coloca el numero de fila
         }
     }
+      //Hecho por Carlos Laib(Carkam) 0901-17-518 
     public void ConsultaAlinear(){
         try{//obtencion de datos
-            int iAlinear,integerColumna;
-              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");
+            int iAlinear,integerColumna;//declara dos variable
+              Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/excel", "root", "");//conecta con la base de datos
+              //Realiza la consulta y encripta la informacion de la base de datos
               PreparedStatement pst = cn.prepareStatement("SELECT * FROM `tblalineacion` WHERE codarch='"+Encriptacion.Encriptar(String.valueOf(cmbcodigo.getSelectedItem()))+"';");
               ResultSet rs = pst.executeQuery();
               boolean r=rs.next();
+              //mientras r sea verdadero
               while(r){     
+                  //la variable obtiene el codigo del registro
                 integerColumna=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")));
+                //y iAlinear obtiene el nombre del registro
                 iAlinear=Integer.parseInt(Encriptacion.Desencriptar(rs.getString("nombre")));
+                //si alinear es igual a 1
                   if (iAlinear==1) {
+                      //La columna la alinea a la izquierda
                        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
                        modelocentrar.setHorizontalAlignment(SwingConstants.LEFT);
                        tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
-                  }else if (iAlinear==2) {
+                  }else if (iAlinear==2) {//si alinear es igual a 2
+                      //la columna se alinea a la derecha
                       DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
                        modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
                        tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
-                  }else if (iAlinear==3) {
+                  }else if (iAlinear==3) {//si alinear es iagual a 3
+                      //la columna se a linea a la izquierda
                        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
                        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
                        tblexcel.getColumnModel().getColumn(integerColumna).setCellRenderer(modelocentrar);  
                   }
+                  //ingresa todos los datos de todos los registros existentes a la lista
                   miAlineado.insertarAlineado(new Alinear(Encriptacion.Desencriptar(rs.getString("nombre")), Integer.parseInt(Encriptacion.Desencriptar(rs.getString("codalinea")))));
                   r=rs.next();
 
-              }
-               System.out.println(miAlineado.ListarAlineado());  
+              } 
           }catch (Exception e){
               JOptionPane.showMessageDialog(null,"le dio un Error fatal "+e);
           }
